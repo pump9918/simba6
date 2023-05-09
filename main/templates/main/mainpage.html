@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>반갑습니다 심바톤 끼리팀 여러분</h1>
+    <img src = "{% static 'images/멋사.png' %}" style="width:500px;">
+    <div>기획/디자인 : 최준형</div>
+    <div>프론트엔드 : 김윤서</div>
+    <div>프론트엔드 : 김동환</div>
+    <div>백엔드 : 박호연</div>
+    <div>백엔드 : 배지현</div>
+
+    <h1><a href="{% url 'main:new' %}">글 쓰기</a></h1>
+
+    <h1>[글 목록]</h1>
+    {% for post in posts %}
+    <h2>{{post}}</h2>
+    {% endfor %}
+
+    <h1>[글 세부 목록]</h1>
+    <div>
+        {% for post in posts %}
+        <div>
+            <h2>제목: {{post.title}}</h2>
+            <h2>작성자: {{post.writer}}</h2>
+            <h2>내용(간략): {{post.summary}}
+                <a href="{% url 'main:detail' post.id %}">...더보기</a>
+            </h2>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

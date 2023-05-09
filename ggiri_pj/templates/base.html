@@ -1,0 +1,21 @@
+<!--페이지 전반의 기본 틀을 적는 곳입니다-->
+<!doctype html>
+{% load static %}
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/project.css' %}">
+
+    <title>심바톤 끼리조</title> <!--홈페이지 상단 이름-->
+</head>
+
+<body>
+    {% include 'shared/_navbar.html' %} <!--네비바 파일 포함 용도-->
+
+    <div class="title">[base]동국대학교 멋쟁이사자처럼 심바톤</div>
+    <a href= "{% url 'main:mainpage' %}">메인으로</a>
+    <a href= "{% url 'main:secondpage' %}">두번째 페이지로</a>
+    {% block content %}
+        <!--각 페이지에서 가져올 부분-->
+    {% endblock %}
+</body>
