@@ -11,6 +11,9 @@ def mainpage(request):
 def secondpage(request):
     return render(request, 'main/secondpage.html')
 
+def thirdpage(request):
+    return render(request, 'main/thirdpage.html')
+
 def new(request): #앞의 new.html을 띄우는 함수
     return render(request, 'main/new.html')
 
