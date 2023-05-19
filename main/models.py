@@ -1,10 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 class Post(models.Model):
     title = models.CharField(max_length=200) #제목 필드
-    writer = models.CharField(max_length=100) #작성자 필드
+    writer = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     pub_date = models.DateTimeField() #작성 시간 필드
     body = models.TextField() #게시글 필드
     image = models.ImageField(upload_to="blog/", blank=True, null=True) #이미지 필드

@@ -11,8 +11,10 @@
     <p><img src="{{post.image.url}}" alt="사진"  height="400"></p>
 {% endif %}
 <h3><p>{{post.body}}</p></h3>
+{% if blog.writer == user %}
 <a href = "{% url 'main:edit' post.id %}">수정하기</a>
 <a href = "{% url 'main:delete' post.id %}">삭제하기</a>
+{% endif %}
 <hr>
 
 {% endblock %}

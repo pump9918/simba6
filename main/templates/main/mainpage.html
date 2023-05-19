@@ -10,7 +10,9 @@
     <div>백엔드 : 박호연</div>
     <div>백엔드 : 배지현</div>
 
+    {% if user.is_authenticated %}
     <h1><a href="{% url 'main:new' %}">글 쓰기</a></h1>
+    {% endif %}
 
     <h1>[글 목록]</h1>
     {% for post in posts %}
