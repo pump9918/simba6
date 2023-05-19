@@ -16,5 +16,22 @@
 <a href = "{% url 'main:delete' post.id %}">삭제하기</a>
 {% endif %}
 <hr>
+<div class="comment_container">
+    <div class="comment_form">
+        <form method="POST" action="{% url 'main:detail' post.id %}">
+            {% csrf_token %}
+            <input type="text" name="content">
+            <input type="submit" name="submit">
+        </form>
+    </div>
+    <div class="comment_list">
+        {% for c in comments %}
+        <hr>
+        <h4>작성자 : {{c.writer}}</h4>
+        <p>내용 : {{c.content}}</p>
+        <p>{{c.pub_date}}</p>
+        {% endfor %}
+    </div>
+</div>
 
 {% endblock %}
