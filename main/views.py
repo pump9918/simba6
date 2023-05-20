@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 # render: 템플릿 불러옴 / redirect: url로 이동 / get_object_or_404: 객체가 있으면 가져오고 없으면 404에러 띄우기
 from .models import Post, Comment
 from django.utils import timezone #django 기본 제공 시간관련 기능
-
+from django.db.models import Q #검색창 데이터베이스 활용
+from django.views.generic import ListView #제네릭뷰 사용
 
 def mainpage(request):
     posts = Post.objects.all() #변수 posts에 Post의 모든 객체 내용을 저장
@@ -72,3 +73,23 @@ def delete(request, id):
     delete_post = Post.objects.get(id=id)
     delete_post.delete()
     return redirect('main:mainpage')
+
+
+class SearchView(ListView): #검색창
+    model = Post
+    context_object_name = 'search_results'
+    template_name = 'main/search_results.html'
+    paginate_by = 8
+    
+    #모든 리뷰가 아닌, 검색결과에 해당하는 리뷰만 보여줌(get_queryset활용)
+    def get_queryset(self):
+        query = self.request.GET.get('query', '')
+        return Post.objects.filter( #OR조건으로 검색어 필터
+            Q(title__icontains=query) #제목에 있거나
+            | Q(body__icontains=query) #포스트 내용에 있거나
+        )
+    
+    def get_context_data(self, **kwargs): #템플릿에 검색어 전달
+        context = super().get_context_data(**kwargs)
+        context['query'] = self.request.GET.get('query', '')
+        return context

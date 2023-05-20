@@ -1,5 +1,6 @@
 from django.urls import path
 from .views import * # main 앱 내의 views.py를 사용하기 위한 코드
+from . import views
 
 app_name = "main"
 urlpatterns = [
@@ -12,4 +13,5 @@ urlpatterns = [
     path('edit/<int:id>', edit, name="edit"),
     path('update/<int:id>', update, name="update"),
     path('delete/<int:id>', delete, name="delete"),
+    path('search/', views.SearchView.as_view(), name='search'),
 ]
