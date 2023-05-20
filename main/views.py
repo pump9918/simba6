@@ -60,7 +60,7 @@ def update(request, id):
         update_post = Post.objects.get(id=id)
         if request.user == update_post.writer:
             update_post.title = request.POST['title']
-            update_post.writer = request.POST['writer']
+            update_post.writer = request.user
             update_post.pub_date = timezone.now()
             update_post.body = request.POST['body']
             update_post.image = request.FILES.get('image')
