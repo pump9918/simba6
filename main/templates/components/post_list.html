@@ -1,0 +1,7 @@
+<div class="contents">
+    {% for post in posts %}
+      <a href="{% url 'main:detail' post.id %}">{{post.id}} : {{post.title}}</a>
+    {% empty %}
+      <p class="empty">{{ empty_message }}</p>
+    {% endfor %}
+</div>

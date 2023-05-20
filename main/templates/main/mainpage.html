@@ -10,24 +10,33 @@
     <div>백엔드 : 박호연</div>
     <div>백엔드 : 배지현</div>
 
+    <div class="header-search"><!--검색창-->
+        <h3>▼▼▼원하는 검색어를 입력하시오▼▼▼</h4>
+        <form class="search-form" action="{% url 'main:search' %}" method="get">
+            <input class="search-input" name="query" type="text" placeholder="게시물을 검색해보세요" required>
+            <button class="cp-button search-button" type="submit">검색</button>
+        </form>
+    </div>
+
+    <h3>▼글 작성하기▼</h4>
     {% if user.is_authenticated %}
-    <h1><a href="{% url 'main:new' %}">글 쓰기</a></h1>
+    <h4><a href="{% url 'main:new' %}">글 쓰기</a></h1>
     {% endif %}
 
-    <h1>[글 목록]</h1>
+    <h4>[글 목록]</h4>
     {% for post in posts %}
-    <h2>{{post}}</h2>
+    <h4>{{post}}</h4>
     {% endfor %}
 
-    <h1>[글 세부 목록]</h1>
+    <h4>[글 세부 목록]</h4>
     <div>
         {% for post in posts %}
         <div>
-            <h2>제목: {{post.title}}</h2>
-            <h2>작성자: {{post.writer}}</h2>
-            <h2>내용(간략): {{post.summary}}
+            <div>제목: {{post.title}}</h2>
+            <div>작성자: {{post.writer}}</h2>
+            <div>내용(간략): {{post.summary}}
                 <a href="{% url 'main:detail' post.id %}">...더보기</a>
-            </h2>
+            </div>
         </div>
         {% endfor %}
     </div>

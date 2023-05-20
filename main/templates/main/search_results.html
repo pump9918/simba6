@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="site-body">
+  <div class="content-list max-content-width">
+    <form class="search-form" action="{% url 'main:search' %}" method="get">
+      <input class="search-input" name="query" value='{{ query }}' type="text" placeholder="게시물을 검색해보세요" required>
+      <button class="cp-button search-button" type="submit">검색</button>
+    </form>
+    <div class="header">
+      <h2>"{{ query }}"에 대한 검색 결과 ({{ paginator.count }})</h2>
+    </div>
+    {% include 'components/post_list.html' with posts=search_results empty_message="검색 결과가 없어요 :(" %}
+  </div>
+</main>
+{% endblock content %}
