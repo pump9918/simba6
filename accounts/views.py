@@ -33,12 +33,13 @@ def signup(request):
                 password=request.POST['password']
             )
             
-            nickname = request.POST['nickname']
+            grade = request.POST['grade']
             department = request.POST['department']
-            hobby = request.POST['hobby']
+            name = request.POST['name']
+            nickname = request.POST['nickname']
             
             #한줄에 편하게 POST를 받는 방식
-            profile = Profile(user=user, nickname=nickname, department=department, hobby=hobby)
+            profile = Profile(user=user, grade=grade, department=department,name=name, nickname=nickname)
             profile.save()
             auth.login(request, user)
             return redirect('/')
