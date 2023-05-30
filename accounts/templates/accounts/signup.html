@@ -12,10 +12,17 @@
     <br>
 
     {% if email_sent %}
-        <h3>이메일이 성공적으로 보내졌습니다!</h3>
+        <h3>이메일이 성공적으로 보내졌습니다! {{ verification_code }}</h3>
     {% else %}
         <h3>이메일 보내기 실패</h3>
     {% endif %}
+    <br>
+
+    <p>인증번호</p>
+    <input type="text" name="verificationcode" id="verification-code-input">
+    <br>
+    <button type="button" id="verification-code-confirm-btn" disabled>인증번호확인</button>
+    <br>
 
     <p>비밀번호</p>
     <input type="password" name="password">
@@ -47,6 +54,8 @@
 <script>
     var usernameInput = document.getElementById('username-input');
     var emailConfirmBtn = document.getElementById('email-confirm-btn');
+    var verificationCodeInput = document.getElementById('verification-code-input');
+        var verificationCodeConfirmBtn = document.getElementById('verification-code-confirm-btn');
 
     emailConfirmBtn.disabled = true;
 
@@ -64,6 +73,27 @@
             console.log(username);
             var emailConfirmUrl = "{% url 'accounts:emailconfirm' username='__USERNAME__' %}".replace('__USERNAME__', username);
             window.location.href = emailConfirmUrl;
+        }
+    });
+
+    verificationCodeInput.addEventListener('input', function() {
+        if (verificationCodeInput.value) {
+            verificationCodeConfirmBtn.disabled = false;
+        } else {
+            verificationCodeConfirmBtn.disabled = true;
+        }
+    });
+
+    verificationCodeConfirmBtn.addEventListener('click', function() {
+        var enteredVerificationCode = verificationCodeInput.value;
+        var receivedVerificationCode = "{{ verification_code }}";
+
+        if (enteredVerificationCode === receivedVerificationCode) {
+            console.log("인증번호가 일치하여 로그인이 가능합니다.");
+            login_enabled = true;
+        } else {
+            console.log("인증번호가 일치하지 않습니다.");
+            login_enabled = false;
         }
     });
 </script>

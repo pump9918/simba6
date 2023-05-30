@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from .models import Profile
 import logging
+import random
+import string
 # Create your views here.
 
 def login(request):
@@ -51,7 +53,8 @@ def emailconfirm(request, username):
     try:
         email_address = f'{username}@naver.com'
         email_subject = '끼리 회원가입 인증메일입니다 :>'
-        email_message = '내용을 입력하세요.'
+        verification_code = generate_verification_code()
+        email_message = '끼리 회원가입 인증번호\n' + verification_code
 
         send_mail(email_subject, email_message, '', [email_address])
         logging.info("이메일이 성공적으로 전송되었습니다.")
@@ -60,4 +63,9 @@ def emailconfirm(request, username):
         email_sent = False
         logging.info("이메일 전송에 실패하였습니다: %s", str(e))
 
-    return render(request, 'accounts/signup.html', {'email_sent': email_sent})
+    return render(request, 'accounts/signup.html', {'email_sent': email_sent, 'verification_code': verification_code})
+
+def generate_verification_code():
+    characters = string.ascii_letters + string.digits
+    verification_code = ''.join(random.choices(characters, k=6))
+    return verification_code
