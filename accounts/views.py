@@ -51,17 +51,15 @@ def signup(request):
 
 def emailconfirm(request, username):
     try:
-        email_address = f'{username}@naver.com'
+        email_address = f'{username}@dgu.ac.kr'
         email_subject = '끼리 회원가입 인증메일입니다 :>'
         verification_code = generate_verification_code()
         email_message = '끼리 회원가입 인증번호\n' + verification_code
 
         send_mail(email_subject, email_message, '', [email_address])
-        logging.info("이메일이 성공적으로 전송되었습니다.")
         email_sent = True
     except Exception as e:
         email_sent = False
-        logging.info("이메일 전송에 실패하였습니다: %s", str(e))
 
     return render(request, 'accounts/signup.html', {'email_sent': email_sent, 'verification_code': verification_code})
 

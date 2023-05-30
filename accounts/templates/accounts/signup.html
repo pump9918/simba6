@@ -48,16 +48,27 @@
     <input type="text" name="nickname">
     <br>
 
-    <input type="submit" value="회원가입">
+    <input type="submit" value="회원가입" id="signup-btn" disabled>
 </form>
 
 <script>
     var usernameInput = document.getElementById('username-input');
     var emailConfirmBtn = document.getElementById('email-confirm-btn');
     var verificationCodeInput = document.getElementById('verification-code-input');
-        var verificationCodeConfirmBtn = document.getElementById('verification-code-confirm-btn');
+    var verificationCodeConfirmBtn = document.getElementById('verification-code-confirm-btn');
+    var signupBtn = document.getElementById('signup-btn');
 
     emailConfirmBtn.disabled = true;
+    verificationCodeConfirmBtn.disabled = true;
+    signupBtn.disabled = true;
+
+    window.addEventListener('load', function() {
+    var savedUsername = localStorage.getItem('username');
+    if (savedUsername) {
+        usernameInput.value = savedUsername;
+        localStorage.removeItem('username');
+    }
+});
 
     usernameInput.addEventListener('input', function() {
         if (usernameInput.value) {
@@ -70,7 +81,7 @@
     emailConfirmBtn.addEventListener('click', function() {
         var username = usernameInput.value;
         if (username) {
-            console.log(username);
+            localStorage.setItem('username', username);
             var emailConfirmUrl = "{% url 'accounts:emailconfirm' username='__USERNAME__' %}".replace('__USERNAME__', username);
             window.location.href = emailConfirmUrl;
         }
@@ -87,13 +98,11 @@
     verificationCodeConfirmBtn.addEventListener('click', function() {
         var enteredVerificationCode = verificationCodeInput.value;
         var receivedVerificationCode = "{{ verification_code }}";
-
+    
         if (enteredVerificationCode === receivedVerificationCode) {
-            console.log("인증번호가 일치하여 로그인이 가능합니다.");
-            login_enabled = true;
+            signupBtn.disabled = false;
         } else {
-            console.log("인증번호가 일치하지 않습니다.");
-            login_enabled = false;
+            signupBtn.disabled = true;
         }
     });
 </script>
