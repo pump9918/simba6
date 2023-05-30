@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from .models import Profile
+import logging
 # Create your views here.
 
 def login(request):
@@ -44,3 +46,18 @@ def signup(request):
             auth.login(request, user)
             return redirect('/')
     return render(request, 'accounts/signup.html')
+
+def emailconfirm(request, username):
+    try:
+        email_address = f'{username}@naver.com'
+        email_subject = '끼리 회원가입 인증메일입니다 :>'
+        email_message = '내용을 입력하세요.'
+
+        send_mail(email_subject, email_message, '', [email_address])
+        logging.info("이메일이 성공적으로 전송되었습니다.")
+        email_sent = True
+    except Exception as e:
+        email_sent = False
+        logging.info("이메일 전송에 실패하였습니다: %s", str(e))
+
+    return render(request, 'accounts/signup.html', {'email_sent': email_sent})
