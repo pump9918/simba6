@@ -18,6 +18,11 @@
         </form>
     </div>
 
+    <div>
+        <h3>학수번호 검색하기</h3>
+        <h4><a href="{% url 'excelDB:excel' %}">엑셀</a></h4>
+    </div>
+
     <h3>▼글 작성하기▼</h4>
     {% if user.is_authenticated %}
     <h4><a href="{% url 'main:new' %}">글 쓰기</a></h1>

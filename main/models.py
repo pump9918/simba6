@@ -24,3 +24,15 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.post.title + " : " + self.content[:20]
+
+# class ExcelModel(models.Model):
+#     classid = models.IntegerField(null=False)
+#     classNum = models.CharField(max_length = 50, null=False)
+#     className = models.CharField(max_length = 50, null=False)
+#     professor = models.CharField(max_length = 10, null=False)
+#     time = models.CharField(max_length = 50, null=False)
+#     classroom = models.CharField(max_length = 50, null=True)
+#     credit = models.IntegerField(null=True)
+    
+#     def __str__(self):
+#         return self.className + " | " + self.classNum
