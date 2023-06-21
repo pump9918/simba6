@@ -5,6 +5,7 @@ from . import views
 app_name = "main"
 urlpatterns = [
     path('', mainpage, name="mainpage"),
+    path('firstpage/', firstpage, name="firstpage"),
     path('secondpage/', secondpage, name="secondpage"),
     path('thirdpage/', thirdpage, name="thirdpage"),
     path('new/', new, name="new"), #new 페이지 url 연결
