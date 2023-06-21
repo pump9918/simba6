@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
+
+</head>
+<body>
+    
+    <div class="container">
+            <div class="header">
+                <div class="header_left">
+                    <div class="header_left_logo"></div>
+                    <div class="header_left_word">끼리</div>                
+                </div>
+                <div class="header_right">
+                    <div class="header_right_ggiri_page">끼리 페이지</div>
+                    <div class="header_right_profile_icon"></div>
+                </div>
+            </div>
+        <div class="content">
+            <div class="login">
+                <form action="{% url 'accounts:login' %}" method="POST">
+                    {% csrf_token %}
+                    id : <input type="text" name="username"><br>
+                    password : <input type="password" name="password"><br>
+                    <input type="submit" value="로그인">
+                </form>
+                
+            </div>
+        </div>
+        <div class="footer">
+            <br><br><br><br>
+            <div class="footer_bold" style="font-weight:600;">동국대학교 멋쟁이 사자처럼 심바톤 6조</div>
+            <br>
+            <div class="footer_place">서울시 중구 필동로 1길 30 동국대학교 학생회관 2층</div>
+            <br>
+            <div class="footer_id">@likelion_dongguk</div>
+            <br><br>
+            <div class="footer_right">@DGU Likelion.All rights reserved.</div>
+        </div>
+    </div>
+</body>
+</html>
