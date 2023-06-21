@@ -105,3 +105,12 @@
   width: 55px;
   height: 55px;
 }
+
+h3 {
+  color: orange;
+}
+
+/*mainpage 따로 파란색 쓰고싶음*/
+h3 .mainpage {
+  color: blue;
+}
