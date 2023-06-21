@@ -2,12 +2,37 @@
 {% load static %}
 
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5</title>
+    <link rel="stylesheet" type="text/css" href="login.css">
 
-<form action="{% url 'accounts:login' %}" method="POST">
-    {% csrf_token %}
-    id : <input type="text" name="username"><br>
-    password : <input type="password" name="password"><br>
-    <input type="submit" value="로그인">
-</form>
+</head>
+<body>
+    
+    <div class="container">
+            <div class="header">
+                <div class="header_left">
+                    <div class="header_left_logo"></div>
+                    <div class="header_left_word">끼리</div>                
+                </div>
+                <div class="header_right">
+                    <div class="header_right_ggiri_page">끼리 페이지</div>
+                    <div class="header_right_profile_icon"></div>
+                </div>
+            </div>
+            <form action="{% url 'accounts:login' %}" method="POST">
+                {% csrf_token %}
+                id : <input type="text" name="username"><br>
+                password : <input type="password" name="password"><br>
+                <input type="submit" value="로그인">
+            </form>
+
+        </div>
+    </body>
+</html>
 
 {% endblock %}
