@@ -1,4 +1,5 @@
 /* css파일들을 관리하는 곳입니다*/
+/*여기서부터 footer*/
 
 .footer {
   /*하단 회색 박스*/
@@ -31,4 +32,76 @@
   display: flex;
   align-items: center;
   letter-spacing: -0.015em;
+}
+
+/*여기서부터 navbar*/
+.navbar {
+  display: flex;
+  padding-left: 5%;
+  justify-content: space-between;
+}
+.button0 {
+  display: flex;
+  width: 50%;
+  align-items: center;
+}
+.navbar .button0 img {
+  /*네비바 끼리 로고*/
+  display: flex;
+  width: 55px;
+  height: 55px;
+  left: 92px;
+  top: 16px;
+}
+
+.navbar .button0 h1 {
+  /* 네비바 끼리 문구 */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  background: linear-gradient(109.12deg, #35ccaa -10.9%, #9779ff 98.02%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  margin-left: 1.5%;
+}
+.button1 {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .button1 a {
+  /*끼리페이지 버튼*/
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  background: #35ccaa;
+  border-radius: 8px;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+
+  padding: 0% 10%;
+  /* or 100% */
+
+  display: flex;
+  align-items: center;
+  text-align: center;
+
+  color: #ffffff;
+  text-decoration: none;
+
+  height: 60px;
+}
+.navbar .button1 img {
+  /*개인 프로필 사진*/
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border: 1px solid linear-gradient(109.12deg, #35ccaa -10.9%, #9779ff 98.02%);
+  display: flex;
+  width: 55px;
+  height: 55px;
 }
