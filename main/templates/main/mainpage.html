@@ -11,11 +11,16 @@
     <div>백엔드 : 배지현</div>
 
     <div class="header-search"><!--검색창-->
-        <h3>▼▼▼원하는 검색어를 입력하시오▼▼▼</h4>
+        <h3>▼▼▼원하는 게시물 검색어를 입력하시오▼▼▼</h4>
         <form class="search-form" action="{% url 'main:search' %}" method="get">
             <input class="search-input" name="query" type="text" placeholder="게시물을 검색해보세요" required>
             <button class="cp-button search-button" type="submit">검색</button>
         </form>
+    </div>
+
+    <div>
+        <h3>학수번호 데이터</h3>
+        <h4><a href="{% url 'excelDB:excel' %}">엑셀</a></h4>
     </div>
 
     <h3>▼글 작성하기▼</h4>

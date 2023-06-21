@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Comment
 from django.utils import timezone #django 기본 제공 시간관련 기능
 from django.db.models import Q #검색창 데이터베이스 활용
-from django.views.generic import ListView #제네릭뷰 사용
+from django.views.generic import View, ListView #제네릭뷰 사용
+import openpyxl #엑셀파일 사용을 위해 설치
 
 def mainpage(request):
     posts = Post.objects.all() #변수 posts에 Post의 모든 객체 내용을 저장
@@ -93,3 +94,30 @@ class SearchView(ListView): #검색창
         context = super().get_context_data(**kwargs)
         context['query'] = self.request.GET.get('query', '')
         return context
+    
+# class ExcelUploadView(View):
+#     def post(self, request):
+#         excelFile = request.FILES['file']
+        
+#         excel = openpyxl.load_workbook(excelFile, data_only = True)
+#         work_sheet = excel.worksheets[0]
+        
+#         all_values = []
+#         for row in work_sheet.rows:
+#             row_value = []
+#             for cell in row:
+#                 row_value.append(cell.value)
+#             all_values.append(row_value)
+            
+#         for row in all_values:
+#             sample_model = ExcelModel(classid=row[0], 
+#                                        classNum=row[1], 
+#                                        className=row[2], 
+#                                        professor=row[3], 
+#                                        time=row[4], 
+#                                        classroom=row[5], 
+#                                        credit=row[6])
+#             sample_model.save()
+            
+#         response = {'status':1, 'message': '엠셀파일이 정상적으로 업로드 됐습니다.'}
+#         return HttpResponse(json.dumbs(response), content_type='application/json')
