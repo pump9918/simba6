@@ -10,6 +10,10 @@ def mainpage(request):
     posts = Post.objects.all() #변수 posts에 Post의 모든 객체 내용을 저장
     return render(request, 'main/mainpage.html', {'posts':posts}) # Read 기능 위한 작업
 
+def firstpage(request):
+    return render(request, 'main/firstpage.html')
+
+
 def secondpage(request):
     return render(request, 'main/secondpage.html')
 
