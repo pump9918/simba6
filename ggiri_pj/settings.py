@@ -38,9 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'openpyxl',
     'main',
     'accounts',
     'users',
+    'excelDB',
 ]
 
 MIDDLEWARE = [

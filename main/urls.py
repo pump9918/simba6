@@ -14,4 +14,5 @@ urlpatterns = [
     path('update/<int:id>', update, name="update"),
     path('delete/<int:id>', delete, name="delete"),
     path('search/', views.SearchView.as_view(), name='search'),
+    # path('excelupload', views.ExcelUploadView.as_view(), name='excel-upload'),
 ]
