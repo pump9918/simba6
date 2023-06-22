@@ -40,9 +40,33 @@
             <div>제목: {{post.title}}</h2>
             <div>작성자: {{post.writer}}</h2>
             <div>내용(간략): {{post.summary}}
-                <a href="{% url 'main:detail' post.id %}">...더보기</a>
+                <a href="{% url 'main:detail' post.id %}">...더보기(detail.html)</a>
             </div>
         </div>
         {% endfor %}
     </div>
+
+    <!--링크모음-->
+    <h2>[아래 링크들은 html작업을 위한 링크 모음입니다]</h2>
+    <!--로그인/회원가입 링크-->
+    <h4><a href="{% url 'accounts:login' %}">로그인(login.html)</a></h4>
+    <h4><a href="{% url 'accounts:logout' %}">로그아웃(logout.html)</a></h4>
+    <h4><a href="{% url 'accounts:signup' %}">회원가입(signup.html)</a></h4>
+    <h4><a href="{% url 'main:firstpage' %}">입장페이지(firstpage.html)</a></h4>
+    <!--게시물 만들기 링크-->
+    {% if user.is_authenticated %}
+        <h4><a href="{% url 'main:new' %}">글 쓰기(new.html)</a></h1>
+    {% endif %}
+    <div>
+        {% for post in posts %}
+        <div>
+            <h4><a href="{% url 'main:detail' post.id %}">상세페이지(detail.html)</a></h4>
+        </div>
+        {% endfor %}
+    </div>
+    <h4><a href="{% url 'main:maketeam1' %}">팀플생성1(maketeam1.html)</a></h4>
+    <h4><a href="{% url 'main:maketeam2' %}">팀플생성2(maketeam2.html)</a></h4>
+    <h4><a href="{% url 'main:teamtest1' %}">팀성향테스트1(teamtest1.html)</a></h4>
+    <h4><a href="{% url 'main:teamtest2' %}">팀성향테스트2(teamtest2.html)</a></h4>
+
 {% endblock %}

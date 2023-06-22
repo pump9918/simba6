@@ -5,6 +5,7 @@ from . import views
 app_name = "main"
 urlpatterns = [
     path('', mainpage, name="mainpage"),
+    path('firstpage/', firstpage, name="firstpage"),
     path('secondpage/', secondpage, name="secondpage"),
     path('thirdpage/', thirdpage, name="thirdpage"),
     path('new/', new, name="new"), #new 페이지 url 연결
@@ -14,5 +15,8 @@ urlpatterns = [
     path('update/<int:id>', update, name="update"),
     path('delete/<int:id>', delete, name="delete"),
     path('search/', views.SearchView.as_view(), name='search'),
-    # path('excelupload', views.ExcelUploadView.as_view(), name='excel-upload'),
+    path('maketeam1/', maketeam1, name="maketeam1"),
+    path('maketeam2/', maketeam2, name="maketeam2"),
+    path('teamtest1/', teamtest1, name="teamtest1"),
+    path('teamtest2/', teamtest2, name="teamtest2"),
 ]
