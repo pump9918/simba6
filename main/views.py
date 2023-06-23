@@ -30,6 +30,7 @@ def create(request): #포스트 생성(CRUD 중 C)
         new_post.writer = request.user
         new_post.pub_date = timezone.now()
         new_post.body = request.POST['body']
+        new_post.describe = request.POST['describe']
         new_post.image = request.FILES.get('image')
         
         new_post.save()
@@ -68,6 +69,7 @@ def update(request, id):
             update_post.writer = request.user
             update_post.pub_date = timezone.now()
             update_post.body = request.POST['body']
+            update_post.describe = request.POST['describe']
             update_post.image = request.FILES.get('image')
             
             update_post.save()
@@ -105,21 +107,21 @@ def teamtest2(scores):
     total_score = sum(scores.values())
 
     if total_score <= 5:
-        result_text = "성격 유형 A"
+        result_text = '당신은 "열정적인 리더"입니다. 팀플을 시작해보세요'
         personality_type = "Type A"
     elif total_score <= 10:
-        result_text = "성격 유형 B"
+        result_text = '당신은 "논리적인 발표자"입니다. 팀플을 시작해보세요'
         personality_type = "Type B"
     else:
-        result_text = "성격 유형 C"
+        result_text = '당신은 "꼼꼼한 탐정"입니다. 팀플을 시작해보세요'
         personality_type = "Type C"
 
     return {'result_text': result_text, 'personality_type': personality_type}
 
-def maketeam1(request):
+def maketeam1(request): #글쓰기 페이지 입장 전
     return render(request, 'main/maketeam1.html')
 
-def maketeam2(request):
+def maketeam2(request): #글쓰기 페이지
     return render(request, 'main/maketeam2.html')
 
 # def teamtest1(request):

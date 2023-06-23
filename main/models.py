@@ -7,7 +7,8 @@ class Post(models.Model):
     title = models.CharField(max_length=200) #제목 필드
     writer = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     pub_date = models.DateTimeField() #작성 시간 필드
-    body = models.TextField() #게시글 필드
+    body = models.TextField() #팀플 기본적 정보 필드
+    describe = models.TextField(blank=True, null=True) #주제 설명 필드
     image = models.ImageField(upload_to="blog/", blank=True, null=True) #이미지 필드
     
     def __str__(self):
