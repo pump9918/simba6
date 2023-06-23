@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404 
 # render: 템플릿 불러옴 / redirect: url로 이동 / get_object_or_404: 객체가 있으면 가져오고 없으면 404에러 띄우기
-from .models import Post, Comment
+from .models import *
 from django.utils import timezone #django 기본 제공 시간관련 기능
 from django.db.models import Q #검색창 데이터베이스 활용
 from django.views.generic import View, ListView #제네릭뷰 사용
@@ -79,6 +79,42 @@ def delete(request, id):
     delete_post.delete()
     return redirect('main:mainpage')
 
+def teamtest1(request):
+    if request.method == 'POST':
+        scores = {}
+        for question in Question.objects.all():
+            choice_id = int(request.POST.get(f'question_{question.id}'))
+            choice = Choice.objects.get(id=choice_id)
+            scores[choice.question.id] = scores.get(choice.question.id, 0) + choice.score
+
+        # 결과 계산
+        result = teamtest2(scores)
+
+        # 결과 저장
+        test_result = TestResult.objects.create(result_text=result['result_text'], personality_type=result['personality_type'])
+
+        return render(request, 'main/teamtest2.html', {'result': result})
+    else:
+        questions = Question.objects.all()
+        context = {'questions': questions}
+        return render(request, 'main/teamtest1.html', context)
+
+def teamtest2(scores):
+    # 각 질문의 점수에 따라 결과 계산
+    # 이 예시에서는 간단하게 점수 합계에 따라 결과를 반환하도록 구현
+    total_score = sum(scores.values())
+
+    if total_score <= 5:
+        result_text = "성격 유형 A"
+        personality_type = "Type A"
+    elif total_score <= 10:
+        result_text = "성격 유형 B"
+        personality_type = "Type B"
+    else:
+        result_text = "성격 유형 C"
+        personality_type = "Type C"
+
+    return {'result_text': result_text, 'personality_type': personality_type}
 
 def maketeam1(request):
     return render(request, 'main/maketeam1.html')
@@ -86,11 +122,11 @@ def maketeam1(request):
 def maketeam2(request):
     return render(request, 'main/maketeam2.html')
 
-def teamtest1(request):
-    return render(request, 'main/teamtest1.html')
+# def teamtest1(request):
+#     return render(request, 'main/teamtest1.html')
 
-def teamtest2(request):
-    return render(request, 'main/teamtest2.html')
+# def teamtest2(request):
+#     return render(request, 'main/teamtest2.html')
 
 
 
