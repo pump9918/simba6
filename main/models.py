@@ -7,7 +7,8 @@ class Post(models.Model):
     title = models.CharField(max_length=200) #제목 필드
     writer = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     pub_date = models.DateTimeField() #작성 시간 필드
-    body = models.TextField() #게시글 필드
+    body = models.TextField() #팀플 기본적 정보 필드
+    describe = models.TextField(blank=True, null=True) #주제 설명 필드
     image = models.ImageField(upload_to="blog/", blank=True, null=True) #이미지 필드
     
     def __str__(self):
@@ -25,14 +26,17 @@ class Comment(models.Model):
     def __str__(self):
         return self.post.title + " : " + self.content[:20]
 
-# class ExcelModel(models.Model):
-#     classid = models.IntegerField(null=False)
-#     classNum = models.CharField(max_length = 50, null=False)
-#     className = models.CharField(max_length = 50, null=False)
-#     professor = models.CharField(max_length = 10, null=False)
-#     time = models.CharField(max_length = 50, null=False)
-#     classroom = models.CharField(max_length = 50, null=True)
-#     credit = models.IntegerField(null=True)
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
     
-#     def __str__(self):
-#         return self.className + " | " + self.classNum
+    def __str__(self):
+        return self.question_text
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    score = models.IntegerField()
+
+class TestResult(models.Model):
+    result_text = models.CharField(max_length=200)
+    personality_type = models.CharField(max_length=10)

@@ -12,4 +12,16 @@
 <h1>팀플 성향 테스트 1</h1>
 <h2><a href = "{% url 'main:mainpage' %}">메인페이지로 돌아가기</a></h2>
 
+<form action="{% url 'main:teamtest1' %}" method="post">
+    {% csrf_token %}
+    {% for question in questions %}
+        <h3>{{ question.question_text }}</h3>
+        {% for choice in question.choice_set.all %}
+        <input type="radio" name="question_{{ question.id }}" value="{{ choice.id }}" required>
+        <label>{{ choice.choice_text }}</label>
+        {% endfor %}
+    {% endfor %}
+    <button type="submit">제출</button>
+</form>
+
 {% endblock %}
