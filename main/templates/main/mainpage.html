@@ -60,13 +60,12 @@
     <div>
         {% for post in posts %}
         <div>
-            <h4><a href="{% url 'main:detail' post.id %}">상세페이지(detail.html)</a></h4>
+            <h4><a href="{% url 'main:detail' post.id %}">상세페이지{{post.id}}(detail.html)</a></h4>
         </div>
         {% endfor %}
     </div>
     <h4><a href="{% url 'main:maketeam1' %}">팀플생성1(maketeam1.html)</a></h4>
     <h4><a href="{% url 'main:maketeam2' %}">팀플생성2(maketeam2.html)</a></h4>
-    <h4><a href="{% url 'main:teamtest1' %}">팀성향테스트1(teamtest1.html)</a></h4>
-    <h4><a href="{% url 'main:teamtest2' %}">팀성향테스트2(teamtest2.html)</a></h4>
+    <h4><a href="{% url 'main:teamtest1' %}">팀성향테스트1(teamtest1.html -> teamtest2.html)</a></h4>
 
 {% endblock %}

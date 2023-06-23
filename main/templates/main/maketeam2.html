@@ -9,4 +9,15 @@
 <h1>팀플 생성 2</h1>
 <h2><a href = "{% url 'main:mainpage' %}">메인페이지로 돌아가기</a></h2>
 
+<form action="{% url 'main:create' %}" method="POST" enctype="multipart/form-data"> <!--enctype: 폼데이터가 인코딩 되는 방식 설정-->
+    {% csrf_token %}
+    <p>팀플제목 : <input type="text" name="title"></p>
+    <p>사진 : <input type="file" name="image"></p> <!--media 파일로 불러옴-->
+    <p>팀플기본적정보 : <textarea type="text" name="body" id="" cols="30" rows="10"></textarea></p>
+    <p>주제설명 : <textarea type="text" name="describe" id="" cols="30" rows="10"></textarea></p>
+    <!--원하는 팀원 성향: 태그 형식으로 나열-->
+    <!--카카오톡 오픈채팅 url 연결-->
+    <button type="submit">제출</button>
+</form>
+
 {% endblock %}
