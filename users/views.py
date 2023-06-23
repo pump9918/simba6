@@ -8,3 +8,9 @@ def mypage(request):
         return render(request, 'users/mypage.html')
     
     #request.user == 현재 로그인한 유저에 대한 정보를 가짐
+    
+def measure(request):
+    return render(request, 'users/measure.html')
+
+def profile(request):
+    return render(request, 'users/profile.html')
