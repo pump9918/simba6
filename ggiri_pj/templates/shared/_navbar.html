@@ -1,11 +1,13 @@
 <div class="navbar">
   <section class="button0">
-    <img src="../../static/images/끼리로고.png" />
+    <a class="link1" href="{% url 'main:mainpage' %}"><img src="../../static/images/끼리로고.png" /></a>
     <h1>끼리</h1>
   </section>
   <!-- 아래는 로그인 이후에 뜨게 해주세용 -->
-  <section class="button1">
-    <a class="link1" href="#">끼리페이지</a>
-    <img src="../../static/images/끼리로고.png" />
-  </section>
+  {% if user.is_authenticated %}
+    <section class="button1">
+      <a class="link1" href="#">끼리페이지</a>
+      <img src="../../static/images/끼리로고.png" />
+    </section>
+  {% endif %}
 </div>
