@@ -18,5 +18,5 @@ urlpatterns = [
     path('maketeam1/', maketeam1, name="maketeam1"),
     path('maketeam2/', maketeam2, name="maketeam2"),
     path('teamtest1/', teamtest1, name="teamtest1"),
-    path('teamtest2/', teamtest2, name="teamtest2"),
+    path('result/<int:test_result_id>/', result, name='result'),
 ]
