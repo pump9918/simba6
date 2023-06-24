@@ -81,25 +81,45 @@ def delete(request, id):
     delete_post.delete()
     return redirect('main:mainpage')
 
+from django.shortcuts import render, redirect
+from .models import Question, Choice, TestResult
+
 def teamtest1(request):
     if request.method == 'POST':
-        scores = {}
-        for question in Question.objects.all():
-            choice_id = int(request.POST.get(f'question_{question.id}'))
-            choice = Choice.objects.get(id=choice_id)
-            scores[choice.question.id] = scores.get(choice.question.id, 0) + choice.score
+        scores = request.session.get('scores', {})
+        question_id = request.session.get('question_id')
+        choice_id = int(request.POST.get(f'question_{question_id}'))
+        choice = Choice.objects.get(id=choice_id)
+        scores[choice.question.id] = scores.get(choice.question.id, 0) + choice.score
 
-        # 결과 계산
-        result = teamtest2(scores)
+        question = Question.objects.exclude(id__in=scores.keys()).first()
+        if question is None:
+            # 결과 계산
+            result = teamtest2(scores)
 
-        # 결과 저장
-        test_result = TestResult.objects.create(result_text=result['result_text'], personality_type=result['personality_type'])
+            # 결과 저장
+            test_result = TestResult.objects.create(result_text=result['result_text'], personality_type=result['personality_type'])
 
-        return render(request, 'main/teamtest2.html', {'result': result})
+            # 세션 초기화
+            request.session['scores'] = None
+            request.session['question_id'] = None
+
+            return redirect('main:result', test_result_id=test_result.id)
+        else:
+            request.session['scores'] = scores
+            request.session['question_id'] = question.id
+
+            return redirect('main:teamtest1')
     else:
-        questions = Question.objects.all()
-        context = {'questions': questions}
+        if 'scores' not in request.session or 'question_id' not in request.session:
+            request.session['scores'] = {}
+            request.session['question_id'] = Question.objects.first().id
+
+        question = Question.objects.get(id=request.session['question_id'])
+        choices = Choice.objects.filter(question=question)
+        context = {'question': question, 'choices': choices}
         return render(request, 'main/teamtest1.html', context)
+ 
 
 def teamtest2(scores):
     # 각 질문의 점수에 따라 결과 계산
@@ -117,6 +137,11 @@ def teamtest2(scores):
         personality_type = "Type C"
 
     return {'result_text': result_text, 'personality_type': personality_type}
+
+
+def result(request, test_result_id):
+    test_result = get_object_or_404(TestResult, id=test_result_id)
+    return render(request, 'main/result.html', {'result': test_result})
 
 def maketeam1(request): #글쓰기 페이지 입장 전
     return render(request, 'main/maketeam1.html')
