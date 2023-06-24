@@ -1,0 +1,24 @@
+<!--팀플유형검사결과-->
+<!--일러스트-->
+<!--열정적인 리더군요 어쩌고-->
+<!--팀플시작하기 버튼-->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>팀플 성향 테스트 2</h1>
+<h2><a href = "{% url 'main:mainpage' %}">메인페이지로 돌아가기</a></h2>
+{% if result %}
+  <!-- 결과를 표시하는 부분 -->
+  <h2>성격 유형 검사 결과</h2>
+  <h1>{{ result.result_text }}</h1>
+  <!-- 테스트 URL 숨기기 -->
+  {% url 'teamtest1' as test_url %}
+  {% if test_url %}
+    <p>테스트를 다시 진행하려면 <a href="{{ test_url }}">여기</a>를 클릭하세요.</p>
+  {% endif %}
+{% endif %}
+
+{% endblock %}
