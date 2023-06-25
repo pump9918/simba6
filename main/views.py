@@ -149,12 +149,6 @@ def maketeam1(request): #글쓰기 페이지 입장 전
 def maketeam2(request): #글쓰기 페이지
     return render(request, 'main/maketeam2.html')
 
-# def teamtest1(request):
-#     return render(request, 'main/teamtest1.html')
-
-# def teamtest2(request):
-#     return render(request, 'main/teamtest2.html')
-
 
 
 
