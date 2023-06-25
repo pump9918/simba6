@@ -12,6 +12,7 @@
 {% endif %}
 <h3><p>팀플 기본적 정보 : {{post.body}}</p></h3>
 <h3><p>주제 설명 : {{post.describe}}</p></h3>
+<h3><p>원하는 팀원 성향 : {{ post.propensity }}</p></h3>
 {% if post.writer == user %}
 <a href = "{% url 'main:edit' post.id %}">수정하기</a>
 <a href = "{% url 'main:delete' post.id %}">삭제하기</a>

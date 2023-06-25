@@ -10,6 +10,8 @@ class Post(models.Model):
     body = models.TextField() #팀플 기본적 정보 필드
     describe = models.TextField(blank=True, null=True) #주제 설명 필드
     image = models.ImageField(upload_to="blog/", blank=True, null=True) #이미지 필드
+    propensity = models.TextField()
+    url = models.TextField()
     
     def __str__(self):
         return self.title #데이터를 호출하면 대푯값으로 데이터의 title이 나오게 됨
