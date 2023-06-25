@@ -9,8 +9,14 @@
     <h3>"{{ result.result_text }}" {{ user.profile.name }}</h3>
 
     <h3>팀플 모집 내역</h3>
-    {% for post in posts %}
-        {{ post.title }}
+    {% for volunteer in volunteers %}
+        {{ volunteer.post.title }}
+        {% for volunteer_obj in volunteer.volunteers %}
+            <p>{{ volunteer_obj.user.profile.nickname }}</p>
+        {% empty %}
+            <p>지원자 없음</p>
+        {% endfor %}
+        <hr>
     {% endfor %}
 
     <h3>팀플 지원 내역</h3>
