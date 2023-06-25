@@ -10,8 +10,8 @@ class Post(models.Model):
     body = models.TextField() #팀플 기본적 정보 필드
     describe = models.TextField(blank=True, null=True) #주제 설명 필드
     image = models.ImageField(upload_to="blog/", blank=True, null=True) #이미지 필드
-    propensity = models.TextField()
-    url = models.TextField()
+    propensity = models.TextField(blank=True, null=True)
+    url = models.TextField(blank=False)
     
     def __str__(self):
         return self.title #데이터를 호출하면 대푯값으로 데이터의 title이 나오게 됨
@@ -42,3 +42,14 @@ class Choice(models.Model):
 class TestResult(models.Model):
     result_text = models.CharField(max_length=200)
     personality_type = models.CharField(max_length=10)
+
+class Volunteer(models.Model):
+    STATUS_CHOICES = [
+        ('pending', '승인 대기'),
+        ('accepted', '승인'),
+        ('rejected', '승인 거부'),
+    ]
+
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    info = models.CharField(max_length=10, choices=STATUS_CHOICES)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
