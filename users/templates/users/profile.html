@@ -3,6 +3,41 @@
 {% load static %}
 
 {% block content %}
-<h1>내 프로필</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/58cae1d5f8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+    <div class="back_button">
+        <div class="back_button"><i class=" fas fa-solid fa-circle-chevron-left fa-3x " style="color: #35ccaa;"></i></div>
+    </div>
+    <div class="content">
+
+        <div class="profile_profile">프로필페이지</div>
+        <div class="container">
+            <div class="container_background">
+                <div class="profile_top">
+                    <div class="profile_image">
+                        <img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FvQUdu%2FbtqvTUJOpaD%2FF6l3qRXedNPB3mGNmmuOY1%2Fimg.png" id="ggiri_logo"class=logo width="80%" height="100%" />
+                    </div>
+                    <div class="profile_nickname"><strong>노란비니</strong></div>
+                    <div class="profile_status"><strong>멀티미디어소프트웨어공학과 2학년</strong></div>
+                    <div class="profile_test"><strong>"논리적인 팔로워" 박호연</strong></div>                
+                </div>
+                <div class="profile_middle">끼리 평가 결과</div>
+                <div class="halfbox">
+                    <div class="halfbox_top">&ensp;어드벤쳐디자인</div>
+                    <div class="halfbox_bottom"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
 
 {% endblock %}
