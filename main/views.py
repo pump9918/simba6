@@ -119,7 +119,7 @@ def teamtest1(request):
         choices = Choice.objects.filter(question=question)
         context = {'question': question, 'choices': choices}
         return render(request, 'main/teamtest1.html', context)
- 
+
 
 def teamtest2(scores):
     # 각 질문의 점수에 따라 결과 계산
