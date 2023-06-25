@@ -66,8 +66,10 @@
     </div>
     <h4><a href="{% url 'main:maketeam1' %}">팀플생성1(maketeam1.html)</a></h4>
     <h4><a href="{% url 'main:maketeam2' %}">팀플생성2(maketeam2.html)</a></h4>
-    <h4><a href="{% url 'main:teamtest1' %}">팀성향테스트1(teamtest1.html -> teamtest2.html)</a></h4>
-    <h4><a href="{% url 'users:mypage' user.id %}">마이페이지(mypage.html)</a></h4>
+    {% if 'scores' not in request.session or 'question_id' not in request.session %}
+        <h4><a href="{% url 'main:teamtest1' %}">팀성향테스트1(teamtest1.html -> teamtest2.html)</a></h4>
+    {% endif %}
+    <h4><a href="{% url 'users:mypage' %}">마이페이지(mypage.html)</a></h4>
     <h4><a href="{% url 'users:measure' %}">끼리평가페이지(measure.html)</a></h4>
     <h4><a href="{% url 'users:profile' %}">프로필페이지(profile.html)</a></h4>
 
