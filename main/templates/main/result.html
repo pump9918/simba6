@@ -9,16 +9,23 @@
 {% block content %}
 
 <h1>팀플 성향 테스트 2</h1>
-<h2><a href = "{% url 'main:mainpage' %}">메인페이지로 돌아가기</a></h2>
 {% if result %}
   <!-- 결과를 표시하는 부분 -->
   <h2>성격 유형 검사 결과</h2>
+  {% if result.personality_type == "Type A" %}
+    <img src = "{% static 'images/열정적인리더.jpg' %}" style="width:500px;">
+  {% elif result.personality_type == "Type B"%}
+    <img src = "{% static 'images/논리적인발표자.jpg' %}" style="width:500px;">
+  {% elif result.personality_type == "Type C"%}
+    <img src = "{% static 'images/꼼꼼한탐정.jpg' %}" style="width:500px;">
+  {% endif %}
   <h1>{{ result.result_text }}</h1>
   <!-- 테스트 URL 숨기기 -->
   {% url 'teamtest1' as test_url %}
-  {% if test_url %}
+  {% if not scores and not question_id %}
     <p>테스트를 다시 진행하려면 <a href="{{ test_url }}">여기</a>를 클릭하세요.</p>
   {% endif %}
 {% endif %}
+<h2><a href = "{% url 'main:mainpage' %}">메인페이지로 돌아가기</a></h2>
 
 {% endblock %}
