@@ -1,0 +1,25 @@
+<!--팀플 유형검사과정-->
+<!--질문-->
+<!--4지선다 for문으로 답변 표기-->
+<!--총 5개정도 하려나-->
+<!--다음 질문 버튼-->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1>팀플 성향 테스트 1</h1>
+<h2><a href = "{% url 'main:mainpage' %}">메인페이지로 돌아가기</a></h2>
+
+<form action="{% url 'main:teamtest1' %}" method="post">
+    {% csrf_token %}
+    <h3>{{ question.question_text }}</h3>
+    {% for choice in choices %}
+      <input type="radio" name="question_{{ question.id }}" value="{{ choice.id }}" required>
+      <label>{{ choice.choice_text }}</label>
+    {% endfor %}
+    <button type="submit">다음 문제</button>
+</form>
+
+{% endblock %}

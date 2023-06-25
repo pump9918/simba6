@@ -1,0 +1,38 @@
+<!--끼리평가페이지-->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://kit.fontawesome.com/58cae1d5f8.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile_24.css' %}">
+</head>
+<body>
+    <div class="back_button">
+        <div class="back_button"><i class=" fas fa-solid fa-circle-chevron-left fa-3x " style="color: #35ccaa;"></i></div>
+    </div>
+    <div class="content">
+
+        <div class="profile_profile">프로필페이지</div>
+        <div class="container">
+            <div class="container_background">
+                <div class="halfbox1">
+                    <div class="halfbox_top1">&ensp;어드벤쳐디자인</div>
+                    <div class="halfbox_bottom1"></div>
+                </div>
+                <div class="halfbox2">
+                    <div class="halfbox_top2">&ensp;어드벤쳐디자인</div>
+                    <div class="halfbox_bottom2"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock %}

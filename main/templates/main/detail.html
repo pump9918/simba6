@@ -3,20 +3,93 @@
 
 {% block content %}
 
-<h1>{{post.title}}</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/detail.css' %}">
+    <script src="https://kit.fontawesome.com/58cae1d5f8.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div class="back_button"><i class=" fas fa-solid fa-circle-chevron-left fa-3x " style="color: #35ccaa;"></i></div>
+
+    <div class="content">
+        <div class="detail_container">
+            <div class="detail_container_background">
+                <div class="detail_title">
+                    &ensp;<strong>팀플제목</strong>
+                    <div>{{post.title}}</div>
+                </div>
+                <div class="detail_empty">
+                    <div class="detail_profile_and_icon">
+                        
+                            <div class="tag_profile"><img src="images/ggiri_logo.png" id="tag_ggiri_logo" width="100%" height="100%" /></div>
+                            <div class="tag_nickname">노란비니</div>
+                        
+                    </div>
+                    <div class="detail_checkapprove">
+                        승인여부 확인하기
+                    </div>
+                </div>
+                <div class="detail_teamplay_info">
+                    &ensp;<strong>팀플정보</strong>
+                    <div>{{post.body}}</div>
+                </div>
+                <div class="detail_topic_info">
+                    &ensp;<strong>주제설명</strong>
+                    <div>{{post.describe}}</div>
+                </div>
+                <div class="detail_teamone_preference">
+                    &ensp;<strong>원하는 팀원 성향</strong>
+                </div>
+                <div class="detail_QNA">
+                    &ensp;<strong> 댓글 창
+                        <div class="comment_container">
+                            <div>[댓글 입력]</div>
+                            <div class="comment_form">
+                                <form method="POST" action="{% url 'main:detail' post.id %}">
+                                    {% csrf_token %}
+                                    <input type="text" name="content">
+                                    <input type="submit" name="submit">
+                                </form>
+                            </div>
+                            <div class="comment_list">
+                                {% for c in comments %}
+                                <hr>
+                                <h4>작성자 : {{c.writer}}</h4>
+                                <p>내용 : {{c.content}}</p>
+                                <p>{{c.pub_date}}</p>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </strong>
+                </div>            
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<!---
+<h1>팀플 제목: {{post.title}}</h1>
 <h2>작성자 : {{post.writer}}</h2>
 <h2>날짜 : {{post.pub_date}}</h2>
 <hr>
 {% if post.image %}
     <p><img src="{{post.image.url}}" alt="사진"  height="400"></p>
 {% endif %}
-<h3><p>{{post.body}}</p></h3>
-{% if blog.writer == user %}
+<h3><p>팀플 기본적 정보 : {{post.body}}</p></h3>
+<h3><p>주제 설명 : {{post.describe}}</p></h3>
+{% if post.writer == user %}
 <a href = "{% url 'main:edit' post.id %}">수정하기</a>
 <a href = "{% url 'main:delete' post.id %}">삭제하기</a>
 {% endif %}
+<h2><a href = "{% url 'main:mainpage' %}">메인페이지로 돌아가기</a></h2>
 <hr>
 <div class="comment_container">
+    <div>[댓글 입력]</div>
     <div class="comment_form">
         <form method="POST" action="{% url 'main:detail' post.id %}">
             {% csrf_token %}
@@ -32,6 +105,5 @@
         <p>{{c.pub_date}}</p>
         {% endfor %}
     </div>
-</div>
-
+</div>-->
 {% endblock %}

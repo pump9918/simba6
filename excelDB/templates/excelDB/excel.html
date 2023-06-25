@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Excel DB Example</title>
+</head>
+<body>
+    <h1>Excel DB Example</h1>
+
+    <h2>Records</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Class ID</th>
+                <th>Class Number</th>
+                <th>Class Name</th>
+                <th>Professor</th>
+                <th>Time</th>
+                <th>Classroom</th>
+                <th>Credit</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+                <tr>
+                    <td>{{ record.classid }}</td>
+                    <td>{{ record.classNum }}</td>
+                    <td>{{ record.className }}</td>
+                    <td>{{ record.professor }}</td>
+                    <td>{{ record.time }}</td>
+                    <td>{{ record.classroom }}</td>
+                    <td>{{ record.credit }}</td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7">No records found.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
