@@ -1,16 +1,27 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth
 from django.contrib.auth.models import User
+from main.models import *
 
-def mypage(request):
-    
-    if request.method == 'GET': #로그인 페이지 띄우기
-        return render(request, 'users/mypage.html')
-    
-    #request.user == 현재 로그인한 유저에 대한 정보를 가짐
+def mypage(request, id):
+    user = get_object_or_404(User, pk=id)
+    result = TestResult.objects.first()
+    context = {
+        'user' : user,
+        'posts' : Post.objects.filter(writer=user),
+        'result': result,
+    }
+    return render(request, "users/mypage.html", context)
     
 def measure(request):
     return render(request, 'users/measure.html')
 
-def profile(request):
-    return render(request, 'users/profile.html')
+def profile(request, id):
+    user = get_object_or_404(User, pk=id)
+    result = TestResult.objects.first()
+    context = {
+        'user' : user,
+        'posts' : Post.objects.filter(writer=user),
+        'result': result,
+    }
+    return render(request, 'users/profile.html', context)

@@ -32,6 +32,8 @@ def create(request): #포스트 생성(CRUD 중 C)
         new_post.body = request.POST['body']
         new_post.describe = request.POST['describe']
         new_post.image = request.FILES.get('image')
+        new_post.propensity = request.POST.get('propensity')
+        new_post.url = request.POST.get('propensity')
         
         new_post.save()
         
@@ -119,7 +121,7 @@ def teamtest1(request):
         choices = Choice.objects.filter(question=question)
         context = {'question': question, 'choices': choices}
         return render(request, 'main/teamtest1.html', context)
- 
+
 
 def teamtest2(scores):
     # 각 질문의 점수에 따라 결과 계산

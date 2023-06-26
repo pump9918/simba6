@@ -8,7 +8,28 @@
 
 {% block content %}
 
-<h1>팀플 생성 1</h1>
-<h2><a href = "{% url 'main:mainpage' %}">메인페이지로 돌아가기</a></h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>최종디자인13</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/maketeam1.css' %}"
+    />
+  </head>
+  <body>
+    <div class="start">
+    <img src="{% static 'images/끼리로고블러1.png' %}" />
+    <div class="make">
+        <h2>팀플 할 시간이에요!!!<br />준비되셨나요???</h2>
+        <a class="link2" href="{% url 'main:maketeam2' %}">팀플 생성하기</a>
+    </div>
+    </div>
+  </body>
+</html>
 
 {% endblock %}

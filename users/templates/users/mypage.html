@@ -2,15 +2,18 @@
 {% load static %}
 
 {% block content %}
-    <h1>내 이름은 뭘까용</h1>
+    <h1>마이 페이지</h1>
 
-    <h3>{{ user.profile.nickname }}님 안녕하세여</h3>
-    <h3>당신의 학과는 {{ user.profile.department }} 입니다.</h3>
+    <h3>{{ user.profile.nickname }}</h3>
+    <h3>{{ user.profile.department }} {{ user.profile.grade }} 학년</h3>
+    <h3>"{{ result.result_text }}" {{ user.profile.name }}</h3>
 
+    <h3>팀플 모집 내역</h3> 
+    {% for post in posts %}
+        {{ post.title }}
+    {% endfor %}
+
+    <h3>팀플 지원 내역</h3>
+
+    <h3>끼리평가 결과</h3>
 {% endblock %}
-
-
-<h1>안녕하세요 {{user.username}}입니다</h1>
-<!--django 내부에서 user모델만 자체적으로 템플릿에서 활용할 수 있도록 처리해줌-->
-<!--profile등 다른 클래스는 안됨-->
-<a href="{% url 'main:mainpage' %}">메인으로 돌아가기</a>
