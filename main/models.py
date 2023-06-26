@@ -53,9 +53,3 @@ class Volunteer(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
     info = models.CharField(max_length=10, choices=STATUS_CHOICES)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-
-class Evaluation(models.Model):
-    evaluator = models.ForeignKey(User, on_delete=models.CASCADE, related_name='evaluations_given')
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='evaluations')
-    target_user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='evaluations_received')
-    comment = models.TextField()

@@ -20,7 +20,7 @@
         <ul>
           <li><a href="#"><strong>주녕</strong></a></li>
           <li><a href="{% url 'users:mypage' user.id %}"><strong>마이페이지</strong></a></li>
-          <li><a href="{% url 'users:measure' %}"><strong>끼리 평가</strong></a></li>
+          <li><a href="{% url 'users:measure' user.id %}"><strong>끼리 평가</strong></a></li>
         </ul>
       </div>
     </section>

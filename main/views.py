@@ -33,7 +33,7 @@ def create(request): #포스트 생성(CRUD 중 C)
         new_post.describe = request.POST['describe']
         new_post.image = request.FILES.get('image')
         new_post.propensity = request.POST.get('propensity')
-        new_post.url = request.POST.get('propensity')
+        new_post.url = request.POST.get('url')
         
         new_post.save()
         #태그형식
