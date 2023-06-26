@@ -45,6 +45,131 @@
   width: 50%;
   align-items: center;
 }
+
+
+/*겉에 큰 부분 */
+
+.navbar .button1_left ul{
+  margin-top: 10px;
+  width:150px;
+  height: 150px;
+  list-style: none;
+
+  display:flex;  
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: all 0.4s ease;    
+
+}
+
+.navbar .button1_left ul li{
+  background-color:#35CCAA;
+  width:130%;
+  height: 100%;
+  display:flex;  
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  
+}
+
+.navbar .button1_left ul li a{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  width:80%;
+  height: 80%;
+  border-radius: 10px;
+}
+
+
+.navbar .button1_right ul{
+  margin-top: 10px;
+  width:150px;
+  height: 150px;
+  list-style: none;
+  
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  border-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-10px);
+  transition: all 0.4s ease;    
+  
+  border:1px transparent;
+}
+
+.navbar .button1_right ul li{
+  background-color:#35CCAA;
+  width:130%;
+  height: 100%;
+  display:flex;  
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  
+}
+.navbar .button1_right ul li a{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  width: 80%;
+  height: 80%;
+  border-radius: 8px;
+}
+
+
+
+.navbar .button1_left li:hover,
+.navbar .button1_right li:hover{
+    background-color: #35CCAA;
+
+
+}
+
+
+
+
+.navbar .button1_left button:focus + ul{
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0px);
+}
+.navbar .button1_right button:focus + ul{
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0px);
+
+}
+
+
+.navbar  a{
+  text-decoration: none;
+  color:black;
+}
+
+
+
+
+
+.navbar .button0{
+  margin-top: -180px;
+}
 .navbar .button0 img {
   /*네비바 끼리 로고*/
   display: flex;
@@ -69,12 +194,25 @@
   margin-left: 1.5%;
 }
 .button1 {
-  width: 20%;
+  width: 25%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-right: 5%;
+  
 }
-.navbar .button1 a {
+
+
+.button1_left{
+}
+
+.button1_right{
+
+}
+
+
+
+.navbar .button1 .button1_left button {
   /*끼리페이지 버튼*/
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
   background: #35ccaa;
@@ -82,21 +220,27 @@
   font-family: "Noto Sans KR";
   font-style: normal;
   font-weight: 500;
-  font-size: 24px;
+  font-size: 15px;
   line-height: 24px;
-
   padding: 0% 10%;
   /* or 100% */
 
   display: flex;
   align-items: center;
-  text-align: center;
-
+  justify-content: center;
   color: #ffffff;
   text-decoration: none;
-
+  width:150px;
   height: 60px;
 }
+
+.navbar .button1 .button1_right button{
+  background-color: white;
+}
+
+
+
+
 .navbar .button1 img {
   /*개인 프로필 사진*/
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
@@ -106,11 +250,8 @@
   height: 55px;
 }
 
-h3 {
-  color: orange;
-}
 
-/*mainpage 따로 파란색 쓰고싶음*/
-h3 .mainpage {
-  color: blue;
+.navbar button{
+  border:1px transparent;
+
 }

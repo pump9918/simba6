@@ -22,9 +22,6 @@
   <h1>{{ result.result_text }}</h1>
   <!-- 테스트 URL 숨기기 -->
   {% url 'teamtest1' as test_url %}
-  {% if not scores and not question_id %}
-    <p>테스트를 다시 진행하려면 <a href="{{ test_url }}">여기</a>를 클릭하세요.</p>
-  {% endif %}
 {% endif %}
 <h2><a href = "{% url 'main:mainpage' %}">메인페이지로 돌아가기</a></h2>
 
