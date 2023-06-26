@@ -19,4 +19,5 @@ urlpatterns = [
     path('maketeam2/', maketeam2, name="maketeam2"),
     path('teamtest1/', teamtest1, name="teamtest1"),
     path('result/<int:test_result_id>/', result, name='result'),
+    path('<int:id>/volunteer', volunteer, name='volunteer'),
 ]

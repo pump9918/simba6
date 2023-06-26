@@ -45,9 +45,9 @@ class TestResult(models.Model):
 
 class Volunteer(models.Model):
     STATUS_CHOICES = [
-        ('pending', '승인 대기'),
+        ('pending', '팀플 생성자가 승인 여부를 결정하지 못했어요!!'),
         ('accepted', '승인'),
-        ('rejected', '승인 거부'),
+        ('rejected', '팀플 생성자가 승인을 거부했습니다.\n다른 팀플을 찾아보세요!!'),
     ]
 
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
