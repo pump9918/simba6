@@ -15,10 +15,12 @@ def mypage(request, id):
             'post': post,
             'volunteers': post_volunteers
         })
+    apply = Volunteer.objects.filter(user=user)
     context = {
         'user': user,
         'volunteers': volunteers,
         'result': result,
+        'apply' : apply
     }
     return render(request, "users/mypage.html", context)
     
@@ -27,3 +29,17 @@ def measure(request):
 
 def profile(request):
     return render(request, 'users/profile.html')
+
+def approve_member(request, volunteer_id):
+    volunteer = Volunteer.objects.get(id=volunteer_id)
+    volunteer.info = 'accepted'
+    volunteer.save()
+
+    return redirect('users:mypage', id=volunteer.post.writer.profile.id)
+
+def reject_member(request, volunteer_id):
+    volunteer = Volunteer.objects.get(id=volunteer_id)
+    volunteer.info = 'rejected'
+    volunteer.save()
+
+    return redirect('users:mypage', id=volunteer.post.writer.profile.id)
