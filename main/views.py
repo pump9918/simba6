@@ -36,6 +36,16 @@ def create(request): #포스트 생성(CRUD 중 C)
         new_post.url = request.POST.get('propensity')
         
         new_post.save()
+        #태그형식
+        words = new_post.body.split(' ')
+        tag_list = []
+        for w in words:
+            if len(w)>0:
+                if w[0] == '#':
+                    tag_list.append(w[1:])
+        for t in tag_list:
+            tag, boolean = Tag.objects.get_or_create(name=t) 
+            new_post.tags.add(tag.id)
         
         return redirect('main:detail', new_post.id) #새로 생성한 post id와함께 detail 페이지로 이동
     else :
@@ -68,6 +78,7 @@ def edit(request, id):
 def update(request, id):
     if request.user.is_authenticated:
         update_post = Post.objects.get(id=id)
+        update_tags = Tag.objects.filter(posts=post)
         if request.user == update_post.writer:
             update_post.title = request.POST['title']
             update_post.writer = request.user
@@ -75,8 +86,19 @@ def update(request, id):
             update_post.body = request.POST['body']
             update_post.describe = request.POST['describe']
             update_post.image = request.FILES.get('image')
-            
+            #태그
+            update_tags.delete()
+            words = update_post.body.split(' ')
+            tag_list = []
+            for w in words:
+                if len(w)>0:
+                    if w[0] == '#':
+                        tag_list.append(w[1:])
+            for t in tag_list:
+                tag, boolean = Tag.objects.get_or_create(name=t)
+                update_post.tags.add(tag.id)
             update_post.save()
+            
             return redirect('main:detail', update_post.id)
     return redirect('accounts:login')
 
