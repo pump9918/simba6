@@ -55,9 +55,11 @@ def detail(request, id): #id에 원하는 게시글의 id 값을 넣어 detail �
     post = get_object_or_404(Post, pk = id) #Post와 id를 받아서 전송 or 오류표시
     if request.method == "GET":
         comments = Comment.objects.filter(post=post)
+        volunteer = Volunteer.objects.filter(user=request.user, post=post).first
         return render(request, 'main/detail.html', {
             'post':post,
-            'comments':comments
+            'comments':comments,
+            'volunteer': volunteer,
         }) # id에 부합하는 게시물 1개씩 관리(detail 페이지)
     # pk(Primary Key): 각 객체를 구분해주는 키 값
     elif request.method == "POST":
@@ -194,3 +196,16 @@ class SearchView(ListView): #검색창
         context = super().get_context_data(**kwargs)
         context['query'] = self.request.GET.get('query', '')
         return context
+    
+
+def volunteer(request, id):
+    if request.user.is_authenticated:
+        post = Post.objects.get(id=id)
+        volunteer = Volunteer()
+        volunteer.user = request.user
+        volunteer.info = 'pending'
+        volunteer.post = post
+        volunteer.save()
+        return redirect('main:detail', id)
+    else:
+        return redirect('accounts:login')

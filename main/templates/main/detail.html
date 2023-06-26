@@ -26,13 +26,19 @@
                 <div class="detail_empty">
                     <div class="detail_profile_and_icon">
                         
-                            <div class="tag_profile"><img src="{% static 'images/끼리로고.png' %}" id="tag_ggiri_logo" width="100%" height="100%" /></div>
-                            <div class="tag_nickname">노란비니</div>
+                        <div class="tag_profile"><img src="{% static 'images/끼리로고.png' %}" id="tag_ggiri_logo" width="100%" height="100%" /></div>
+                            <div class="tag_nickname">{{post.writer.profile.nickname}}</div>
                         
                     </div>
                     <div class="detail_checkapprove">
-                        승인여부 확인하기
-                    </div>
+                        {% if post.writer != user %}
+                            {% if volunteer %}
+                                <a class="link1" href="{% url 'users:mypage' user.id %}">승인 여부 확인하기</a>
+                            {% else %}
+                                <a class="link1" href="{% url 'main:volunteer' post.id %}">지원하기</a>
+                            {% endif %}
+                        {% endif %}
+                    </div>                                    
                 </div>
                 <div class="detail_teamplay_info">
                     &ensp;<strong>팀플정보</strong>
