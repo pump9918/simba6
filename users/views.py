@@ -16,5 +16,12 @@ def mypage(request, id):
 def measure(request):
     return render(request, 'users/measure.html')
 
-def profile(request):
-    return render(request, 'users/profile.html')
+def profile(request, id):
+    user = get_object_or_404(User, pk=id)
+    result = TestResult.objects.first()
+    context = {
+        'user' : user,
+        'posts' : Post.objects.filter(writer=user),
+        'result': result,
+    }
+    return render(request, 'users/profile.html', context)

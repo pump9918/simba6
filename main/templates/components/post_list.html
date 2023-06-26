@@ -2,14 +2,16 @@
 
 <div class="contents">
     {% for post in posts %}
-      <div>{{post.writer}} : {{post.title}} </div>
+      <div>작성자: {{post.writer}} | 팀플제목: {{post.title}} </div>
+      <!--
       {% if post.image %}
         <p><img src="{{post.image.url}}" alt="사진"  height="100"></p>
       {% else %}
-        <p><img src="{% static 'images/동국대기본.jpg' %}" alt="사진"  height="100"></p>  
+        <p><img src="{% static 'images/동국대기본.jpg' %}" alt="사진"  height="100"></p> 
       {% endif %}
-        {{post.body}}
-        <a href="{% url 'main:detail' post.id %}">지원하기</a>
+      -->
+      <div>내용 요약: {{post.body}}</div>
+      <a href="{% url 'main:detail' post.id %}">상세보기</a>
     {% empty %}
       <p class="empty">{{ empty_message }}</p>
     {% endfor %}
