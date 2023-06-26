@@ -1,0 +1,221 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: #2e363e;
+  width: 100vw;
+}
+.navbar {
+  display: flex;
+  padding-left: 5%;
+  justify-content: space-between;
+}
+.button0 {
+  display: flex;
+  width: 50%;
+  align-items: center;
+}
+.navbar .button0 img {
+  /*네비바 끼리 로고*/
+  display: flex;
+  width: 55px;
+  height: 55px;
+  left: 92px;
+  top: 16px;
+}
+
+.navbar .button0 h1 {
+  /* 네비바 끼리 문구 */
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  background: linear-gradient(109.12deg, #35ccaa -10.9%, #9779ff 98.02%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  margin-left: 1.5%;
+}
+.button1 {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar .button1 a {
+  /*끼리페이지 버튼*/
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  background: #35ccaa;
+  border-radius: 8px;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 24px;
+  padding: 0% 10%;
+  /* or 100% */
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  text-decoration: none;
+  height: 60px;
+}
+.navbar .button1 img {
+  /*개인 프로필 사진*/
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border: 1px solid linear-gradient(109.12deg, #35ccaa -10.9%, #9779ff 98.02%);
+  display: flex;
+  width: 55px;
+  height: 55px;
+}
+
+/*여기서부터 수정하시오*/
+.processbar {
+  width: 100%;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.processbar img {
+  margin: 2% 0%;
+  width: 70%;
+}
+.process {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: 1% 0%;
+}
+.process h1 {
+  border-radius: 8px;
+  background: var(
+    --box-color-2,
+    linear-gradient(141deg, #35ccaa 0.74%, #9779ff 100%)
+  );
+  color: #fff;
+  font-size: 32px;
+  font-family: Noto Sans KR;
+  font-weight: 600;
+  height: 42px;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  border-radius: 8px;
+  display: flex;
+  color: #ffffff;
+  padding: 0.5% 10%;
+}
+.test {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+.test a {
+  display: flex;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 30px;
+  height: 70px;
+  color: #000000;
+  width: 70%;
+  border: linear-gradient(to right, green, yellow);
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  padding: 0.1%;
+  /*동환코드*/
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background-image: linear-gradient(#fff, #fff),
+    linear-gradient(to right, #35ccaa, #9779ff);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+  margin: 1% 0%;
+  text-decoration: none;
+}
+.button2 {
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-left: 50%;
+}
+.button2 a {
+  background: #35ccaa;
+  border-radius: 8px;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  padding: 0% 10%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  text-decoration: none;
+  height: 60px;
+}
+/*여기부터 돈터치*/
+.footer {
+  /*하단 회색 박스*/
+  width: 95%;
+  height: 250px;
+  background: rgba(217, 217, 217, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 5%;
+  margin-top: 4%;
+}
+.item-title {
+  /*동국대학교 멋쟁이 사자처럼 심바톤 6조*/
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.015em;
+}
+.item-content {
+  /*서울시 중구 필동로 1길 30 동국대학교 학생회관 2층*/
+  font-family: "Montserrat";
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 29px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.015em;
+}
+.btn {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-decoration: none;
+
+  background: #35ccaa;
+  border-radius: 8px;
+  font-family: "Noto Sans KR";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: #ffffff;
+  text-decoration: none;
+  height: 60px;
+}
