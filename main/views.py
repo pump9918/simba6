@@ -4,7 +4,7 @@ from .models import *
 from django.utils import timezone #django 기본 제공 시간관련 기능
 from django.db.models import Q #검색창 데이터베이스 활용
 from django.views.generic import View, ListView #제네릭뷰 사용
-import openpyxl #엑셀파일 사용을 위해 설치
+from excelDB.excel_db import ExcelDB
 
 def mainpage(request):
     posts = Post.objects.all() #변수 posts에 Post의 모든 객체 내용을 저장
@@ -172,5 +172,3 @@ class SearchView(ListView): #검색창
         context = super().get_context_data(**kwargs)
         context['query'] = self.request.GET.get('query', '')
         return context
-    
-
