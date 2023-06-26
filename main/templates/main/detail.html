@@ -26,8 +26,13 @@
                 <div class="detail_empty">
                     <div class="detail_profile_and_icon">
                         
+<<<<<<< HEAD
                             <div class="tag_profile"><img src="images/ggiri_logo.png" id="tag_ggiri_logo" width="100%" height="100%" /></div>
                             <div class="tag_nickname">{{post.writer.profile.nickname}}</div>
+=======
+                            <div class="tag_profile"><img src="{% static 'images/끼리로고.png' %}" id="tag_ggiri_logo" width="100%" height="100%" /></div>
+                            <div class="tag_nickname">노란비니</div>
+>>>>>>> fb3a3d5172249eb3e23fe54cbe06587507b227c9
                         
                     </div>
                     <div class="detail_checkapprove">
@@ -42,6 +47,7 @@
                 </div>
                 <div class="detail_teamplay_info">
                     &ensp;<strong>팀플정보</strong>
+                    
                     <div>{{post.body}}</div>
                 </div>
                 <div class="detail_topic_info">
@@ -52,7 +58,7 @@
                     &ensp;<strong>원하는 팀원 성향</strong>
                     <div>{{post.propensity}}</div>
                 </div>
-                <div class="detail_QNA">
+                <div class="detail_QNA" style="overflow: auto; height: 500px;">
                     &ensp;<strong> 댓글 창
                         <div class="comment_container">
                             <div>[댓글 입력]</div>
@@ -73,7 +79,9 @@
                             </div>
                         </div>
                     </strong>
-                </div>            
+                </div>
+                <a href = "{% url 'main:edit' post.id %}">수정하기</a>
+                <a href = "{% url 'main:delete' post.id %}">삭제하기</a>            
             </div>
         </div>
     </div>

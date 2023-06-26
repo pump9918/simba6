@@ -27,9 +27,6 @@ def mypage(request, id):
 def measure(request):
     return render(request, 'users/measure.html')
 
-def profile(request):
-    return render(request, 'users/profile.html')
-
 def approve_member(request, volunteer_id):
     volunteer = Volunteer.objects.get(id=volunteer_id)
     volunteer.info = 'accepted'
@@ -43,3 +40,13 @@ def reject_member(request, volunteer_id):
     volunteer.save()
 
     return redirect('users:mypage', id=volunteer.post.writer.profile.id)
+
+def profile(request, id):
+    user = get_object_or_404(User, pk=id)
+    result = TestResult.objects.first()
+    context = {
+        'user' : user,
+        'posts' : Post.objects.filter(writer=user),
+        'result': result,
+    }
+    return render(request, 'users/profile.html', context)
