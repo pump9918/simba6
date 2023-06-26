@@ -62,8 +62,8 @@
                 </div>
                 <div class="container_3">
                     <div class="container_3_blank">
+                        {% for apply in apply %}
                         <div class="container3_halfbox1">
-                            {% for apply in apply %}
                                 <div class="container3_halfbox_top1">{{ apply.post.title }}</div>
                                 <div class="container3_halfbox_bottom1">
                                     <strong>팀플 생성자</strong>
@@ -75,12 +75,8 @@
                                         {{ apply.get_info_display }}
                                     {% endif %}
                                 </div>
-                            {% endfor %}
                         </div>
-                        <div class="container3_halfbox1">
-                            <div class="container3_halfbox_top1">어드벤쳐디자인</div>
-                            <div class="container3_halfbox_bottom1"></div>
-                        </div>
+                        {% endfor %}
 
                     </div>
                     <div class="mypage_container3_list">
