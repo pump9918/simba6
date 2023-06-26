@@ -40,7 +40,7 @@
                                 <div class="container2_halfbox_top1">{{ volunteer.post.title }}</div>
                                 <div class="container2_halfbox_bottom1">
                                     {% for volunteer_obj in volunteer.volunteers %}
-                                        <div>{{ volunteer_obj.user.profile.nickname }}</div>
+                                        <a class="btn" href="{% url 'users:profile'  volunteer_obj.user.profile.id %}">{{ volunteer_obj.user.profile.nickname }}</a>
                                         {% if volunteer_obj.info == 'pending' %}
                                             <a class="btn" href="{% url 'users:approve_member' volunteer_obj.id %}">팀원 승인</a>
                                             <a class="btn" href="{% url 'users:reject_member' volunteer_obj.id %}">팀원 거부</a>
