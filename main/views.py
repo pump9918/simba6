@@ -5,10 +5,11 @@ from django.utils import timezone #django 기본 제공 시간관련 기능
 from django.db.models import Q #검색창 데이터베이스 활용
 from django.views.generic import View, ListView #제네릭뷰 사용
 from excelDB.excel_db import ExcelDB
+from django.http import HttpResponse
 
 def mainpage(request):
-    posts = Post.objects.all() #변수 posts에 Post의 모든 객체 내용을 저장
-    return render(request, 'main/mainpage.html', {'posts':posts}) # Read 기능 위한 작업
+    posts = Post.objects.all() 
+    return render(request, 'main/mainpage.html', {'posts': posts,})
 
 def firstpage(request):
     return render(request, 'main/firstpage.html')
@@ -80,7 +81,7 @@ def edit(request, id):
 def update(request, id):
     if request.user.is_authenticated:
         update_post = Post.objects.get(id=id)
-        update_tags = Tag.objects.filter(posts=post)
+        update_tags = Tag.objects.filter(posts=update_post)
         if request.user == update_post.writer:
             update_post.title = request.POST['title']
             update_post.writer = request.user
@@ -125,11 +126,56 @@ def tag_posts(request, tag_id):
         'tag':tag,
         'posts':posts,
     })
+    
+# def teamtest1(request):
+#     if request.method == 'POST':
+#         user = request.user  # 사용자 정보 가져오기
 
+#         scores = request.session.get(f'scores_{user.id}', {})  # 사용자별로 세션 데이터 유지
+#         question_id = request.session.get(f'question_id_{user.id}')
+#         choice_id = int(request.POST.get(f'question_{question_id}'))
+#         choice = Choice.objects.get(id=choice_id)
+#         scores[choice.question.id] = scores.get(choice.question.id, 0) + choice.score
+
+#         question = Question.objects.exclude(id__in=scores.keys()).first()
+#         if question is None:
+#             # 결과 계산
+#             result = teamtest2(scores)
+
+#             # 결과 저장
+#             test_result = TestResult.objects.create(
+#                 user=user,  # 현재 로그인한 사용자 정보 저장
+#                 result_text=result['result_text'],
+#                 personality_type=result['personality_type']
+#             )
+
+#             # 세션 초기화
+#             request.session[f'scores_{user.id}'] = None
+#             request.session[f'question_id_{user.id}'] = None
+
+#             return redirect('main:result', test_result_id=test_result.id)
+#         else:
+#             request.session[f'scores_{user.id}'] = scores
+#             request.session[f'question_id_{user.id}'] = question.id
+
+#             return redirect('main:teamtest1')
+#     else:
+#         user = request.user  # 사용자 정보 가져오기
+
+#         if f'scores_{user.id}' not in request.session or f'question_id_{user.id}' not in request.session:
+#             request.session[f'scores_{user.id}'] = {}
+#             request.session[f'question_id_{user.id}'] = Question.objects.first().id
+
+#         question = Question.objects.get(id=request.session[f'question_id_{user.id}'])
+#         choices = Choice.objects.filter(question=question)
+#         context = {'question': question, 'choices': choices}
+#         return render(request, 'main/teamtest1.html', context)
 def teamtest1(request):
     if request.method == 'POST':
-        scores = request.session.get('scores', {})
-        question_id = request.session.get('question_id')
+        user = request.user  # 사용자 정보 가져오기
+
+        scores = request.session.get(f'scores_{user.id}', {})  # 사용자별로 세션 데이터 유지
+        question_id = request.session.get(f'question_id_{user.id}')
         choice_id = int(request.POST.get(f'question_{question_id}'))
         choice = Choice.objects.get(id=choice_id)
         scores[choice.question.id] = scores.get(choice.question.id, 0) + choice.score
@@ -140,50 +186,117 @@ def teamtest1(request):
             result = teamtest2(scores)
 
             # 결과 저장
-            test_result = TestResult.objects.create(result_text=result['result_text'], personality_type=result['personality_type'])
+            test_result = TestResult.objects.create(
+                user=user,  # 현재 로그인한 사용자 정보 저장
+                result_text=result['result_text'],
+                personality_type=result['personality_type']
+            )
 
             # 세션 초기화
-            request.session['scores'] = None
-            request.session['question_id'] = None
+            del request.session[f'scores_{user.id}']
+            del request.session[f'question_id_{user.id}']
 
             return redirect('main:result', test_result_id=test_result.id)
         else:
-            request.session['scores'] = scores
-            request.session['question_id'] = question.id
+            request.session[f'scores_{user.id}'] = scores
+            request.session[f'question_id_{user.id}'] = question.id
 
             return redirect('main:teamtest1')
     else:
-        if 'scores' not in request.session or 'question_id' not in request.session:
-            request.session['scores'] = {}
-            request.session['question_id'] = Question.objects.first().id
+        user = request.user  # 사용자 정보 가져오기
 
-        question = Question.objects.get(id=request.session['question_id'])
-        choices = Choice.objects.filter(question=question)
-        context = {'question': question, 'choices': choices}
-        return render(request, 'main/teamtest1.html', context)
+        if f'scores_{user.id}' not in request.session or f'question_id_{user.id}' not in request.session:
+            request.session[f'scores_{user.id}'] = {}
+            question = Question.objects.first()
+            if question is not None:
+                request.session[f'question_id_{user.id}'] = question.id
 
+        question_id = request.session.get(f'question_id_{user.id}')
+        if question_id is not None:
+            question = Question.objects.get(id=question_id)
+            choices = Choice.objects.filter(question=question)
+            context = {'question': question, 'choices': choices}
+            return render(request, 'main/teamtest1.html', context)
+        else:
+            # 질문이 없는 경우에 대한 처리
+            return HttpResponse('No question available.')
 
 def teamtest2(scores):
-    # 각 질문의 점수에 따라 결과 계산
-    # 이 예시에서는 간단하게 점수 합계에 따라 결과를 반환하도록 구현
     total_score = sum(scores.values())
 
     if total_score <= 5:
-        result_text = '당신은 "열정적인 리더"입니다. 팀플을 시작해보세요'
+        result_text = "열정적인 리더"
         personality_type = "Type A"
     elif total_score <= 10:
-        result_text = '당신은 "논리적인 발표자"입니다. 팀플을 시작해보세요'
+        result_text = "논리적인 발표자"
         personality_type = "Type B"
     else:
-        result_text = '당신은 "꼼꼼한 탐정"입니다. 팀플을 시작해보세요'
+        result_text = "꼼꼼한 탐정"
         personality_type = "Type C"
 
     return {'result_text': result_text, 'personality_type': personality_type}
 
 
 def result(request, test_result_id):
-    test_result = get_object_or_404(TestResult, id=test_result_id)
+    test_result = TestResult.objects.get(id=test_result_id)
     return render(request, 'main/result.html', {'result': test_result})
+    
+# def teamtest1(request):
+#     if request.method == 'POST':
+#         scores = request.session.get('scores', {})
+#         question_id = request.session.get('question_id')
+#         choice_id = int(request.POST.get(f'question_{question_id}'))
+#         choice = Choice.objects.get(id=choice_id)
+#         scores[choice.question.id] = scores.get(choice.question.id, 0) + choice.score
+
+#         question = Question.objects.exclude(id__in=scores.keys()).first()
+#         if question is None:
+#             # 결과 계산
+#             result = teamtest2(scores)
+
+#             # 결과 저장
+#             test_result = TestResult.objects.create(result_text=result['result_text'], personality_type=result['personality_type'])
+
+#             # 세션 초기화
+#             request.session['scores'] = None
+#             request.session['question_id'] = None
+
+#             return redirect('main:result', test_result_id=test_result.id)
+#         else:
+#             request.session['scores'] = scores
+#             request.session['question_id'] = question.id
+
+#             return redirect('main:teamtest1')
+#     else:
+#         if 'scores' not in request.session or 'question_id' not in request.session:
+#             request.session['scores'] = {}
+#             request.session['question_id'] = Question.objects.first().id
+
+#         question = Question.objects.get(id=request.session['question_id'])
+#         choices = Choice.objects.filter(question=question)
+#         context = {'question': question, 'choices': choices}
+#         return render(request, 'main/teamtest1.html', context)
+
+
+# def teamtest2(scores):
+#     total_score = sum(scores.values())
+
+#     if total_score <= 5:
+#         result_text = "열정적인 리더"
+#         personality_type = "Type A"
+#     elif total_score <= 10:
+#         result_text = "논리적인 발표자"
+#         personality_type = "Type B"
+#     else:
+#         result_text = "꼼꼼한 탐정"
+#         personality_type = "Type C"
+
+#     return {'result_text': result_text, 'personality_type': personality_type}
+
+
+# def result(request, test_result_id):
+#     test_result = TestResult.objects.get(id=test_result_id)
+#     return render(request, 'main/result.html', {'result': test_result})
 
 def maketeam1(request): #글쓰기 페이지 입장 전
     return render(request, 'main/maketeam1.html')

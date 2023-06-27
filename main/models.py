@@ -49,6 +49,8 @@ class Choice(models.Model):
 class TestResult(models.Model):
     result_text = models.CharField(max_length=200)
     personality_type = models.CharField(max_length=10)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # 사용자 필드 추가
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class Volunteer(models.Model):
     STATUS_CHOICES = [
