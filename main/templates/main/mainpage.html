@@ -2,6 +2,50 @@
 {% load static %}
 
 {% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>최종디자인10</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/mainpage.css' %}"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+      <div class="apply">
+          <h1>팀플 지원</h1> `
+        </div>
+        <form class="search-form" action="{% url 'main:search' %}" method="get">
+        <div class="icon-search">
+            <form class="search-form" action="{% url 'main:search' %}" method="get">
+                <input class="search-input" name="query" type="text" placeholder="검색 (학수번호, 교수명, 교과명)" required>  
+                <h1>학수번호</h1>
+                <a class="link1" href="#"><i class="fas fa-chevron-down"></i>        
+                </a>
+                <button class="cp-button search-button" type="submit">검색</button>
+            </form>
+        </div>
+        </form>
+        <div class="tag">
+        <h1>#학과</h1>
+        <h1>#학수번호</h1>
+        <h1>#학과</h1>          
+        </div>
+        {% for post in posts %}
+            <div class="information">
+            <h2></h2><!--색상 박스 -->
+            <h3>{{post.title}}</h3> <!--흰 박스 + 문구 -->
+            <a class="link1" href="{% url 'main:detail' post.id %}">상세보기</a> <!--문구 + 초록 박스 -->
+          </div>
+        {% endfor %}
+      </div>
+
     <h1>반갑습니다 심바톤 끼리팀 여러분</h1>
     <img src = "{% static 'images/멋사.png' %}" style="width:500px;">
     <div>기획/디자인 : 최준형</div>
@@ -71,7 +115,7 @@
     {% if user.is_authenticated %}
         <h4><a href="{% url 'users:mypage' user.id %}">마이페이지(mypage.html)</a></h4>
         <h4><a href="{% url 'users:profile' user.id %}">프로필페이지(profile.html)</a></h4>
-        <h4><a href="{% url 'users:measure' %}">끼리평가페이지(measure.html)</a></h4>
+        <h4><a href="{% url 'users:measure' user.id %}">끼리평가페이지(measure.html)</a></h4>
     {% endif %}
     
     

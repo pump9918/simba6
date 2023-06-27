@@ -2,58 +2,44 @@
 {% load static %}
 
 {% block content %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>최종디자인10</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/mainpage.css' %}"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+      <div class="apply">
+          <h1>검색 결과</h1> `
+        </div>
+        <form class="search-form" action="{% url 'main:search' %}" method="get">
+        <div class="icon-search">
+            <form class="search-form" action="{% url 'main:search' %}" method="get">
+                <input class="search-input" name="query" value='{{ query }}' type="text" placeholder="게시물을 검색해보세요" required>
+                <h1>학수번호</h1>
+                <a class="link1" href="#"><i class="fas fa-chevron-down"></i>        
+                </a>
+                <button class="cp-button search-button" type="submit">검색</button>
+            </form>
+        </div>
+        </form>
+        <div class="tag">
+          <h1>"{{ query }}"에 대한 검색 결과 ({{ paginator.count }})</h2>      
+        </div>
+        {% if search_results %}
+          {% include 'components/post_list.html' with posts=search_results empty_message="검색 결과가 없어요 :(" %}
+        {% else %}
+          <p>올바르지 않은 검색입니다. 다시 한 번 검색해보세요.</p>
+        {% endif %}
+        
+      </div>
 
-<main class="site-body">
-  <div class="content-list max-content-width">
-    <form class="search-form" action="{% url 'main:search' %}" method="get">
-      <input class="search-input" name="query" value='{{ query }}' type="text" placeholder="게시물을 검색해보세요" required>
-      <button class="cp-button search-button" type="submit">검색</button>
-    </form>
-    <div class="header">
-      <h2>"{{ query }}"에 대한 검색 결과 ({{ paginator.count }})</h2>
-    </div>
-    {% if search_results %}
-      {% include 'components/post_list.html' with posts=search_results empty_message="검색 결과가 없어요 :(" %}
-    {% else %}
-      <p>올바르지 않은 검색입니다. 다시 한 번 검색해보세요.</p>
-    {% endif %}
-    <!--페이지네이션-->
-    <div class="pagination">
-      {% if page_obj.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}">이전</a>
-      {% endif %}
-  
-      <span class="current-page">{{ page_obj.number }}</span>
-  
-      {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}">다음</a>
-      {% endif %}
-    </div>
-  </div>
-</main>
-<!--
-<main class="site-body">
-  <div class="content-list max-content-width">
-    <form class="search-form" action="{% url 'main:search' %}" method="get">
-      <input class="search-input" name="query" value='{{ query }}' type="text" placeholder="게시물을 검색해보세요" required>
-      <button class="cp-button search-button" type="submit">검색</button>
-    </form>
-    <div class="header">
-      <h2>"{{ query }}"에 대한 검색 결과 ({{ paginator.count }})</h2>
-    </div>
-    {% include 'components/post_list.html' with posts=search_results empty_message="검색 결과가 없어요 :(" %}
-    <div class="pagination">
-      {% if page_obj.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}">이전</a>
-      {% endif %}
-  
-      <span class="current-page">{{ page_obj.number }}</span>
-  
-      {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}">다음</a>
-      {% endif %}
-    </div>
-  </div>
-</main>
--->
 {% endblock content %}
