@@ -18,41 +18,78 @@
     </div>
     <div class="content">
 
-        <div class="profile_profile">끼리평가</div>
+        <div class="profile_profile">끼리 평가</div>
         <div class="container">
             <div class="container_background">
                 {% for my_project in my_projects %}
                     <div class="halfbox1">
-                        <div class="halfbox_top1">&ensp;{{ my_project.project.post.title }}</div>
+                        <div class="halfbox_top1">&ensp;&ensp;{{ my_project.project.post.title }}</div>
                         <div class="halfbox_bottom1">
+                            <div class="title">
+                                <div class="halfbox_bottom1_left_title">
+                                    <div class="halfbox_bottom1_teambox_word"><strong>팀원</strong></div>         
+    
+                                </div>
+                                <div class="halfbox_bottom1_right_title">
+                                    <div class="halfbox_bottom1_evaluatebox_word"><strong>평가</strong></div>
+                                </div>
+                            </div>    
                             {% if my_project.project.post.writer.id != user.id %}
-                                {{ my_project.project.post.writer.profile.nickname }}
-                                {% if user.profile in my_project.project.post.writer.profile.likers.all %}
-                                    <a href="{% url 'users:like' my_project.project.post.writer.id %}"><button type="button" class="btn btn-outline-info">좋아요 취소</button></a>
-                                {% else %}
-                                    <a href="{% url 'users:like' my_project.project.post.writer.id %}"><button type="button" class="btn btn-outline-info">좋아요</button></a>
-                                {% endif %}
-                                {% if user.profile in my_project.project.post.writer.profile.haters.all %}
-                                        <a href="{% url 'users:hate' my_project.project.post.writer.id %}"><button type="button" class="btn btn-outline-info">싫어요 취소</button></a>
-                                {% else %}
-                                        <a href="{% url 'users:hate' my_project.project.post.writer.id %}"><button type="button" class="btn btn-outline-info">싫어요</button></a>
-                                {% endif %}
+                                <div class="teammate1">
+                                    <div class="teammate1_profile">
+                                        <div class="teammate1_tag_profile_and_nickname">
+                                            <div class="teammate1_tag_profile">
+                                                {% if user.profile.userImage %}
+                                                    <img src="{{ my_project.project.post.writer.profile.userImage.url }}" id="tag_ggiri_logo" width="100%" height="100%"></div>
+                                                {% else %}
+                                                    <img src="{% static 'images/동국대기본.jpg' %}" id="tag_ggiri_logo" width="100%" height="100%"></div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="teammate1_tag_nickname">{{ my_project.project.post.writer.profile.nickname }}</div>
+                                        </div>
+                                        <div class="teammate1_like_dislike">
+                                            {% if user.profile in my_project.project.post.writer.profile.likers.all %}
+                                                <div class="teammate1_like"><a href="{% url 'users:like' my_project.project.post.writer.id %}"><i class="fa-regular fa-thumbs-up"></i>취소</a></div>
+                                            {% else %}
+                                                <div class="teammate1_like"><a href="{% url 'users:like' my_project.project.post.writer.id %}"><i class="fa-regular fa-thumbs-up"></i></a></div>
+                                            {% endif %}
+                                            {% if user.profile in my_project.project.post.writer.profile.haters.all %}
+                                                <div class="teammate1_dislike"><a href="{% url 'users:hate' my_project.project.post.writer.id %}"><i class="fa-regular fa-thumbs-down"></i>취소</a></div>
+                                            {% else %}
+                                                <div class="teammate1_dislike"><a href="{% url 'users:hate' my_project.project.post.writer.id %}"><i class="fa-regular fa-thumbs-down"></i></a></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
                             {% endif %}
-                            <br>
                             {% for member in my_project.member %}
                                 {% if member.user != user %}
-                                    {{ member.user.profile.nickname }}
-                                    {% if user.profile in member.user.profile.likers.all %}
-                                        <a href="{% url 'users:like' member.user.id %}"><button type="button" class="btn btn-outline-info">좋아요 취소</button></a>
-                                    {% else %}
-                                        <a href="{% url 'users:like' member.user.id %}"><button type="button" class="btn btn-outline-info">좋아요</button></a>
-                                    {% endif %}
-                                    {% if user.profile in member.user.profile.haters.all %}
-                                        <a href="{% url 'users:hate' member.user.id %}"><button type="button" class="btn btn-outline-info">싫어요 취소</button></a>
-                                    {% else %}
-                                        <a href="{% url 'users:hate' member.user.id %}"><button type="button" class="btn btn-outline-info">싫어요</button></a>
-                                    {% endif %}
-                                    <br>
+                                    <div class="teammate1">
+                                        <div class="teammate1_profile">
+                                            <div class="teammate1_tag_profile_and_nickname">
+                                                <div class="teammate1_tag_profile">
+                                                    {% if user.profile.userImage %}
+                                                        <img src="{{ member.user.profile.userImage.url }}" id="tag_ggiri_logo" width="100%" height="100%"></div>
+                                                    {% else %}
+                                                        <img src="{% static 'images/동국대기본.jpg' %}" id="tag_ggiri_logo" width="100%" height="100%"></div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="teammate1_tag_nickname">{{ member.user.profile.nickname }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="teammate1_like_dislike">
+                                            {% if user.profile in member.user.profile.likers.all %}
+                                                <div class="teammate1_like"><a href="{% url 'users:like' member.user.id %}"><i class="fa-regular fa-thumbs-up"></i>취소</a></div>
+                                            {% else %}
+                                                <div class="teammate1_like"><a href="{% url 'users:like' member.user.id %}"><i class="fa-regular fa-thumbs-up"></i></a></div>
+                                            {% endif %}
+                                            {% if user.profile in member.user.profile.haters.all %}
+                                                <div class="teammate1_dislike"><a href="{% url 'users:hate' member.user.id %}"><i class="fa-regular fa-thumbs-down"></i>취소</a></div>
+                                            {% else %}
+                                                <div class="teammate1_dislike"><a href="{% url 'users:hate' member.user.id %}"><i class="fa-regular fa-thumbs-down"></i></a></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 {% endif %}
                             {% endfor %}
                         </div>
@@ -61,35 +98,73 @@
 
                 {% for my_post_project in my_post_projects %}
                     <div class="halfbox1">
-                        <div class="halfbox_top1">&ensp;{{ my_post_project.project.title }}</div>
+                        <div class="halfbox_top1">&ensp;&ensp;{{ my_post_project.project.title }}</div>
                         <div class="halfbox_bottom1">
+                            <div class="title">
+                                <div class="halfbox_bottom1_left_title">
+                                    <div class="halfbox_bottom1_teambox_word"><strong>팀원</strong></div>         
+    
+                                </div>
+                                <div class="halfbox_bottom1_right_title">
+                                    <div class="halfbox_bottom1_evaluatebox_word"><strong>평가</strong></div>
+                                </div>
+                            </div>    
                             {% if my_post_project.project.writer.id != user.id %}
-                                {{ my_post_project.project.writer.profile.nickname }}
-                                {% if user.profile in my_post_project.project.writer.profile.likers.all %}
-                                    <a href="{% url 'users:like' my_post_project.project.writer.id %}"><button type="button" class="btn btn-outline-info">좋아요 취소</button></a>
-                                {% else %}
-                                    <a href="{% url 'users:like' my_post_project.project.writer.id %}"><button type="button" class="btn btn-outline-info">좋아요</button></a>
-                                {% endif %}
-                                {% if user.profile in my_post_project.project.writer.profile.haters.all %}
-                                        <a href="{% url 'users:hate' my_post_project.project.writer.id %}"><button type="button" class="btn btn-outline-info">싫어요 취소</button></a>
-                                {% else %}
-                                        <a href="{% url 'users:hate' my_post_project.project.writer.id %}"><button type="button" class="btn btn-outline-info">싫어요</button></a>
-                                {% endif %}
-                                <br>
+                                <div class="teammate1">
+                                    <div class="teammate1_profile">
+                                        <div class="teammate1_tag_profile_and_nickname">
+                                            <div class="teammate1_tag_profile">
+                                                {% if user.profile.userImage %}
+                                                    <img src="{{ my_post_project.project.writer.profile.userImage.url }}" id="tag_ggiri_logo" width="100%" height="100%"></div>
+                                                {% else %}
+                                                    <img src="{% static 'images/동국대기본.jpg' %}" id="tag_ggiri_logo" width="100%" height="100%"></div>
+                                                {% endif %}
+                                            </div>
+                                            <div class="teammate1_tag_nickname">{{ my_post_project.project.writer.profile.nickname }}</div>
+                                        </div>
+                                        <div class="teammate1_like_dislike">
+                                            {% if user.profile in my_post_project.project.writer.profile.likers.all %}
+                                                <div class="teammate1_like"><a href="{% url 'users:like' my_post_project.project.writer.id %}"><i class="fa-regular fa-thumbs-up"></i>취소</a></div>
+                                            {% else %}
+                                                <div class="teammate1_like"><a href="{% url 'users:like' my_post_project.project.writer.id %}"><i class="fa-regular fa-thumbs-up"></i></a></div>
+                                            {% endif %}
+                                            {% if user.profile in my_post_project.project.writer.profile.haters.all %}
+                                                <div class="teammate1_dislike"><a href="{% url 'users:like' my_post_project.project.writer.id %}"><i class="fa-regular fa-thumbs-down"></i>취소</a></div>
+                                            {% else %}
+                                                <div class="teammate1_dislike"><a href="{% url 'users:like' my_post_project.project.writer.id %}"><i class="fa-regular fa-thumbs-down"></i></a></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
                             {% endif %}
                             {% for member in my_post_project.member %}
                                 {% if user != member.user %}
-                                    {{ member.user.profile.nickname }}
-                                    {% if user.profile in member.user.profile.likers.all %}
-                                        <a href="{% url 'users:like' member.user.id %}"><button type="button" class="btn btn-outline-info">좋아요 취소</button></a>
-                                    {% else %}
-                                        <a href="{% url 'users:like' member.user.id %}"><button type="button" class="btn btn-outline-info">좋아요</button></a>
-                                    {% endif %}
-                                    {% if user.profile in member.user.profile.haters.all %}
-                                        <a href="{% url 'users:hate' member.user.id %}"><button type="button" class="btn btn-outline-info">싫어요 취소</button></a>
-                                    {% else %}
-                                        <a href="{% url 'users:hate' member.user.id %}"><button type="button" class="btn btn-outline-info">싫어요</button></a>
-                                    {% endif %}
+                                    <div class="teammate1">
+                                        <div class="teammate1_profile">
+                                            <div class="teammate1_tag_profile_and_nickname">
+                                                <div class="teammate1_tag_profile">
+                                                    {% if user.profile.userImage %}
+                                                        <img src="{{ member.user.profile.userImage.url }}" id="tag_ggiri_logo" width="100%" height="100%"></div>
+                                                    {% else %}
+                                                        <img src="{% static 'images/동국대기본.jpg' %}" id="tag_ggiri_logo" width="100%" height="100%"></div>
+                                                    {% endif %}
+                                                </div>
+                                                <div class="teammate1_tag_nickname">{{ member.user.profile.nickname }}</div>
+                                            </div>
+                                        </div>
+                                        <div class="teammate1_like_dislike">
+                                            {% if user.profile in member.user.profile.likers.all %}
+                                                <div class="teammate1_like"><a href="{% url 'users:like' member.user.id %}"><i class="fa-regular fa-thumbs-up"></i>취소</a></div>
+                                            {% else %}
+                                                <div class="teammate1_like"><a href="{% url 'users:like' member.user.id %}"><i class="fa-regular fa-thumbs-up"></i></a></div>
+                                            {% endif %}
+                                            {% if user.profile in member.user.profile.haters.all %}
+                                                <div class="teammate1_dislike"><a href="{% url 'users:hate' member.user.id %}"><i class="fa-regular fa-thumbs-down"></i>취소</a></div>
+                                            {% else %}
+                                                <div class="teammate1_dislike"><a href="{% url 'users:hate' member.user.id %}"><i class="fa-regular fa-thumbs-down"></i></a></div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
                                 {% endif %}
                                 <br>
                             {% endfor %}
