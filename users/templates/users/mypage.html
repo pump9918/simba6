@@ -65,8 +65,8 @@
                 <div class="apply">
                     팀플 모집 내역
                 </div>
+                {% for volunteer in volunteers %}
                 <div class="slide1_content1">
-                    {% for volunteer in volunteers %}                   
                     <div class="slide1_content1_top">{{ volunteer.post.title }}</div>
                     <div class="slide1_content1_bottom">
                         <div class="slide1_content1_bottom_firstline">
@@ -99,18 +99,15 @@
                         {% empty %}
                             <p>아직 지원자가 없어요 ㅠ</p>
                         {% endfor %}
-                    {% endfor %}
-                    {% if not volunteers%}
-                        팀플 모집 내역이 없어요.
-                    {% endif %}
                     </div>
                 </div>
+                {% endfor %}
 
                 <div class="team_apply_list">
                     팀원 지원 내역
                 </div>
+                {% for apply in apply %}           
                 <div class="slide2_content1">     
-                    {% for apply in apply %}           
                     <div class="slide2_content1_top1">{{ apply.post.title }}</div>
                     <div class="slide2_content1_bottom1">
                         <div class="slide2_content1_bottom_firstline">
@@ -139,11 +136,8 @@
                             </div>
                         </div>
                     </div>
-                    {% endfor %}
-                    {% if not apply %}
-                        팀플 지원 결과가 없어요!
-                    {% endif %}
                 </div>
+                {% endfor %}
             </div>
         </div>
 </body>
