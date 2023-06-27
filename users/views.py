@@ -36,6 +36,7 @@ def measure(request, id):
         })
     context = {
         'my_projects': my_projects,
+        'user': user,
     }
     return render(request, 'users/measure.html', context)
 
