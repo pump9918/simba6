@@ -84,3 +84,13 @@ def like(request, id):
     else:
         user.profile.likes.add(liked_user.profile)
     return measure(request, id=request.user.id)
+
+def hate(request, id):
+    user = request.user
+    hated_user = get_object_or_404(User, pk=id)
+    is_hater = user.profile in hated_user.profile.haters.all()
+    if is_hater:
+        user.profile.hates.remove(hated_user.profile)
+    else:
+        user.profile.hates.add(hated_user.profile)
+    return measure(request, id=request.user.id)

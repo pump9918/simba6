@@ -27,10 +27,38 @@
                         <div class="halfbox_bottom1">
                             {% if my_project.project.post.writer.id != user.id %}
                                 {{ my_project.project.post.writer.profile.nickname }}
+                                {% if user.profile in my_project.project.post.writer.profile.likers.all %}
+                                    <a href="{% url 'users:like' my_project.project.post.writer.id %}"><button type="button" class="btn btn-outline-info">좋아요 취소</button></a>
+                                {% else %}
+                                    <a href="{% url 'users:like' my_project.project.post.writer.id %}"><button type="button" class="btn btn-outline-info">좋아요</button></a>
+                                {% endif %}
+                                {% if user.profile in my_post_project.project.writer.profile.haters.all %}
+                                        <a href="{% url 'users:hate' my_project.project.post.writer.id %}"><button type="button" class="btn btn-outline-info">싫어요 취소</button></a>
+                                {% else %}
+                                        <a href="{% url 'users:hate' my_project.project.post.writer.id %}"><button type="button" class="btn btn-outline-info">싫어요</button></a>
+                                {% endif %}
                             {% endif %}
+                            {% for hater in my_project.project.post.writer.profile.haters.all %}
+                                {{ hater.nickname }}
+                            {% endfor %}
+                            <br>
                             {% for member in my_project.member %}
                                 {% if member.user != user %}
                                     {{ member.user.profile.nickname }}
+                                    {% if user.profile in member.user.profile.likers.all %}
+                                        <a href="{% url 'users:like' member.user.id %}"><button type="button" class="btn btn-outline-info">좋아요 취소</button></a>
+                                    {% else %}
+                                        <a href="{% url 'users:like' member.user.id %}"><button type="button" class="btn btn-outline-info">좋아요</button></a>
+                                    {% endif %}
+                                    {% if user.profile in member.user.profile.haters.all %}
+                                        <a href="{% url 'users:hate' member.user.id %}"><button type="button" class="btn btn-outline-info">싫어요 취소</button></a>
+                                    {% else %}
+                                        <a href="{% url 'users:hate' member.user.id %}"><button type="button" class="btn btn-outline-info">싫어요</button></a>
+                                    {% endif %}
+                                    {% for hater in member.user.profile.haters.all %}
+                                        {{ hater.nickname }}
+                                    {% endfor %}
+                                    <br>
                                 {% endif %}
                             {% endfor %}
                         </div>
@@ -43,12 +71,16 @@
                         <div class="halfbox_bottom1">
                             {% if my_post_project.project.writer.id != user.id %}
                                 {{ my_post_project.project.writer.profile.nickname }}
-                                {% if my_post_project.project.writer.profile in my_post_project.project.writer.profile.likers.all %}
-                                    <a href="{% url 'users:like' user.id %}"><button type="button" class="btn btn-outline-info">좋아요 취소</button></a>
+                                {% if user.profile in my_post_project.project.writer.profile.likers.all %}
+                                    <a href="{% url 'users:like' my_post_project.project.writer.id %}"><button type="button" class="btn btn-outline-info">좋아요 취소</button></a>
                                 {% else %}
-                                    <a href="{% url 'users:like' user.id %}"><button type="button" class="btn btn-outline-info">좋아요</button></a>
+                                    <a href="{% url 'users:like' my_post_project.project.writer.id %}"><button type="button" class="btn btn-outline-info">좋아요</button></a>
                                 {% endif %}
-                                {{ my_post_project.project.writer.profile.likers.all }}
+                                {% if user.profile in my_post_project.project.writer.profile.haters.all %}
+                                        <a href="{% url 'users:hate' my_post_project.project.writer.id %}"><button type="button" class="btn btn-outline-info">싫어요 취소</button></a>
+                                {% else %}
+                                        <a href="{% url 'users:hate' my_post_project.project.writer.id %}"><button type="button" class="btn btn-outline-info">싫어요</button></a>
+                                {% endif %}
                                 <br>
                             {% endif %}
                             {% for member in my_post_project.member %}
@@ -59,9 +91,14 @@
                                     {% else %}
                                         <a href="{% url 'users:like' member.user.id %}"><button type="button" class="btn btn-outline-info">좋아요</button></a>
                                     {% endif %}
+                                    {% if user.profile in member.user.profile.writer.profile.haters.all %}
+                                        <a href="{% url 'users:hate' member.user.id %}"><button type="button" class="btn btn-outline-info">싫어요 취소</button></a>
+                                    {% else %}
+                                        <a href="{% url 'users:hate' member.user.id %}"><button type="button" class="btn btn-outline-info">싫어요</button></a>
+                                    {% endif %}
                                 {% endif %}
-                                {% for liker in member.user.profile.likers.all %}
-                                    {{ liker.user.username }}
+                                {% for hater in member.user.profile.haters.all %}
+                                    {{ hater.nickname }}
                                 {% endfor %}
                                 <br>
                             {% endfor %}
