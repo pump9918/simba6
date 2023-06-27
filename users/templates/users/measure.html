@@ -23,12 +23,28 @@
             <div class="container_background">
                 {% for my_project in my_projects %}
                     <div class="halfbox1">
-                        <div class="halfbox_top1">&ensp;{{ my_project.post.title }}</div>
+                        <div class="halfbox_top1">&ensp;{{ my_project.project.post.title }}</div>
                         <div class="halfbox_bottom1">
                             {% if my_project.project.post.writer.id != user.id %}
                                 {{ my_project.project.post.writer.profile.nickname }}
                             {% endif %}
                             {% for member in my_project.member %}
+                                {% if member.user != user %}
+                                    {{ member.user.profile.nickname }}
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {% for my_post_project in my_post_projects %}
+                    <div class="halfbox1">
+                        <div class="halfbox_top1">&ensp;{{ my_post_project.project.title }}</div>
+                        <div class="halfbox_bottom1">
+                            {% if my_post_project.project.writer.id != user.id %}
+                                {{ my_post_project.project.writer.profile.nickname }}
+                            {% endif %}
+                            {% for member in my_post_project.member %}
                                 {% if member.user != user %}
                                     {{ member.user.profile.nickname }}
                                 {% endif %}

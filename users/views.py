@@ -34,9 +34,20 @@ def measure(request, id):
             'project': project,
             'member': member
         })
+    
+    my_posts = Post.objects.filter(writer=user)
+    my_post_projects = []
+    for my_post in my_posts:
+        my_post_member = Volunteer.objects.filter(post=my_post, info='accepted')
+        my_post_projects.append({
+            'project': my_post,
+            'member': my_post_member
+        })
+
     context = {
         'my_projects': my_projects,
         'user': user,
+        'my_post_projects': my_post_projects,
     }
     return render(request, 'users/measure.html', context)
 
