@@ -48,6 +48,18 @@
                             </div>
                         {% endfor %}
                     </div>
+                    <div class="mypage_like_dislike">
+                        <div class="mypage_like">
+                            <i class="fas fa-solid fa-thumbs-up"></i>
+                            <div class="mypage_like_num">{{ user.profile.likers.count }}</div>
+                        </div>
+                        <div class="mypage_dislike">
+                            <i class="fas fa-solid fa-thumbs-down"></i>
+                            <div class="mypage_dislike_num">{{ user.profile.haters.count }}</div>
+
+                        </div>
+                    </div>
+
                 </div>
                     
                 <div class="apply">
