@@ -1,296 +1,465 @@
 .content {
-    display: inline-flex;
+    display: flex;
     width: 100%;
-    height: 260vh;
+    
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+    gap:40px;
     
 }
 .mypage_mypage_icon{
-    display: flex;
+    display:flex;
     justify-content: center;
     align-items: center;
     background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
     border-radius: 5px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border:1px transparent;
-    color:white;    
-    margin-bottom: 30px;
-    width:20%;
-    height: 60px;
-    font-size: 19px;
-
+    color:white;
+    width:15%;
+    height:60px;
 }
 .container{
     width:80%;
-    height:230vh;
+    
     display: flex;
     justify-content: center;
     align-items: center;
     background: var(--2, linear-gradient(134deg, rgba(53, 204, 170, 0.30) 0%, rgba(151, 121, 255, 0.30) 99.59%));
     border-radius: 8px;
     border:1px transparent;
+    
 }
 .container_background{
     width:95%;
     height:95%;
-    display:grid;
-    grid-template-rows:repeat(4,1fr) ;
-}
-/*container 1*/
-
-.container_1{
-    grid-row: 1/2;
-    
-    display:grid;
-    grid-template-rows:repeat(3,1fr) ;
-
+    display:flex;
+    flex-direction: column;
+    gap:20px;
 }
 
-.mypage_profile{
-    grid-row: 1/3;
+/* 픽스 들어가는거 */
+.fix{
+    border:1px solid black;
+    width:100%;
+    height: 400px;
     display:grid;
     grid-template-columns: repeat(4,1fr);
     grid-template-rows: repeat(3,1fr);
-    gap:15px;
-    margin:5px;
 }
-.mypage_myprofile_image{
+
+
+
+.mypage_myimage{
     border:1px solid black;
-    grid-column: 1/2;
     grid-row: 1/3;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.mypage_position{
-    grid-column: 3/5;
-    grid-row: 1/2;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 8px;
-
-}
-.mypage_test_name{
-    grid-column: 3/5;
-    grid-row: 2/3;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    border-radius: 8px;
-}
-.mypage_nickname{
     grid-column: 1/2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mypage_mynickname{
+    border:1px solid black;
     grid-row: 3/4;
+    grid-column: 1/2;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mypage_mynickname_word{
     display:flex;
     justify-content: center;
     align-items: center;
     background-color: white;
+    width:180px;
+    height:40px;
+    border:1px transparent;
     border-radius: 8px;
-
 }
 
 
 
-.mypage_container1_list{
-    grid-row: 3/4;
-    display: flex;
-    align-items: center;
-    
-}
-.mypage_container1_list_word{
-    display: flex;
-    align-items: center;
+.mypage_myposition{
+    border:1px solid black;
+    grid-row: 1/2;
+    grid-column: 2/4;
+    display:flex;
     justify-content: center;
-    width:140px;
+    align-items: center;
+}
+.mypage_myposition_word{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width:400px;
+    height:60px;
+    border:1px transparent;
+    border-radius: 8px;
+}
+
+
+
+
+
+
+
+.mypage_mytest{
+    border:1px solid black;
+    grid-row: 2/3;
+    grid-column: 2/4;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.mypage_mytest_word{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    width:400px;
+    height:60px;
+    border:1px transparent;
+    border-radius: 8px;
+}
+.mypage_hashtag_box{
+    
+    border:1px solid black;
+    grid-row: 3/4;
+    grid-column: 2/5;
+
+}
+
+.mypage_hashtag1{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    border:1px transparent;
+    border-radius: 8px;
+    width:100px;
     height: 50px;
+    background-color: #48cace;
+}
+
+
+.fas{
+    font-size: 80px;
+    background: -webkit-linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.mypage_like_dislike{
+    border:1px solid black;
+    grid-row: 1/3;
+    grid-column: 4/5;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.mypage_like{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width:50%;
+    border:1px solid black;
+
+
+}
+.mypage_dislike{
+    flex-direction: column;
+
+    width:50%;
+    border:1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+
+
+
+
+
+
+
+
+/* 픽스 끝나는곳 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.apply{
+    display:flex;
+    justify-content: center;
+    align-items: center;
     background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
     border-radius: 5px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border:1px transparent;
     color:white;
+    width:15%;
+    height:60px;
 }
-
-
-
-/*container 2*/
-.container_2{
-    grid-row: 2/3;
-    display:grid;
-    grid-template-rows: repeat(3,1fr);
-
-}
-.container_2_blank{
-    grid-row: 1/3;
-    overflow: scroll;
-}
-.mypage_container2_list{
-    grid-row: 3/4;
-    display: flex;
-    align-items: center;
-}
-.mypage_container2_list_word{
-    
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width:140px;
-        height: 50px;
-        background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
-        border-radius: 5px;
-        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
-        border:1px transparent;
-        color:white;
-    
-
-}
-
-.container2_halfbox1{
-    display:grid;
-    grid-template-rows: repeat(5,1fr);
-    width:100%;
-    height:100%;
-    border-radius: 8px;
-    background-color: white;
-
-}
-.container2_halfbox_top1{
+.team_apply_list{
     display:flex;
     justify-content: center;
     align-items: center;
-    grid-row: 1/2;
-    border-radius: 8px;
-    color:white;
-
-    background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
-}
-
-.container2_halfbox2{
-    display:grid;
-    grid-template-rows: repeat(5,1fr);
-    width:100%;
-    height:100%;
-    border-radius: 8px;
-    background-color: white;
-
-}
-.container2_halfbox_top2{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    grid-row: 1/2;
-    color:white;
-
-    border-radius: 8px;
-    background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
-}
-
-
-
-/*container 3*/
-.container_3{
-    grid-row: 3/4;
-    display:grid;
-    grid-template-rows: repeat(3,1fr);
-
-}
-.container_3_blank{
-    grid-row: 1/3;
-    overflow: scroll;
-
-
-}
-.mypage_container3_list{
-    grid-row: 3/4;
-    display: flex;
-    align-items: center;
-}
-
-
-.mypage_container3_list_word{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width:140px;
-    height: 50px;
     background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
     border-radius: 5px;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
     border:1px transparent;
     color:white;
+    width:15%;
+    height:60px;
 }
 
 
-
-.container3_halfbox1{
+/* 슬라이드 1 */
+.slide1_content1{
+    border:1px solid black;
+    width:100%;
+    height: 350px;
     display:grid;
     grid-template-rows: repeat(5,1fr);
-    width:100%;
-    height:100%;
+    border:1px solid black;
     border-radius: 8px;
     background-color: white;
-
+    
 }
-.container3_halfbox_top1{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    grid-row: 1/2;
-    color:white;
-
-    border-radius: 8px;
-    background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
-}
-
-.container3_halfbox2{
-    display:grid;
-    grid-template-rows: repeat(5,1fr);
-    width:100%;
-    height:100%;
-    border-radius: 8px;
-    background-color: white;
-
-}
-.container3_halfbox_top2{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    color:white;
-
-    grid-row: 1/2;
-    border-radius: 8px;
-    background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
-}
-
-
-/*container 4*/
-
-.container_4{
-    grid-row: 4/5;
-
-
-}
-.container4_halfbox1{
-    display:grid;
-    grid-template-rows: repeat(5,1fr);
-    width:100%;
-    height:100%;
-    border-radius: 8px;
-    background-color: white;
-
-}
-.container4_halfbox_top1{
+.slide1_content1_top{
     display:flex;
     justify-content: center;
     align-items: center;
     grid-row: 1/2;
     border-radius: 8px;
-    color:white;
     background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
 }
+.slide1_content1_bottom{
+    gap:20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.slide1_content1_bottom_firstline{
+    border:1px solid black;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 20px;
+}
+.slide1_content1_firstline_left{
+    border:1px solid black;
+    
+}
+.slide1_content1_firstline_right{
+    border:1px solid black;
+
+}
+
+
+
+
+.slide1_content1_bottom_secondline{
+    border:1px solid black;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+    
+}
+.slide1_content1_secondline_left{
+    border:1px solid black;
+    
+}
+
+
+/* 노란비니 태그 */
+
+.slide1_content1_tag_profile_and_nickname{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border:1px solid black;
+    width:150px;
+    height: 50px;
+    background-color: #35CCAA;
+    border-radius: 50px;
+
+}
+.slide1_content1_tag_profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid black;
+    border-radius: 5rem;
+    width:50px;
+    height:50px;
+    background-color: white;
+}
+.slide1_content1_tag_nickname{
+    position: relative;
+    right:-10px;
+    color:white;
+}
+
+
+
+
+
+.slide1_content1_secondline_right{
+    border:1px solid black;
+    display: flex;
+    align-items: center;
+    gap:20px;
+    margin-right: 28px;
+}
+.slide1_content1_secondline_right button{
+    background-color: #35CCAA;
+    width:80px;
+    height: 30px;
+    border-radius: 8px;
+    border:1px transparent;
+}
+
+
+
+
+/* 슬라이드 1 끝나는곳 */
+
+
+
+
+/* 슬라이드 2 */
+
+
+.slide2{
+    gap:20px;
+}
+.slide2_content1{
+    border:1px solid black;
+    width:100%;
+    height: 280px;
+    display:grid;
+    grid-template-rows: repeat(5,1fr);
+    border:1px solid black;
+    border-radius: 8px;
+    background-color: white;
+}
+.slide2_content1_top1{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 1/2;
+    border-radius: 8px;
+    background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
+}
+
+.slide2_content1_bottom1{
+    gap:20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.slide2_content1_bottom_firstline{
+    border:1px solid black;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 20px;
+}
+.slide2_content1_firstline_left{
+    border:1px solid black;
+    
+}
+.slide2_content1_firstline_right{
+    border:1px solid black;
+
+}
+
+
+
+
+.slide2_content1_bottom_secondline{
+    border:1px solid black;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+    
+}
+.slide2_content1_secondline_left{
+    border:1px solid black;
+    
+}
+
+
+/* 노란비니 태그 */
+
+.slide2_content1_tag_profile_and_nickname{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border:1px solid black;
+    width:150px;
+    height: 50px;
+    background-color: #35CCAA;
+    border-radius: 50px;
+
+}
+.slide2_content1_tag_profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid black;
+    border-radius: 5rem;
+    width:50px;
+    height:50px;
+    background-color: white;
+}
+.slide2_content1_tag_nickname{
+    position: relative;
+    right:-10px;
+    color:white;
+}
+
+
+
+
+
+
+
+/* 슬라이드 2 끝나는곳 */
+
