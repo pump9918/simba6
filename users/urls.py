@@ -8,4 +8,6 @@ urlpatterns = [
     path('mypage/approve/<int:volunteer_id>/member/', approve_member, name="approve_member"),
     path('mypage/reject/<int:volunteer_id>/member/', reject_member, name="reject_member"),
     path('profile/<int:id>/', profile, name="profile"),
+    path('measure/<int:id>/like', like, name="like"),
+    path('measure/<int:id>/hate', hate, name="hate")
 ]

@@ -17,9 +17,10 @@
       <div class="button1_right">        
         <button><img src="{% static 'images/끼리로고.png' %}" /></button>
         <ul>
-          <li><a href="#"><strong>주녕</strong></a></li>
+          <li><a href="#"><strong>{{ user.profile.nickname }}</strong></a></li>
           <li><a href="{% url 'users:mypage' user.id %}"><strong>마이페이지</strong></a></li>
           <li><a href="{% url 'users:measure' user.id %}"><strong>끼리 평가</strong></a></li>
+          <li><a href="{% url 'accounts:logout' %}"><strong>로그아웃</strong></a></li>
         </ul>
       </div>
     </section>
