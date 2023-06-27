@@ -19,95 +19,121 @@
 
         <div class="container">
             <div class="container_background">
-                <div class="container_1">
-                    <div class="mypage_profile"> 
-                        <!--
-                        {% if user.profile.userImage %}
-                            <div class="mypage_myprofile_image"><img src="{{ user.profile.userImage }}"></div>
-                        {% endif %}-->
-                        {% if user.profile.userImage %}
+                <div class="fix">
+                    <div class="mypage_myimage">
+                        내 프로필 사진
+                        <!-- {% if user.profile.userImage %}
                             <div class="mypage_myprofile_image"><img src="{{ user.profile.userImage.url }}" alt="프로필 사진"></div>
                         {% else %}
                             <div class="mypage_myprofile_image"><img src="{% static 'images/동국대기본.jpg' %}" alt="프로필 사진"></div>
-                        {% endif %}
-                        <div class="mypage_position"><strong>{{ user.profile.department }} {{ user.profile.grade }}학년</strong></div>
-                        <div class="mypage_test_name"><strong>"{{ result.result_text }}" {{ user.profile.name }}</strong></div>
-                        <div class="mypage_nickname"><strong>{{ user.profile.nickname }}</strong></div>
-                        <div class="tag_container"> <!--개인 태그-->
-                            {% for mytag in mytaglist %}
+                        {% endif %} -->
+                    </div>
+                    <div class="mypage_mynickname">
+                        <div class="mypage_mynickname_word">{{ user.profile.nickname }}</div>
+                    </div>
+                    <div class="mypage_myposition">
+                        <div class="mypage_myposition_word">
+                            {{ user.profile.department }} {{ user.profile.grade }}학년
+                        </div>
+                    </div>
+                    <div class="mypage_mytest">
+                        <div class="mypage_mytest_word">
+                            "{{ result.result_text }}" {{ user.profile.name }}
+                        </div>
+                    </div>
+                    <div class="mypage_hashtag_box">
+                        {% for mytag in mytaglist %}
+                            <div class="mypage_hashtag1">
                                 <a href="#">{{ mytag.mytagname }}</a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    
-
-                    <div class="mypage_container1_list">
-                        <div class="mypage_container1_list_word">
-                            팀플 모집 내역
-                        </div>
-                    </div>
-                </div>
-                <div class="container_2">
-                    <div class="container_2_blank">
-                        {% for volunteer in volunteers %}
-                            <div class="container2_halfbox1">
-                                <div class="container2_halfbox_top1">{{ volunteer.post.title }}</div>
-                                <div class="container2_halfbox_bottom1">
-                                    {% for volunteer_obj in volunteer.volunteers %}
-                                        <a class="btn" href="{% url 'users:profile'  volunteer_obj.user.profile.id %}">{{ volunteer_obj.user.profile.nickname }}</a>
-                                        {% if volunteer_obj.info == 'pending' %}
-                                            <a class="btn" href="{% url 'users:approve_member' volunteer_obj.id %}">팀원 승인</a>
-                                            <a class="btn" href="{% url 'users:reject_member' volunteer_obj.id %}">팀원 거부</a>
-                                        {% else %}
-                                            선택 완료
-                                        {% endif %}
-                                    {% empty %}
-                                        <p>아직 지원자가 없어요 ㅠ</p>
-                                    {% endfor %}
-                                </div>
                             </div>
                         {% endfor %}
                     </div>
-                    <div class="mypage_container2_list">
-                        <div class="mypage_container2_list_word">
-                            팀플 지원 내역
-                        </div>
-                    </div>
                 </div>
-                <div class="container_3">
-                    <div class="container_3_blank">
-                        {% for apply in apply %}
-                        <div class="container3_halfbox1">
-                                <div class="container3_halfbox_top1">{{ apply.post.title }}</div>
-                                <div class="container3_halfbox_bottom1">
-                                    <strong>팀플 생성자</strong>
-                                    {{ apply.post.writer.profile.nickname }}
-                                    <strong>지원 결과</strong>
-                                    {% if apply.info == 'accepted'%}
-                                        {{ apply.post.url }}
-                                    {% else %}
-                                        {{ apply.get_info_display }}
-                                    {% endif %}
+                    
+                <div class="apply">
+                    팀플 모집 내역
+                </div>
+                <div class="slide1_content1">
+                    {% for volunteer in volunteers %}                   
+                    <div class="slide1_content1_top">{{ volunteer.post.title }}</div>
+                    <div class="slide1_content1_bottom">
+                        <div class="slide1_content1_bottom_firstline">
+                            <div class="slide1_content1_firstline_left">지원자</div>
+                            <div class="slide1_content1_firstline_right">승인 여부</div>
+                        </div>
+                        {% for volunteer_obj in volunteer.volunteers %}
+                        <div class="slide1_content1_bottom_secondline">
+                            <div class="slide1_content1_secondline_left">
+                                <div class="slide1_content1_tag_profile_and_nickname">
+                                    <div class="slide1_content1_tag_profile">
+                                        {% if user.profile.userImage %}
+                                            <img src="{{ post.writer.profile.userImage.url }}" width="100%" height="100%" />
+                                        {% else %}
+                                            <img src="{% static 'images/동국대기본.jpg' %}"width="100%" height="100%" />
+                                        {% endif %}
+                                    </div>
+                                    <div class="slide1_content1_tag_nickname"><a class="btn" href="{% url 'users:profile'  volunteer_obj.user.id %}">{{ volunteer_obj.user.profile.nickname }}</a></div>
                                 </div>
+                            </div>
+                            <div class="slide1_content1_secondline_right">
+                                {% if volunteer_obj.info == 'pending' %}
+                                    <button class="slide1_content1_secondline_approve"><a class="btn" href="{% url 'users:approve_member' volunteer_obj.id %}">팀원 승인</a></button>
+                                    <button class="slide1_content1_secondline_disapprove"><a class="btn" href="{% url 'users:reject_member' volunteer_obj.id %}">팀원 거부</a></button>
+                                {% else %}
+                                    선택 완료
+                                {% endif %}
+                            </div>
                         </div>
+                        {% empty %}
+                            <p>아직 지원자가 없어요 ㅠ</p>
                         {% endfor %}
+                    {% endfor %}
+                    {% if not volunteers%}
+                        팀플 모집 내역이 없어요.
+                    {% endif %}
+                    </div>
+                </div>
 
-                    </div>
-                    <div class="mypage_container3_list">
-                        <div class="mypage_container3_list_word">
-                            끼리평가 결과
+                <div class="team_apply_list">
+                    팀원 지원 내역
+                </div>
+                <div class="slide2_content1">     
+                    {% for apply in apply %}           
+                    <div class="slide2_content1_top1">{{ apply.post.title }}</div>
+                    <div class="slide2_content1_bottom1">
+                        <div class="slide2_content1_bottom_firstline">
+                            <div class="slide2_content1_firstline_left">팀플 생성자</div>
+                            <div class="slide2_content1_firstline_right">지원결과</div>
+                        </div>
+                        <div class="slide2_content1_bottom_secondline">
+                            <div class="slide2_content1_secondline_left">
+                                <div class="slide2_content1_tag_profile_and_nickname">
+                                    <div class="slide2_content1_tag_profile">
+                                        {% if user.profile.userImage %}
+                                            <img src="{{ post.writer.profile.userImage.url }}" width="100%" height="100%" />
+                                        {% else %}
+                                            <img src="{% static 'images/동국대기본.jpg' %}"width="100%" height="100%" />
+                                        {% endif %}
+                                    </div>
+                                    <div class="slide2_content1_tag_nickname">{{ apply.post.writer.profile.nickname }}</div>
+                                </div>
+                            </div>
+                            <div class="slide2_content1_secondline_right">
+                                {% if apply.info == 'accepted'%}
+                                    <button class="result">{{ apply.post.url }}</button>
+                                {% else %}
+                                    <button class="result">{{ apply.get_info_display }}</button>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
+                    {% endfor %}
+                    {% if not apply %}
+                        팀플 지원 결과가 없어요!
+                    {% endif %}
                 </div>
-                <div class="container_4">
-                        <div class="container4_halfbox1">
-                            <div class="container4_halfbox_top1">어드벤쳐디자인 (2023년 1학기 진행)</div>
-                            <div class="container4_halfbox_bottom1"></div>
-                        </div>
-                </div>
-            </div>    
+            </div>
         </div>
-    </div>
 </body>
 </html>
 
