@@ -25,17 +25,16 @@
         <div class="icon-search">
             <form class="search-form" action="{% url 'main:search' %}" method="get">
                 <input class="search-input" name="query" type="text" placeholder="검색 (학수번호, 교수명, 교과명)" required>  
-                <h1>학수번호</h1>
-                <a class="link1" href="#"><i class="fas fa-chevron-down"></i>        
-                </a>
-                <button class="cp-button search-button" type="submit">검색</button>
+                <!--<h1>학수번호</h1>-->
+                <!--<a class="link1" href="#"><i class="fas fa-chevron-down"></i></a>      -->
+                <h1><button class="cp-button search-button" type="submit">검색</button></h1>
             </form>
         </div>
         </form>
         <div class="tag">
-        <h1>#학과</h1>
-        <h1>#학수번호</h1>
-        <h1>#학과</h1>          
+            {% for mytag in mytaglist %}
+                <h1>#{{ mytag.mytagname }}</h1>
+            {% endfor %}        
         </div>
         {% for post in posts %}
             <div class="information">
@@ -99,6 +98,9 @@
     {% if user.is_authenticated %}
         <h4><a href="{% url 'main:maketeam1' %}">팀플생성1(maketeam1.html)</a></h4>
         <h4><a href="{% url 'main:maketeam2' %}">팀플생성2(maketeam2.html)</a></h4>
+        {% if 'scores' not in request.session or 'question_id' not in request.session %}
+            <h4><a href="{% url 'main:teamtest1' %}">팀성향테스트1(teamtest1.html -> result.html)</a></h4>
+        {% endif %}
     {% endif %}
     <div>
         {% for post in posts %}
@@ -107,9 +109,6 @@
         </div>
         {% endfor %}
     </div>
-    {% if 'scores' not in request.session or 'question_id' not in request.session %}
-        <h4><a href="{% url 'main:teamtest1' %}">팀성향테스트1(teamtest1.html -> teamtest2.html)</a></h4>
-    {% endif %}
     {% if user.is_authenticated %}
         <h4><a href="{% url 'users:mypage' user.id %}">마이페이지(mypage.html)</a></h4>
         <h4><a href="{% url 'users:profile' user.id %}">프로필페이지(profile.html)</a></h4>

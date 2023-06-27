@@ -22,11 +22,11 @@
                 <div class="fix">
                     <div class="mypage_myimage">
                         내 프로필 사진
-                        <!-- {% if user.profile.userImage %}
+                        {% if user.profile.userImage %}
                             <div class="mypage_myprofile_image"><img src="{{ user.profile.userImage.url }}" alt="프로필 사진"></div>
                         {% else %}
                             <div class="mypage_myprofile_image"><img src="{% static 'images/동국대기본.jpg' %}" alt="프로필 사진"></div>
-                        {% endif %} -->
+                        {% endif %}
                     </div>
                     <div class="mypage_mynickname">
                         <div class="mypage_mynickname_word">{{ user.profile.nickname }}</div>
