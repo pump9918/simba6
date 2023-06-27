@@ -25,11 +25,11 @@
                         {% if user.profile.userImage %}
                             <div class="mypage_myprofile_image"><img src="{{ user.profile.userImage }}"></div>
                         {% endif %}-->
-                        {% if user.profile.userImage %}
+                        <!-- {% if user.profile.userImage %}
                             <div class="mypage_myprofile_image"><img src="{{ user.profile.userImage.url }}" alt="프로필 사진"></div>
                         {% else %}
                             <div class="mypage_myprofile_image"><img src="{% static 'images/동국대기본.jpg' %}" alt="프로필 사진"></div>
-                        {% endif %}
+                        {% endif %} -->
                         <div class="mypage_position"><strong>{{ user.profile.department }} {{ user.profile.grade }}학년</strong></div>
                         <div class="mypage_test_name"><strong>"{{ result.result_text }}" {{ user.profile.name }}</strong></div>
                         <div class="mypage_nickname"><strong>{{ user.profile.nickname }}</strong></div>
