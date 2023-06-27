@@ -4,7 +4,7 @@ from .models import *
 from django.utils import timezone #django 기본 제공 시간관련 기능
 from django.db.models import Q #검색창 데이터베이스 활용
 from django.views.generic import View, ListView #제네릭뷰 사용
-import openpyxl #엑셀파일 사용을 위해 설치
+from excelDB.excel_db import ExcelDB
 
 def mainpage(request):
     posts = Post.objects.all() #변수 posts에 Post의 모든 객체 내용을 저장
@@ -36,6 +36,16 @@ def create(request): #포스트 생성(CRUD 중 C)
         new_post.url = request.POST.get('propensity')
         
         new_post.save()
+        #태그형식
+        words = new_post.body.split(' ')
+        tag_list = []
+        for w in words:
+            if len(w)>0:
+                if w[0] == '#':
+                    tag_list.append(w[1:])
+        for t in tag_list:
+            tag, boolean = Tag.objects.get_or_create(name=t) 
+            new_post.tags.add(tag.id)
         
         return redirect('main:detail', new_post.id) #새로 생성한 post id와함께 detail 페이지로 이동
     else :
@@ -45,9 +55,13 @@ def detail(request, id): #id에 원하는 게시글의 id 값을 넣어 detail �
     post = get_object_or_404(Post, pk = id) #Post와 id를 받아서 전송 or 오류표시
     if request.method == "GET":
         comments = Comment.objects.filter(post=post)
+        volunteer = Volunteer.objects.filter(user=request.user, post=post).first
+        tags = Tag.objects.all()
         return render(request, 'main/detail.html', {
             'post':post,
-            'comments':comments
+            'comments':comments,
+            'volunteer': volunteer,
+            'tags' : tags,
         }) # id에 부합하는 게시물 1개씩 관리(detail 페이지)
     # pk(Primary Key): 각 객체를 구분해주는 키 값
     elif request.method == "POST":
@@ -66,6 +80,7 @@ def edit(request, id):
 def update(request, id):
     if request.user.is_authenticated:
         update_post = Post.objects.get(id=id)
+        update_tags = Tag.objects.filter(posts=post)
         if request.user == update_post.writer:
             update_post.title = request.POST['title']
             update_post.writer = request.user
@@ -73,8 +88,19 @@ def update(request, id):
             update_post.body = request.POST['body']
             update_post.describe = request.POST['describe']
             update_post.image = request.FILES.get('image')
-            
+            #태그
+            update_tags.delete()
+            words = update_post.body.split(' ')
+            tag_list = []
+            for w in words:
+                if len(w)>0:
+                    if w[0] == '#':
+                        tag_list.append(w[1:])
+            for t in tag_list:
+                tag, boolean = Tag.objects.get_or_create(name=t)
+                update_post.tags.add(tag.id)
             update_post.save()
+            
             return redirect('main:detail', update_post.id)
     return redirect('accounts:login')
 
@@ -83,8 +109,22 @@ def delete(request, id):
     delete_post.delete()
     return redirect('main:mainpage')
 
-from django.shortcuts import render, redirect
-from .models import Question, Choice, TestResult
+# 모든 tag 리스트를 볼 수 있는 페이지 구현
+def tag_list(request):
+    tags = Tag.objects.all()
+    return render(request, 'main/tag_list.html', {
+        'tags':tags,
+    })
+
+
+# 태그 선택 시 해당 태그가 포함된 게시물 보는 기능 구현
+def tag_posts(request, tag_id):
+    tag = get_object_or_404(Tag, id=tag_id)
+    posts = tag.posts.all()
+    return render(request, 'main/tag_posts.html', {
+        'tag':tag,
+        'posts':posts,
+    })
 
 def teamtest1(request):
     if request.method == 'POST':
@@ -156,6 +196,7 @@ def maketeam2(request): #글쓰기 페이지
 
 class SearchView(ListView): #검색창
     model = Post
+    excel_db = ExcelDB()
     context_object_name = 'search_results'
     template_name = 'main/search_results.html'
     paginate_by = 8
@@ -163,10 +204,13 @@ class SearchView(ListView): #검색창
     #모든 리뷰가 아닌, 검색결과에 해당하는 리뷰만 보여줌(get_queryset활용)
     def get_queryset(self):
         query = self.request.GET.get('query', '')
-        return Post.objects.filter( #OR조건으로 검색어 필터
-            Q(title__icontains=query) #제목에 있거나
-            | Q(body__icontains=query) #포스트 내용에 있거나
-        )
+        if self.excel_db.check_search(query):
+            return Post.objects.filter(
+                Q(title__icontains=query)
+                | Q(body__icontains=query)
+            )
+        else:
+            return Post.objects.none()  # 빈 쿼리셋 반환
     
     def get_context_data(self, **kwargs): #템플릿에 검색어 전달
         context = super().get_context_data(**kwargs)
@@ -174,3 +218,14 @@ class SearchView(ListView): #검색창
         return context
     
 
+def volunteer(request, id):
+    if request.user.is_authenticated:
+        post = Post.objects.get(id=id)
+        volunteer = Volunteer()
+        volunteer.user = request.user
+        volunteer.info = 'pending'
+        volunteer.post = post
+        volunteer.save()
+        return redirect('main:detail', id)
+    else:
+        return redirect('accounts:login')

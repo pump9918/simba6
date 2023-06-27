@@ -14,7 +14,7 @@
 </head>
 <body>
     <div class="back_button">
-        <div class="back_button"><i class=" fas fa-solid fa-circle-chevron-left fa-3x " style="color: #35ccaa;"></i></div>
+        <div class="back_button"><a href="{% url 'main:mainpage' %}"><i class=" fas fa-solid fa-circle-chevron-left fa-3x " style="color: #35ccaa;"></i></a></div>
     </div>
     <div class="content">
 
@@ -23,17 +23,29 @@
             <div class="container_background">
                 <div class="profile_top">
                     <div class="profile_image">
-                        <img src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FvQUdu%2FbtqvTUJOpaD%2FF6l3qRXedNPB3mGNmmuOY1%2Fimg.png" id="ggiri_logo"class=logo width="80%" height="100%" />
+                        {% if user.profile.userImage %}
+                            <img src="{{ user.profile.userImage.url }}" id="ggiri_logo"class=logo width="80%" height="100%" />
+                        {% else %}
+                            <img src="{% static 'images/동국대기본.jpg' %}" id="ggiri_logo"class=logo width="80%" height="100%" />
+                        {% endif %}
                     </div>
                     <div class="profile_nickname"><strong>{{user.profile.nickname}}</strong></div>
                     <div class="profile_status"><strong>{{user.profile.department}} {{user.profile.grade}}학년</strong></div>
                     <div class="profile_test"><strong>"{{result.result_text}}" {{user.profile.name}}</strong></div>                
                 </div>
                 <div class="profile_middle">끼리 평가 결과</div>
-                <div class="halfbox">
-                    <div class="halfbox_top">&ensp;어드벤쳐디자인</div>
-                    <div class="halfbox_bottom"></div>
-                </div>
+                {% for volunteer in volunteers %}
+                    <div class="halfbox">
+                        <div class="halfbox_top">&ensp;{{ volunteer.post.title }}</div>
+                        <div class="halfbox_bottom">
+                            {% for volunteer_obj in volunteer.volunteers %}
+                            <div>{{ volunteer_obj.user.profile.nickname }}</div>
+                            {% empty %}
+                            <p>아직 지원자가 없어요 ㅠ</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
