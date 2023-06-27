@@ -12,7 +12,11 @@
     <div class="header">
       <h2>"{{ query }}"에 대한 검색 결과 ({{ paginator.count }})</h2>
     </div>
-    {% include 'components/post_list.html' with posts=search_results empty_message="검색 결과가 없어요 :(" %}
+    {% if search_results %}
+      {% include 'components/post_list.html' with posts=search_results empty_message="검색 결과가 없어요 :(" %}
+    {% else %}
+      <p>올바르지 않은 검색입니다. 다시 한 번 검색해보세요.</p>
+    {% endif %}
     <!--페이지네이션-->
     <div class="pagination">
       {% if page_obj.has_previous %}
@@ -27,4 +31,29 @@
     </div>
   </div>
 </main>
+<!--
+<main class="site-body">
+  <div class="content-list max-content-width">
+    <form class="search-form" action="{% url 'main:search' %}" method="get">
+      <input class="search-input" name="query" value='{{ query }}' type="text" placeholder="게시물을 검색해보세요" required>
+      <button class="cp-button search-button" type="submit">검색</button>
+    </form>
+    <div class="header">
+      <h2>"{{ query }}"에 대한 검색 결과 ({{ paginator.count }})</h2>
+    </div>
+    {% include 'components/post_list.html' with posts=search_results empty_message="검색 결과가 없어요 :(" %}
+    <div class="pagination">
+      {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}">이전</a>
+      {% endif %}
+  
+      <span class="current-page">{{ page_obj.number }}</span>
+  
+      {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}">다음</a>
+      {% endif %}
+    </div>
+  </div>
+</main>
+-->
 {% endblock content %}
