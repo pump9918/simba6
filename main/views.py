@@ -5,7 +5,6 @@ from django.utils import timezone #django 기본 제공 시간관련 기능
 from django.db.models import Q #검색창 데이터베이스 활용
 from django.views.generic import View, ListView #제네릭뷰 사용
 from excelDB.excel_db import ExcelDB
-from django.http import HttpResponse
 
 def mainpage(request):
     posts = Post.objects.all() 
@@ -127,49 +126,6 @@ def tag_posts(request, tag_id):
         'posts':posts,
     })
     
-# def teamtest1(request):
-#     if request.method == 'POST':
-#         user = request.user  # 사용자 정보 가져오기
-
-#         scores = request.session.get(f'scores_{user.id}', {})  # 사용자별로 세션 데이터 유지
-#         question_id = request.session.get(f'question_id_{user.id}')
-#         choice_id = int(request.POST.get(f'question_{question_id}'))
-#         choice = Choice.objects.get(id=choice_id)
-#         scores[choice.question.id] = scores.get(choice.question.id, 0) + choice.score
-
-#         question = Question.objects.exclude(id__in=scores.keys()).first()
-#         if question is None:
-#             # 결과 계산
-#             result = teamtest2(scores)
-
-#             # 결과 저장
-#             test_result = TestResult.objects.create(
-#                 user=user,  # 현재 로그인한 사용자 정보 저장
-#                 result_text=result['result_text'],
-#                 personality_type=result['personality_type']
-#             )
-
-#             # 세션 초기화
-#             request.session[f'scores_{user.id}'] = None
-#             request.session[f'question_id_{user.id}'] = None
-
-#             return redirect('main:result', test_result_id=test_result.id)
-#         else:
-#             request.session[f'scores_{user.id}'] = scores
-#             request.session[f'question_id_{user.id}'] = question.id
-
-#             return redirect('main:teamtest1')
-#     else:
-#         user = request.user  # 사용자 정보 가져오기
-
-#         if f'scores_{user.id}' not in request.session or f'question_id_{user.id}' not in request.session:
-#             request.session[f'scores_{user.id}'] = {}
-#             request.session[f'question_id_{user.id}'] = Question.objects.first().id
-
-#         question = Question.objects.get(id=request.session[f'question_id_{user.id}'])
-#         choices = Choice.objects.filter(question=question)
-#         context = {'question': question, 'choices': choices}
-#         return render(request, 'main/teamtest1.html', context)
 def teamtest1(request):
     if request.method == 'POST':
         user = request.user  # 사용자 정보 가져오기
@@ -193,8 +149,8 @@ def teamtest1(request):
             )
 
             # 세션 초기화
-            del request.session[f'scores_{user.id}']
-            del request.session[f'question_id_{user.id}']
+            request.session[f'scores_{user.id}'] = None
+            request.session[f'question_id_{user.id}'] = None
 
             return redirect('main:result', test_result_id=test_result.id)
         else:
@@ -207,19 +163,13 @@ def teamtest1(request):
 
         if f'scores_{user.id}' not in request.session or f'question_id_{user.id}' not in request.session:
             request.session[f'scores_{user.id}'] = {}
-            question = Question.objects.first()
-            if question is not None:
-                request.session[f'question_id_{user.id}'] = question.id
+            request.session[f'question_id_{user.id}'] = Question.objects.first().id
 
-        question_id = request.session.get(f'question_id_{user.id}')
-        if question_id is not None:
-            question = Question.objects.get(id=question_id)
-            choices = Choice.objects.filter(question=question)
-            context = {'question': question, 'choices': choices}
-            return render(request, 'main/teamtest1.html', context)
-        else:
-            # 질문이 없는 경우에 대한 처리
-            return HttpResponse('No question available.')
+        question = Question.objects.get(id=request.session[f'question_id_{user.id}'])
+        choices = Choice.objects.filter(question=question)
+        context = {'question': question, 'choices': choices}
+        return render(request, 'main/teamtest1.html', context)
+
 
 def teamtest2(scores):
     total_score = sum(scores.values())
