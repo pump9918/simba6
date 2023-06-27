@@ -43,11 +43,27 @@
                         <div class="halfbox_bottom1">
                             {% if my_post_project.project.writer.id != user.id %}
                                 {{ my_post_project.project.writer.profile.nickname }}
+                                {% if my_post_project.project.writer.profile in my_post_project.project.writer.profile.likers.all %}
+                                    <a href="{% url 'users:like' user.id %}"><button type="button" class="btn btn-outline-info">좋아요 취소</button></a>
+                                {% else %}
+                                    <a href="{% url 'users:like' user.id %}"><button type="button" class="btn btn-outline-info">좋아요</button></a>
+                                {% endif %}
+                                {{ my_post_project.project.writer.profile.likers.all }}
+                                <br>
                             {% endif %}
                             {% for member in my_post_project.member %}
-                                {% if member.user != user %}
+                                {% if user != member.user %}
                                     {{ member.user.profile.nickname }}
+                                    {% if user.profile in member.user.profile.writer.profile.likers.all %}
+                                        <a href="{% url 'users:like' member.user.id %}"><button type="button" class="btn btn-outline-info">좋아요 취소</button></a>
+                                    {% else %}
+                                        <a href="{% url 'users:like' member.user.id %}"><button type="button" class="btn btn-outline-info">좋아요</button></a>
+                                    {% endif %}
                                 {% endif %}
+                                {% for liker in member.user.profile.likers.all %}
+                                    {{ liker.user.username }}
+                                {% endfor %}
+                                <br>
                             {% endfor %}
                         </div>
                     </div>

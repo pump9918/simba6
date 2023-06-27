@@ -7,3 +7,5 @@ class Profile(models.Model): #기존 allauth에서 제공하는건 User에서, �
     department = models.TextField(null=True, max_length=30)
     name = models.TextField(null=True, max_length=10)
     nickname = models.TextField(null=True, max_length=10)
+    likes = models.ManyToManyField("self", related_name="likers", symmetrical=False)
+    hates = models.ManyToManyField("self", related_name="haters", symmetrical=False)

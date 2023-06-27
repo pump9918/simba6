@@ -74,3 +74,13 @@ def profile(request, id):
         'result': result,
     }
     return render(request, 'users/profile.html', context)
+
+def like(request, id):
+    user = request.user
+    liked_user = get_object_or_404(User, pk=id)
+    is_liker = user.profile in liked_user.profile.likers.all()
+    if is_liker:
+        user.profile.likes.remove(liked_user.profile)
+    else:
+        user.profile.likes.add(liked_user.profile)
+    return measure(request, id=request.user.id)
