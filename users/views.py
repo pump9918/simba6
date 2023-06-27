@@ -24,6 +24,7 @@ def mypage(request, id):
         'result': test_result,
         'apply' : apply,
         'mytaglist' : mytaglist,
+        'users': User.objects.all(),
     }
     return render(request, "users/mypage.html", context)
     
@@ -59,14 +60,14 @@ def approve_member(request, volunteer_id):
     volunteer.info = 'accepted'
     volunteer.save()
 
-    return redirect('users:mypage', id=volunteer.post.writer.profile.id)
+    return redirect('users:mypage', id=request.user.id)
 
 def reject_member(request, volunteer_id):
     volunteer = Volunteer.objects.get(id=volunteer_id)
     volunteer.info = 'rejected'
     volunteer.save()
 
-    return redirect('users:mypage', id=volunteer.post.writer.profile.id)
+    return redirect('users:mypage', id=request.user.id)
 
 def profile(request, id):
     user = get_object_or_404(User, pk=id)
@@ -96,7 +97,7 @@ def like(request, id):
         user.profile.likes.remove(liked_user.profile)
     else:
         user.profile.likes.add(liked_user.profile)
-    return measure(request, id=request.user.id)
+    return redirect('users:measure', id=request.user.id)
 
 def hate(request, id):
     user = request.user
@@ -106,4 +107,4 @@ def hate(request, id):
         user.profile.hates.remove(hated_user.profile)
     else:
         user.profile.hates.add(hated_user.profile)
-    return measure(request, id=request.user.id)
+    return redirect('users:measure', id=request.user.id)

@@ -18,7 +18,7 @@
     </div>
     <div class="content">
 
-        <div class="profile_profile">프로필페이지</div>
+        <div class="profile_profile">프로필 페이지</div>
         <div class="container">
             <div class="container_background">
                 <div class="profile_top">
@@ -31,21 +31,24 @@
                     </div>
                     <div class="profile_nickname"><strong>{{user.profile.nickname}}</strong></div>
                     <div class="profile_status"><strong>{{user.profile.department}} {{user.profile.grade}}학년</strong></div>
-                    <div class="profile_test"><strong>"{{result.result_text}}" {{user.profile.name}}</strong></div>                
+                    <div class="profile_test"><strong>"{{result.result_text}}" {{user.profile.name}}</strong></div>
+                    <div class="profile_hashtag_box">
+                        {% for tag in user.profile.taglist.all %}
+                            <div class="profile_hashtag1">#{{tag.mytagname}}</div>
+                        {% endfor %}
+                    </div>
                 </div>
                 <div class="profile_middle">끼리 평가 결과</div>
-                {% for volunteer in volunteers %}
-                    <div class="halfbox">
-                        <div class="halfbox_top">&ensp;{{ volunteer.post.title }}</div>
-                        <div class="halfbox_bottom">
-                            {% for volunteer_obj in volunteer.volunteers %}
-                            <div>{{ volunteer_obj.user.profile.nickname }}</div>
-                            {% empty %}
-                            <p>아직 지원자가 없어요 ㅠ</p>
-                            {% endfor %}
-                        </div>
+                <div class="profile_like_dislike">
+                    <div class="profile_like_box">
+                        <div class="profile_like_icon"><i class="fas fa-solid fa-heart" ></i></div>
+                        {{ user.profile.likers.count }}
                     </div>
-                {% endfor %}
+                    <div class="profile_dislike_box">
+                        <div class="profile_dislike_icon"><i class="fas fa-solid fa-heart-crack"></i></div>
+                        {{ user.profile.haters.count }}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
