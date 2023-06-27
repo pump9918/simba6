@@ -38,11 +38,11 @@
                         <div class="tag_nickname">{{post.writer.profile.nickname}}</div>
                         
                     </div>
+                    {% if post.writer == user %}
                     <div class="detail_checkapprove">
-                        {% if post.writer == user %}
                             <a class="link1" href="{% url 'main:edit' post.id %}">수정하기</a>
-                        {% endif %}
                     </div>
+                    {% endif %}
                     <div class="detail_checkapprove">
                         {% if post.writer != user %}
                             {% if volunteer %}
