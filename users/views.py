@@ -37,8 +37,20 @@ def measure(request, id):
             'project': project,
             'member': member
         })
+    
+    my_posts = Post.objects.filter(writer=user)
+    my_post_projects = []
+    for my_post in my_posts:
+        my_post_member = Volunteer.objects.filter(post=my_post, info='accepted')
+        my_post_projects.append({
+            'project': my_post,
+            'member': my_post_member
+        })
+
     context = {
         'my_projects': my_projects,
+        'user': user,
+        'my_post_projects': my_post_projects,
     }
     return render(request, 'users/measure.html', context)
 
@@ -75,3 +87,23 @@ def profile(request, id):
         'apply' : apply
     }
     return render(request, 'users/profile.html', context)
+
+def like(request, id):
+    user = request.user
+    liked_user = get_object_or_404(User, pk=id)
+    is_liker = user.profile in liked_user.profile.likers.all()
+    if is_liker:
+        user.profile.likes.remove(liked_user.profile)
+    else:
+        user.profile.likes.add(liked_user.profile)
+    return measure(request, id=request.user.id)
+
+def hate(request, id):
+    user = request.user
+    hated_user = get_object_or_404(User, pk=id)
+    is_hater = user.profile in hated_user.profile.haters.all()
+    if is_hater:
+        user.profile.hates.remove(hated_user.profile)
+    else:
+        user.profile.hates.add(hated_user.profile)
+    return measure(request, id=request.user.id)
