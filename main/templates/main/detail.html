@@ -27,8 +27,8 @@
                     <div class="detail_profile_and_icon">
                         
                         <div class="tag_profile">
-                            <a href="#">
-                            <img src="{% static 'images/끼리로고.png' %}" id="tag_ggiri_logo" width="100%" height="100%" />
+                            <a href="{{ post.writer.profile.url }}">
+                            <img src="{{ post.writer.profile.userImage.url }}" id="tag_ggiri_logo" width="100%" height="100%" />
                             </a>
                         </div>
                         <div class="tag_nickname">{{post.writer.profile.nickname}}</div>
