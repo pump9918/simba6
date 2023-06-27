@@ -6,8 +6,10 @@ from django.db.models import Prefetch
 
 def mypage(request, id):
     user = get_object_or_404(User, pk=id)
+    profile = user.profile
     result = TestResult.objects.first()
     posts = Post.objects.filter(writer=user)
+    mytaglist = profile.taglist.all()
     volunteers = []
     for post in posts:
         post_volunteers = Volunteer.objects.filter(post=post)
@@ -20,7 +22,8 @@ def mypage(request, id):
         'user': user,
         'volunteers': volunteers,
         'result': result,
-        'apply' : apply
+        'apply' : apply,
+        'mytaglist' : mytaglist,
     }
     return render(request, "users/mypage.html", context)
     
@@ -68,10 +71,20 @@ def reject_member(request, volunteer_id):
 def profile(request, id):
     user = get_object_or_404(User, pk=id)
     result = TestResult.objects.first()
+    posts = Post.objects.filter(writer=user)
+    volunteers = []
+    for post in posts:
+        post_volunteers = Volunteer.objects.filter(post=post)
+        volunteers.append({
+            'post': post,
+            'volunteers': post_volunteers
+        })
+    apply = Volunteer.objects.filter(user=user)
     context = {
-        'user' : user,
-        'posts' : Post.objects.filter(writer=user),
+        'user': user,
+        'volunteers': volunteers,
         'result': result,
+        'apply' : apply
     }
     return render(request, 'users/profile.html', context)
 

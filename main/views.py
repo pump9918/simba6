@@ -56,10 +56,12 @@ def detail(request, id): #id에 원하는 게시글의 id 값을 넣어 detail �
     if request.method == "GET":
         comments = Comment.objects.filter(post=post)
         volunteer = Volunteer.objects.filter(user=request.user, post=post).first
+        tags = Tag.objects.all()
         return render(request, 'main/detail.html', {
             'post':post,
             'comments':comments,
             'volunteer': volunteer,
+            'tags' : tags,
         }) # id에 부합하는 게시물 1개씩 관리(detail 페이지)
     # pk(Primary Key): 각 객체를 구분해주는 키 값
     elif request.method == "POST":
@@ -107,8 +109,22 @@ def delete(request, id):
     delete_post.delete()
     return redirect('main:mainpage')
 
-from django.shortcuts import render, redirect
-from .models import Question, Choice, TestResult
+# 모든 tag 리스트를 볼 수 있는 페이지 구현
+def tag_list(request):
+    tags = Tag.objects.all()
+    return render(request, 'main/tag_list.html', {
+        'tags':tags,
+    })
+
+
+# 태그 선택 시 해당 태그가 포함된 게시물 보는 기능 구현
+def tag_posts(request, tag_id):
+    tag = get_object_or_404(Tag, id=tag_id)
+    posts = tag.posts.all()
+    return render(request, 'main/tag_posts.html', {
+        'tag':tag,
+        'posts':posts,
+    })
 
 def teamtest1(request):
     if request.method == 'POST':
@@ -180,6 +196,7 @@ def maketeam2(request): #글쓰기 페이지
 
 class SearchView(ListView): #검색창
     model = Post
+    excel_db = ExcelDB()
     context_object_name = 'search_results'
     template_name = 'main/search_results.html'
     paginate_by = 8
@@ -187,10 +204,13 @@ class SearchView(ListView): #검색창
     #모든 리뷰가 아닌, 검색결과에 해당하는 리뷰만 보여줌(get_queryset활용)
     def get_queryset(self):
         query = self.request.GET.get('query', '')
-        return Post.objects.filter( #OR조건으로 검색어 필터
-            Q(title__icontains=query) #제목에 있거나
-            | Q(body__icontains=query) #포스트 내용에 있거나
-        )
+        if self.excel_db.check_search(query):
+            return Post.objects.filter(
+                Q(title__icontains=query)
+                | Q(body__icontains=query)
+            )
+        else:
+            return Post.objects.none()  # 빈 쿼리셋 반환
     
     def get_context_data(self, **kwargs): #템플릿에 검색어 전달
         context = super().get_context_data(**kwargs)

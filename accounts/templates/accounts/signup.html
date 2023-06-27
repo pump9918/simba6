@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<form method="POST" action="{% url 'accounts:signup' %}">
+<form method="POST" action="{% url 'accounts:signup' %}" enctype="multipart/form-data">
     {% csrf_token %}
     <p>username</p>
     <input type="text" name="username" id="username-input">
@@ -32,6 +32,10 @@
     <input type="password" name="confirm">
     <br>
 
+    <p>프로필사진</p>
+    <input type="file" name="userImage" accept="image/*">
+    <br>
+
     <p>학년</p>
     <input type="number" name="grade" min="1" max="4">
     <br>
@@ -46,6 +50,10 @@
 
     <p>별명</p>
     <input type="text" name="nickname">
+    <br>
+
+    <p>나의 해시태그</p>
+    <input type="text" name="mytags">
     <br>
 
     <input type="submit" value="회원가입" id="signup-btn" disabled>
