@@ -335,7 +335,10 @@
     right:-10px;
     color:white;
 }
-
+.slide1_content1_tag_profile img{
+    width:100%;
+    height: 100%;
+}
 
 
 
@@ -349,7 +352,7 @@
 }
 .slide1_content1_secondline_right button{
     background-color: #35CCAA;
-    width:80px;
+    width:100px;
     height: 30px;
     border-radius: 8px;
     border:1px transparent;
