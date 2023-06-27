@@ -27,8 +27,20 @@ def mypage(request, id):
     }
     return render(request, "users/mypage.html", context)
     
-def measure(request):
-    return render(request, 'users/measure.html')
+def measure(request, id):
+    user = get_object_or_404(User, pk=id)
+    projects = Volunteer.objects.filter(user=user, info='accepted')
+    my_projects = []
+    for project in projects:
+        member = Volunteer.objects.filter(post=project.post)
+        my_projects.append({
+            'project': project,
+            'member': member
+        })
+    context = {
+        'my_projects': my_projects,
+    }
+    return render(request, 'users/measure.html', context)
 
 def approve_member(request, volunteer_id):
     volunteer = Volunteer.objects.get(id=volunteer_id)
