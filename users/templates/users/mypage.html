@@ -21,14 +21,10 @@
             <div class="container_background">
                 <div class="container_1">
                     <div class="mypage_profile"> 
-                        <!--
-                        {% if user.profile.userImage %}
-                            <div class="mypage_myprofile_image"><img src="{{ user.profile.userImage }}"></div>
-                        {% endif %}-->
                         {% if user.profile.userImage %}
                             <div class="mypage_myprofile_image"><img src="{{ user.profile.userImage.url }}" alt="프로필 사진"></div>
                         {% else %}
-                            <div class="mypage_myprofile_image"><img src="{% static 'images/동국대기본.jpg' %}" alt="프로필 사진"></div>
+                            <div class="mypage_myprofile_image"><img src="{% static 'images/기본이미지.png' %}" alt="프로필 사진"></div>
                         {% endif %}
                         <div class="mypage_position"><strong>{{ user.profile.department }} {{ user.profile.grade }}학년</strong></div>
                         <div class="mypage_test_name"><strong>"{{ result.result_text }}" {{ user.profile.name }}</strong></div>

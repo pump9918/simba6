@@ -7,7 +7,7 @@ from django.db.models import Prefetch
 def mypage(request, id):
     user = get_object_or_404(User, pk=id)
     profile = user.profile
-    result = TestResult.objects.first()
+    test_result = TestResult.objects.filter(user=user).first()
     posts = Post.objects.filter(writer=user)
     mytaglist = profile.taglist.all()
     volunteers = []
@@ -21,7 +21,7 @@ def mypage(request, id):
     context = {
         'user': user,
         'volunteers': volunteers,
-        'result': result,
+        'result': test_result,
         'apply' : apply,
         'mytaglist' : mytaglist,
     }
