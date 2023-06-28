@@ -89,16 +89,18 @@
                     <h1>프로필 이미지 등록</h1>
                     <button class="image-button">
                         <input class="image-button" type="file" name="userImage" accept="image/*">
+                        <!--<img src="{% static 'images/기본이미지.png' %}" alt="끼리 로고" />-->
+                        <!--
                         {% if user.profile.userImage %}
-                            <img src="{{ profile.photo.url }}" alt="프로필 사진">
+                            <img src="{{ profile.userImage.url }}" alt="프로필 사진">
                         {% else %}
                             <img src="{% static 'images/기본이미지.png' %}" alt="끼리 로고" />
-                        {% endif %}
+                        {% endif %}-->
                     </button>      
                 </div>
                 <div class="check">
                     <input class="link1" type="submit" value="회원가입" id="signup-btn" disabled>
-                    <a class="link1" href="#">확인</a>
+                    <!--<a class="link1" href="#">확인</a>-->
                 </div>
             </form>
         </div>
