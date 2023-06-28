@@ -4,10 +4,12 @@ from . import views
 
 app_name = "main"
 urlpatterns = [
-    path('', mainpage, name="mainpage"),
-    path('firstpage/', firstpage, name="firstpage"),
-    path('secondpage/', secondpage, name="secondpage"),
-    path('thirdpage/', thirdpage, name="thirdpage"),
+    #path('', mainpage, name="mainpage"),
+    path('mainpage/', mainpage, name="mainpage"),
+    path('', firstpage, name="firstpage"),
+    #path('firstpage/', firstpage, name="firstpage"),
+    # path('secondpage/', secondpage, name="secondpage"),
+    # path('thirdpage/', thirdpage, name="thirdpage"),
     path('new/', new, name="new"), #new 페이지 url 연결
     path('create/', create, name="create"), #create 생성페이지 url 연결
     path('<int:id>', detail, name="detail"), #id에 부합하는 detail페이지로 연결
