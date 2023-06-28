@@ -60,7 +60,7 @@ def signup(request):
                 profile.taglist.add(tag)
                 
             auth.login(request, user)
-            return redirect('/')
+            return redirect('main:teamtest1')
     return render(request, 'accounts/signup.html')
 
 def emailconfirm(request, username):
