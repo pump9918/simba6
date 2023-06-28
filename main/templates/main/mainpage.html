@@ -89,11 +89,11 @@
         {% endfor %}
     </div>-->
 
-
     <h2>[아래 링크들은 html작업을 위한 링크 모음입니다]</h2>
     <h4><a href="{% url 'excelDB:excel' %}">학수번호 데이터 엑셀</a></h4>
     <h4><a href="{% url 'accounts:login' %}">로그인(login.html)</a></h4>
     <h4><a href="{% url 'accounts:logout' %}">로그아웃(logout.html)</a></h4>
+    <!--
     <h4><a href="{% url 'accounts:signup' %}">회원가입(signup.html)</a></h4>
     <h4><a href="{% url 'main:firstpage' %}">입장페이지(firstpage.html)</a></h4>
     {% if user.is_authenticated %}
@@ -114,7 +114,6 @@
         <h4><a href="{% url 'users:mypage' user.id %}">마이페이지(mypage.html)</a></h4>
         <h4><a href="{% url 'users:profile' user.id %}">프로필페이지(profile.html)</a></h4>
         <h4><a href="{% url 'users:measure' user.id %}">끼리평가페이지(measure.html)</a></h4>
-    {% endif %}
-    
-    
+    {% endif %} 
+    -->
 {% endblock %}
