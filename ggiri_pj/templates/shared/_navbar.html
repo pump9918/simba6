@@ -2,34 +2,32 @@
 
 <div class="navbar">
   <section class="button0">
-    <a class="link1" href="{% url 'main:mainpage' %}"><img src="{% static 'images/끼리로고.png' %}" /></a>
+    <a class="link1" href="{% url 'main:mainpage' %}"
+      ><img src="{% static 'images/끼리로고.png' %}"
+    /></a>
     <h1>끼리</h1>
   </section>
+  <!-- 아래는 로그인 이후에 뜨게 해주세용 -->
   {% if user.is_authenticated %}
-    <section class="button1">
-      <div class="button1_left">
-        <button class="link1" href="#">끼리페이지</button>
-        <ul>
-          <li><a href="{% url 'main:mainpage' %}"><strong>팀원 지원</strong></a></li>
-          <li><a href="{% url 'main:maketeam1' %}"><strong>팀플 생성</strong></a></li>
-        </ul>
-      </div>
-      <div class="button1_right">        
-        <button><img src="{% static 'images/끼리로고.png' %}" /></button>
-        <ul>
-          <li><a href="#"><strong>{{ user.profile.nickname }}</strong></a></li>
-          <li><a href="{% url 'users:mypage' user.id %}"><strong>마이페이지</strong></a></li>
-          <li><a href="{% url 'users:measure' user.id %}"><strong>끼리 평가</strong></a></li>
-          <li><a href="{% url 'accounts:logout' %}"><strong>로그아웃</strong></a></li>
-        </ul>
-      </div>
-    </section>
+  <div class="dropdown1">
+    <button class="dropdown-button1">끼리페이지</button>
+    <div class="dropdown-content1">
+      <a href="{% url 'main:mainpage' %}">팀플 지원</a>
+      <a href="{% url 'main:maketeam1' %}">팀플 생성</a>
+    </div>
+  </div>
+  <div class="dropdown2">
+    <button class="dropdown-button2">이미지 삽입</button>
+    <div class="dropdown-content2">
+      <a href="{% url 'users:profile' user.id %}">주녕</a>
+      <a href="{% url 'users:mypage' user.id %}">마이페이지</a>
+      <a href="{% url 'users:measure' user.id %}">끼리 평가</a>
+
+    </div>
+  </div>
+  </div>
   {% endif %}
 </div>
-
-
-
-
 
 <!--
 <div class="navbar">
