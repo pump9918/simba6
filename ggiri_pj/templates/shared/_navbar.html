@@ -13,15 +13,18 @@
     <button class="dropdown-button1">끼리페이지</button>
     <div class="dropdown-content1">
       <a href="{% url 'main:mainpage' %}">팀플 지원</a>
+      <br>
       <a href="{% url 'main:maketeam1' %}">팀플 생성</a>
     </div>
   </div>
   <div class="dropdown2">
-    <button class="dropdown-button2">이미지 삽입</button>
+    <button class="dropdown-button2"><img src="{% static 'images/끼리로고.png' %}"/></button>
+    </button>
     <div class="dropdown-content2">
-      <a href="{% url 'users:profile' user.id %}">주녕</a>
+      <a href="{% url 'users:profile' user.id %}">{{user.profile.nickname}}</a>
       <a href="{% url 'users:mypage' user.id %}">마이페이지</a>
       <a href="{% url 'users:measure' user.id %}">끼리 평가</a>
+      <a href="{% url 'accounts:logout' %}">로그아웃</a>
 
     </div>
   </div>
