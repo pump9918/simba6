@@ -1,7 +1,7 @@
 .content {
     display: inline-flex;
     width: 100%;
-    height: 140vh;
+    
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -36,7 +36,7 @@
 .maketeam2_container{
 
     width:60%;
-    height:110vh;
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,27 +46,40 @@
 }
 .maketeam2_container_background{
     width:90%;
-    height:100vh;
+    margin:10px;
     display: grid;
     grid-template-rows: repeat(6,1fr);
     grid-template-columns: repeat(5,1fr);
     border-radius: 8px;
     border:1px transparent;
-    gap:20px
+    gap:10px;
 }
 .maketeam2_title{
     grid-row:1/2;
     grid-column: 1/6;
     background-color: white;
     border-radius: 8px;
+    height:100px;
+    margin-top: 20px;
 
+}
+input{
+    width:100%;
+    height: 100%;
+    border:1px transparent;
 
+}
+textarea{
+    width:100%;
+    height: 100%;
+    border:1px transparent;
 }
 .maketeam2_teamplay_info{
     grid-row:2/3;
     grid-column: 1/6;
     background-color: white;
     border-radius: 8px;
+    height:100px;
     
 }
 .maketeam2_topic_info{
@@ -74,6 +87,7 @@
     border-radius: 8px;
     grid-row:3/4;
     grid-column: 1/6;
+    height:100px;
     
 }
 .maketeam2_team_preference{
@@ -81,6 +95,7 @@
     border-radius: 8px;
     grid-row:4/5;
     grid-column: 1/6;
+    height:100px;
     
 }
 .maketeam2_kakaourl{
@@ -88,6 +103,7 @@
     border-radius: 8px;
     grid-row:5/6;
     grid-column: 1/6;
+    height:100px;
 }
 .maketeam2_createbuttonbox{
     grid-row:6/7;
