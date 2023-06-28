@@ -25,17 +25,16 @@
         <div class="icon-search">
             <form class="search-form" action="{% url 'main:search' %}" method="get">
                 <input class="search-input" name="query" type="text" placeholder="검색 (학수번호, 교수명, 교과명)" required>  
-                <h1>학수번호</h1>
-                <a class="link1" href="#"><i class="fas fa-chevron-down"></i>        
-                </a>
-                <button class="cp-button search-button" type="submit">검색</button>
+                <!--<h1>학수번호</h1>-->
+                <!--<a class="link1" href="#"><i class="fas fa-chevron-down"></i></a>      -->
+                <h1><button class="cp-button search-button" type="submit">검색</button></h1>
             </form>
         </div>
         </form>
         <div class="tag">
-        <h1>#학과</h1>
-        <h1>#학수번호</h1>
-        <h1>#학과</h1>          
+            {% for mytag in mytaglist %}
+                <h1>#{{ mytag.mytagname }}</h1>
+            {% endfor %}        
         </div>
         {% for post in posts %}
             <div class="information">
@@ -45,16 +44,16 @@
           </div>
         {% endfor %}
       </div>
-
+    <!--
     <h1>반갑습니다 심바톤 끼리팀 여러분</h1>
     <img src = "{% static 'images/멋사.png' %}" style="width:500px;">
     <div>기획/디자인 : 최준형</div>
     <div>프론트엔드 : 김윤서</div>
     <div>프론트엔드 : 김동환</div>
     <div class="mainpage">백엔드 : 박호연</div>
-    <div>백엔드 : 배지현</div>
+    <div>백엔드 : 배지현</div>-->
 
-    <div class="header-search"><!--검색창-->
+    <!--<div class="header-search">
         <h3><div class="mainpage">▼▼▼원하는 게시물 검색어를 입력하시오▼▼▼</div></h3>
         <form class="search-form" action="{% url 'main:search' %}" method="get">
             <input class="search-input" name="query" type="text" placeholder="게시물을 검색해보세요" required>
@@ -68,11 +67,11 @@
     </div>
 
     <h3>▼글 작성하기▼</h4>
-    {% if user.is_authenticated %}
-    <h4><a href="{% url 'main:new' %}">글 쓰기</a></h1>
-    {% endif %}
+    {% if user.is_authenticated %}-->
+    <!--<h4><a href="{% url 'main:new' %}">글 쓰기</a></h1>
+    {% endif %}-->
 
-    <h4>[글 목록]</h4>
+    <!--<h4>[글 목록]</h4>
     {% for post in posts %}
     <h4>{{post}}</h4>
     {% endfor %}
@@ -88,19 +87,21 @@
             </div>
         </div>
         {% endfor %}
-    </div>
+    </div>-->
 
-    <!--링크모음-->
+
     <h2>[아래 링크들은 html작업을 위한 링크 모음입니다]</h2>
-    <!--로그인/회원가입 링크-->
+    <h4><a href="{% url 'excelDB:excel' %}">학수번호 데이터 엑셀</a></h4>
     <h4><a href="{% url 'accounts:login' %}">로그인(login.html)</a></h4>
     <h4><a href="{% url 'accounts:logout' %}">로그아웃(logout.html)</a></h4>
     <h4><a href="{% url 'accounts:signup' %}">회원가입(signup.html)</a></h4>
     <h4><a href="{% url 'main:firstpage' %}">입장페이지(firstpage.html)</a></h4>
-    <!--게시물 만들기 링크-->
     {% if user.is_authenticated %}
         <h4><a href="{% url 'main:maketeam1' %}">팀플생성1(maketeam1.html)</a></h4>
         <h4><a href="{% url 'main:maketeam2' %}">팀플생성2(maketeam2.html)</a></h4>
+        {% if 'scores' not in request.session or 'question_id' not in request.session %}
+            <h4><a href="{% url 'main:teamtest1' %}">팀성향테스트1(teamtest1.html -> result.html)</a></h4>
+        {% endif %}
     {% endif %}
     <div>
         {% for post in posts %}
@@ -109,9 +110,6 @@
         </div>
         {% endfor %}
     </div>
-    {% if 'scores' not in request.session or 'question_id' not in request.session %}
-        <h4><a href="{% url 'main:teamtest1' %}">팀성향테스트1(teamtest1.html -> teamtest2.html)</a></h4>
-    {% endif %}
     {% if user.is_authenticated %}
         <h4><a href="{% url 'users:mypage' user.id %}">마이페이지(mypage.html)</a></h4>
         <h4><a href="{% url 'users:profile' user.id %}">프로필페이지(profile.html)</a></h4>

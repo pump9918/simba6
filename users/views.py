@@ -7,7 +7,7 @@ from django.db.models import Prefetch
 def mypage(request, id):
     user = get_object_or_404(User, pk=id)
     profile = user.profile
-    result = TestResult.objects.first()
+    test_result = TestResult.objects.filter(user=user).first()
     posts = Post.objects.filter(writer=user)
     mytaglist = profile.taglist.all()
     volunteers = []
@@ -21,9 +21,10 @@ def mypage(request, id):
     context = {
         'user': user,
         'volunteers': volunteers,
-        'result': result,
+        'result': test_result,
         'apply' : apply,
         'mytaglist' : mytaglist,
+        'users': User.objects.all(),
     }
     return render(request, "users/mypage.html", context)
     
@@ -37,8 +38,20 @@ def measure(request, id):
             'project': project,
             'member': member
         })
+    
+    my_posts = Post.objects.filter(writer=user)
+    my_post_projects = []
+    for my_post in my_posts:
+        my_post_member = Volunteer.objects.filter(post=my_post, info='accepted')
+        my_post_projects.append({
+            'project': my_post,
+            'member': my_post_member
+        })
+
     context = {
         'my_projects': my_projects,
+        'user': user,
+        'my_post_projects': my_post_projects,
     }
     return render(request, 'users/measure.html', context)
 
@@ -47,14 +60,14 @@ def approve_member(request, volunteer_id):
     volunteer.info = 'accepted'
     volunteer.save()
 
-    return redirect('users:mypage', id=volunteer.post.writer.profile.id)
+    return redirect('users:mypage', id=request.user.id)
 
 def reject_member(request, volunteer_id):
     volunteer = Volunteer.objects.get(id=volunteer_id)
     volunteer.info = 'rejected'
     volunteer.save()
 
-    return redirect('users:mypage', id=volunteer.post.writer.profile.id)
+    return redirect('users:mypage', id=request.user.id)
 
 def profile(request, id):
     user = get_object_or_404(User, pk=id)
@@ -75,3 +88,23 @@ def profile(request, id):
         'apply' : apply
     }
     return render(request, 'users/profile.html', context)
+
+def like(request, id):
+    user = request.user
+    liked_user = get_object_or_404(User, pk=id)
+    is_liker = user.profile in liked_user.profile.likers.all()
+    if is_liker:
+        user.profile.likes.remove(liked_user.profile)
+    else:
+        user.profile.likes.add(liked_user.profile)
+    return redirect('users:measure', id=request.user.id)
+
+def hate(request, id):
+    user = request.user
+    hated_user = get_object_or_404(User, pk=id)
+    is_hater = user.profile in hated_user.profile.haters.all()
+    if is_hater:
+        user.profile.hates.remove(hated_user.profile)
+    else:
+        user.profile.hates.add(hated_user.profile)
+    return redirect('users:measure', id=request.user.id)

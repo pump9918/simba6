@@ -1,12 +1,16 @@
 .content {
     display: inline-flex;
     width: 100%;
-    height: 120vh;
+    
     justify-content: center;
     align-items: center;
     flex-direction: column;
     gap:20px;
     
+}
+.fas{
+    font-size: 40px;
+    color: #35CCAA;
 }
 .back_button{
     display:flex;
@@ -38,7 +42,7 @@
     justify-content: center;
     align-items: center;
     gap:10%;
-    
+    border:1px solid black;
 }
 .profile_profile{
     display:flex;
@@ -51,13 +55,15 @@
     border:1px transparent;
     background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
     color:white;
+    font-size: 20px;
 }
 .halfbox1{
     border:1px transparent;
     border-radius: 8px;
-    width:40%;
+    width:90%;
     height: 500px;
     background-color: white;
+    
 
 }
 .halfbox_top1{
@@ -70,23 +76,205 @@
     border-radius: 8px;
     background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
 }
-.halfbox2{
 
-    border:1px transparent;
-    background-color: white;
-    border-radius: 8px;
-    height: 500px;
-    width: 40%;
-
-}
-.halfbox_top2{
-    color:white;
+.halfbox_bottom1{
+    width:100%;
+    height: 90%;
     display:flex;
-    justify-content: left;
+    flex-direction: column;
+    gap:20px;
+    justify-content: space-evenly;
+
+}
+.title{
+    border: 1px solid black;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    font-size: 20px;
+}
+
+/* 팀원 1 평가 */
+
+.teammate1{
+    display:flex;
+    justify-content: space-evenly;
+    border:1px solid black;
+}
+.teammate1_like_dislike{
+    display:flex;
+    justify-content: space-evenly;
+    border:1px solid black;
+    gap:60px;
+}
+.teammate1_dislike{
+    margin-right: 40px;;
+}
+/* 노란비니 태그 */
+
+.teammate1_tag_profile_and_nickname{
+    display: flex;
+    flex-direction: row;
     align-items: center;
+    border:1px solid black;
+    width:150px;
+    height: 50px;
+    background-color: #35CCAA;
+    border-radius: 50px;
+
+}
+.teammate1_tag_profile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid black;
+    border-radius: 5rem;
+    width:50px;
+    height:50px;
+    background-color: white;
+}
+.teammate1_tag_nickname{
+    position: relative;
+    right:-10px;
+    color:white;
+}
+
+
+.teammate1_like_dislike i{
+    font-size: 40px;
+    color:#35CCAA;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*teambox*/
+
+/* .halfbox_bottom1_teambox1{
+    grid-row: 1/5;
+    grid-column: 1/2;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.halfbox_bottom1_teambox_badge{
+    width:100%;
+    height: 60%;
+    gap:20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.profile_24_tag_profile_and_nickname1{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width:150px;
+    height: 50px;
+    background-color: #35CCAA;
+    border-radius: 50px;
+
+}
+.profile_24_tag_profile1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid black;
+    border-radius: 5rem;
+    width:50px;
+    height:50px;
+    background-color: white;
+}
+.profile_24_tag_nickname1{
+    position: relative;
+    right:-10px;
+    color:white;
+} */
+
+
+/*evaluate box*/
+
+
+/* .halfbox_bottom1_evaluatebox{
+    grid-row: 1/5;
+    grid-column: 2/3;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+.halfbox_bottom1_evaluatebox_yes_no{
+    width:100%;
+    height: 60%;
+    gap:20px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+
+.halfbox_bottom1_evaluatebox_yes_no1{
+    width:100%;
+    height: 40px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border:1px solid black;
+}
+.halfbox_bottom1_evaluatebox_yes1{
+    border:1px solid black;
+    
+}
+.halfbox_bottom1_evaluatebox_no1{
+    border:1px solid black;
+}
+
+.halfbox_bottom1_evaluatebox_yes_no1 i{
+    font-size: 30px;
+}
+
+.halfbox_bottom1_evaluatebox button{
+    background-color: transparent;
+} */
+
+
+
+
+
+
+/*제출 버튼*/
+
+
+
+.halfbox1_submit_box button{
+
+    width:160px;
+    height: 40px;
+    background-color:#35CCAA;
     border:1px transparent;
     border-radius: 8px;
-    height: 50px;
-
-    background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
+    color: white;
 }
+.halfbox1_submit_box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 5/6;
+    grid-column: 1/3;
+}
+

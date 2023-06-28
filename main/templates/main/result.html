@@ -1,3 +1,13 @@
+<!--팀플유형검사결과-->
+<!--일러스트-->
+<!--열정적인 리더군요 어쩌고-->
+<!--팀플시작하기 버튼-->
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -8,37 +18,34 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="/result(리더)/result.css"
+      href="{% static 'css/result.css' %}"
     />
   </head>
   <body>
     <div container>
-      <div class="navbar">
-        <section class="button0">
-          <img src="/이미지/끼리로고.png" />
-          <h1>끼리</h1>
-        </section>
-        <section class="button1">
-          <a class="link1" href="#">끼리페이지</a>
-          <img src="/이미지/끼리로고.png" />
-        </section>
       </div>
-        <div class="result-image">
-          <img src="/이미지/엄근진리더끼리1.png">
-    </div>
-        <div class="result">
-          <h1>당신은 "열정적인 리더"입니다<br>팀플을 시작해보세요!!</h1></div>
-        <div class="start"><a class="link1" href="#">팀플 시작하기</a></div>
-      </div>
-      <div class="footer">
-        <section class="item-title">
-          동국대학교 멋쟁이 사자처럼 심바톤 6조
-        </section>
-        <section class="item-content">
-          <br />서울시 중구 필동로 1길 30 동국대학교 학생회관 2층<br /><br />@likelion_dongguk<br /><br />@DGU
-          Likelion. All rights reserved.
-        </section>
+        {% if result %}
+          <!-- 결과를 표시하는 부분 -->
+          {% if result.personality_type == "Type A" %}
+            <div class="result-image">
+              <img src = "{% static 'images/열정적인리더.jpg' %}">
+            </div>
+          {% elif result.personality_type == "Type B"%}
+            <div class="result-image">
+              <img src = "{% static 'images/논리적인발표자.jpg' %}">
+            </div>
+          {% elif result.personality_type == "Type C"%}
+            <div class="result-image">
+              <img src = "{% static 'images/꼼꼼한탐정.jpg' %}">
+            </div>
+          {% endif %}
+          <div class="result">
+            <h1>당신은 {{ result.result_text }} 팀플을 시작해보세요</h1></div>
+          <div class="start"><a class="link1" href="{% url 'main:mainpage' %}">팀플 시작하기</a></div>
+        {% endif %}
       </div>
     </div>
   </body>
 </html>
+
+{% endblock %}
