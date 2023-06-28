@@ -93,9 +93,10 @@ def like(request, id):
     user = request.user
     liked_user = get_object_or_404(User, pk=id)
     is_liker = user.profile in liked_user.profile.likers.all()
+    is_hater = user.profile in liked_user.profile.haters.all()
     if is_liker:
         user.profile.likes.remove(liked_user.profile)
-    else:
+    elif not is_hater:
         user.profile.likes.add(liked_user.profile)
     return redirect('users:measure', id=request.user.id)
 
@@ -103,8 +104,9 @@ def hate(request, id):
     user = request.user
     hated_user = get_object_or_404(User, pk=id)
     is_hater = user.profile in hated_user.profile.haters.all()
+    is_liker = user.profile in hated_user.profile.likers.all()
     if is_hater:
         user.profile.hates.remove(hated_user.profile)
-    else:
+    elif not is_liker:
         user.profile.hates.add(hated_user.profile)
     return redirect('users:measure', id=request.user.id)

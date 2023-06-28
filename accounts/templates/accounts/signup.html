@@ -21,6 +21,7 @@
     <div>
       <div container>
         <!-- 여기부터 수정 -->
+<<<<<<< HEAD
         <form
           method="POST"
           action="{% url 'accounts:signup' %}"
@@ -150,6 +151,88 @@
           </div>
         </form>
       </div>
+=======
+            <form method="POST" action="{% url 'accounts:signup' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="toplogo">
+                    <img src="{% static 'images/끼리로고.png' %}" />
+                    <h1>끼리</h1>
+                </div>
+                <div class="signup"> 
+                    <h1>회원가입</h1>
+                </div>
+                <div class="id">
+                    <h1>아이디</h1>
+                    <h2>동국대학교 웹메일 인증이 필요한 서비스입니다.</h2>
+                </div>
+                <div class="inputid">
+                    
+                    <input type="text" name="username" id="username-input" placeholder="아이디">
+                    <button class="link1" type="button" id="email-confirm-btn" disabled>인증메일</button>
+                    <!--<a class="link1" href="#">인증번호 전송</a>-->
+                </div>
+                {% if email_sent %}
+                    <h3>이메일이 성공적으로 보내졌습니다! {{ verification_code }}</h3>
+                {% else %}
+                    <h3>이메일 보내기 실패</h3>
+                {% endif %}
+                <div class="checknum">
+                    <input type="text" name="verificationcode" id="verification-code-input"  placeholder="인증번호 입력란">
+                    <!--<a class="link1" href="#">인증번호 확인</a>-->
+                    <button type="button" id="verification-code-confirm-btn" disabled>인증번호확인</button>
+                </div>
+                <div class="pw">
+                    <h1>비밀번호</h1>
+                </div>
+                <div class="inputpw">
+                    <!--<input type="text" placeholder="비밀번호를 입력해 주세요" />-->
+                    <input type="password" name="password" placeholder="비밀번호를 입력해 주세요">
+                </div>
+                <div class="reinputpw">
+                    <!--<input type="text" placeholder="비밀번호를 다시 입력해 주세요" />-->
+                    <input type="password" name="confirm" placeholder="비밀번호를 다시 입력해 주세요">
+                </div>
+                <div class="information">
+                    <h1>회원정보</h1>
+                </div>
+                <div class="grade">
+                    <!--<input type="text" placeholder="학년을 입력해주세요" />-->
+                    <input type="number" placeholder="학년" name="grade" min="1" max="4">
+                </div> 
+                <div class="class">
+                    <input type="text" name="department" placeholder="학과를 입력해주세요">
+                </div>
+                <div class="name">
+                    <input type="text" name="name"  placeholder="사용자의 성함을 입력해 주세요">
+                </div>
+                <div class="name">
+                    <input type="text" name="nickname" placeholder="사용하실 별명을 입력해 주세요" />
+                    <!--<a class="link1" href="#">중복확인</a>-->
+                </div>
+                <div class="tag">
+                    <input type="text" name="mytags" placeholder="자신의 팀플 성향을 해시태그로 작성해주세요" />
+                    <h1>#를 작성하신 후 스페이스 바를 통해 각 성향들을 띄어주세요</h1>
+                </div>
+                <div class="profile">
+                    <h1>프로필 이미지 등록</h1>
+                    <button class="image-button">
+                        <input class="image-button" type="file" name="userImage" accept="image/*">
+                        <!--<img src="{% static 'images/기본이미지.png' %}" alt="끼리 로고" />-->
+                        <!--
+                        {% if user.profile.userImage %}
+                            <img src="{{ profile.userImage.url }}" alt="프로필 사진">
+                        {% else %}
+                            <img src="{% static 'images/기본이미지.png' %}" alt="끼리 로고" />
+                        {% endif %}-->
+                    </button>      
+                </div>
+                <div class="check">
+                    <input class="link1" type="submit" value="회원가입" id="signup-btn" disabled>
+                    <!--<a class="link1" href="#">확인</a>-->
+                </div>
+            </form>
+        </div>
+>>>>>>> 49002d72474fea5d771d99498c76a2cbf858f8b2
     </div>
   </body>
 </html>
