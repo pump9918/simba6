@@ -47,6 +47,7 @@
 .dropdown1 {
   position: relative;
   display: inline-block;
+  margin-left: 15%;
 }
 .dropdown-button1 {
   border: none;
@@ -102,6 +103,12 @@
 .dropdown2 {
   position: relative;
   display: inline-block;
+  margin-left: -5%;
+}
+.dropdown2 img {
+  position: relative;
+  display: inline-block;
+  margin-left: -5%;
 }
 .dropdown-button2 {
   border: none;
