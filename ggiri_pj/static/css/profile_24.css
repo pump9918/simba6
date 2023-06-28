@@ -1,5 +1,5 @@
 .content {
-    display: inline-flex;
+    display: flex;
     width: 100%;
     
     justify-content: center;
@@ -12,16 +12,7 @@
     font-size: 40px;
     color: #35CCAA;
 }
-.back_button{
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    top: 50px;
-    left:80px;
-    width:60px;    
-    height: 60px;
-}
+
 .container{
     display: flex;
     justify-content: center;
@@ -29,20 +20,21 @@
     border:1px transparent;
     border-radius: 8px;
     width:70%;
-    height:85vh;
-
+    bottom: 20px;
     background: var(--2, linear-gradient(134deg, rgba(53, 204, 170, 0.30) 0%, rgba(151, 121, 255, 0.30) 99.59%));
 }
 .container_background{
-
+    
     width:95%;
     height:95%;
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
+    
     justify-content: center;
     align-items: center;
-    gap:10%;
-    border:1px solid black;
+    gap:10px;
+    margin:15px;
+    
 }
 .profile_profile{
     display:flex;
@@ -56,12 +48,14 @@
     background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
     color:white;
     font-size: 20px;
+    gap:20px;
+    
 }
 .halfbox1{
     border:1px transparent;
     border-radius: 8px;
-    width:90%;
-    height: 500px;
+    width:700px;
+    height: 400px;
     background-color: white;
     
 
@@ -79,7 +73,7 @@
 
 .halfbox_bottom1{
     width:100%;
-    height: 90%;
+    
     display:flex;
     flex-direction: column;
     gap:20px;
@@ -87,25 +81,34 @@
 
 }
 .title{
-    border: 1px solid black;
     display:flex;
     flex-direction: row;
     justify-content: space-evenly;
     font-size: 20px;
+    padding-top: 15px;
 }
 
 /* 팀원 1 평가 */
 
 .teammate1{
     display:flex;
-    justify-content: space-evenly;
-    border:1px solid black;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height:80px;
+    
+    gap:40px;
+
+}
+.teammate1_tag_profile_and_nickname{
+    float: left;
+
 }
 .teammate1_like_dislike{
     display:flex;
-    justify-content: space-evenly;
-    border:1px solid black;
-    gap:60px;
+    float:right;
+    gap:40px;
+    margin-left: 100px;
 }
 .teammate1_dislike{
     margin-right: 40px;;
@@ -116,7 +119,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    border:1px solid black;
     width:150px;
     height: 50px;
     background-color: #35CCAA;
@@ -127,11 +129,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border:1px solid black;
-    border-radius: 5rem;
+    border-radius: 80%;
     width:50px;
     height:50px;
-    background-color: white;
+    
+    
 }
 .teammate1_tag_nickname{
     position: relative;
@@ -143,114 +145,37 @@
 .teammate1_like_dislike i{
     font-size: 40px;
     color:#35CCAA;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*teambox*/
-
-/* .halfbox_bottom1_teambox1{
-    grid-row: 1/5;
-    grid-column: 1/2;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-.halfbox_bottom1_teambox_badge{
-    width:100%;
-    height: 60%;
-    gap:20px;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-.profile_24_tag_profile_and_nickname1{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    width:150px;
-    height: 50px;
-    background-color: #35CCAA;
-    border-radius: 50px;
+    border-radius: 5rem;
+    border:1px transparent;
 
 }
-.profile_24_tag_profile1{
+
+
+
+
+.submit_button_box{
     display: flex;
     justify-content: center;
     align-items: center;
-    border:1px solid black;
-    border-radius: 5rem;
-    width:50px;
-    height:50px;
-    background-color: white;
-}
-.profile_24_tag_nickname1{
-    position: relative;
-    right:-10px;
-    color:white;
-} */
-
-
-/*evaluate box*/
-
-
-/* .halfbox_bottom1_evaluatebox{
-    grid-row: 1/5;
-    grid-column: 2/3;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-
-.halfbox_bottom1_evaluatebox_yes_no{
-    width:100%;
-    height: 60%;
-    gap:20px;
-    display:flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-}
-
-
-
-.halfbox_bottom1_evaluatebox_yes_no1{
-    width:100%;
+    width:120px;
     height: 40px;
-    display:flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    border:1px solid black;
-}
-.halfbox_bottom1_evaluatebox_yes1{
-    border:1px solid black;
-    
-}
-.halfbox_bottom1_evaluatebox_no1{
-    border:1px solid black;
+    background-color: #35CCAA;
+    border-radius: 8px;
+
 }
 
-.halfbox_bottom1_evaluatebox_yes_no1 i{
-    font-size: 30px;
+.submit_button_box a{
+    text-decoration: none;
+    color:white;
 }
 
-.halfbox_bottom1_evaluatebox button{
-    background-color: transparent;
-} */
+
+
+
+
+
+
+
 
 
 

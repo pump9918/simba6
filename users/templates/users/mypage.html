@@ -24,7 +24,7 @@
                         {% if user.profile.userImage %}
                             <div class="mypage_myprofile_image"><img src="{{ user.profile.userImage.url }}" alt="프로필 사진" width="100%" height="100%"></div>
                         {% else %}
-                            <div class="mypage_myprofile_image"><img src="{% static 'images/동국대기본.jpg' %}" alt="프로필 사진" width="100%" height="100%"></div>
+                            <div class="mypage_myprofile_image"><img src="{% static 'images/기본이미지.png' %}" alt="프로필 사진" width="100%" height="100%"></div>
                         {% endif %}
                     </div>
                     <div class="mypage_mynickname">
@@ -80,7 +80,7 @@
                                         {% if user.profile.userImage %}
                                             <img src="{{ post.writer.profile.userImage.url }}" width="100%" height="100%" />
                                         {% else %}
-                                            <img src="{% static 'images/동국대기본.jpg' %}"width="100%" height="100%" />
+                                            <img src="{% static 'images/기본이미지.png' %}"width="100%" height="100%" />
                                         {% endif %}
                                     </div>
                                     <div class="slide1_content1_tag_nickname"><a class="btn" href="{% url 'users:profile'  volunteer_obj.user.id %}">{{ volunteer_obj.user.profile.nickname }}</a></div>
@@ -120,7 +120,7 @@
                                         {% if user.profile.userImage %}
                                             <img src="{{ post.writer.profile.userImage.url }}" width="100%" height="100%" />
                                         {% else %}
-                                            <img src="{% static 'images/동국대기본.jpg' %}"width="100%" height="100%" />
+                                            <img src="{% static 'images/기본이미지.png' %}"width="100%" height="100%" />
                                         {% endif %}
                                     </div>
                                     <div class="slide2_content1_tag_nickname">{{ apply.post.writer.profile.nickname }}</div>
