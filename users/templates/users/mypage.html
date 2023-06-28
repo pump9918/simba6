@@ -77,8 +77,8 @@
                             <div class="slide1_content1_secondline_left">
                                 <div class="slide1_content1_tag_profile_and_nickname">
                                     <div class="slide1_content1_tag_profile">
-                                        {% if volunteer_obj.user.profile.userImage %}
-                                            <img src="{{ volunteer_obj.user.profile.userImage.url }}" width="100%" height="100%" />
+                                        {% if user.profile.userImage %}
+                                            <img src="{{ post.writer.profile.userImage.url }}" width="100%" height="100%" />
                                         {% else %}
                                             <img src="{% static 'images/기본이미지.png' %}"width="100%" height="100%" />
                                         {% endif %}
@@ -117,13 +117,13 @@
                             <div class="slide2_content1_secondline_left">
                                 <div class="slide2_content1_tag_profile_and_nickname">
                                     <div class="slide2_content1_tag_profile">
-                                        {% if apply.post.writer.profile.userImage %}
-                                            <img src="{{ apply.post.writer.profile.userImage.url }}" width="100%" height="100%" />
+                                        {% if user.profile.userImage %}
+                                            <img src="{{ post.writer.profile.userImage.url }}" width="100%" height="100%" />
                                         {% else %}
                                             <img src="{% static 'images/기본이미지.png' %}"width="100%" height="100%" />
                                         {% endif %}
                                     </div>
-                                    <div class="slide2_content1_tag_nickname"><a class="btn" href="{% url 'users:profile' apply.post.writer.id %}">{{ apply.post.writer.profile.nickname }}</a></div>
+                                    <div class="slide2_content1_tag_nickname">{{ apply.post.writer.profile.nickname }}</div>
                                 </div>
                             </div>
                             <div class="slide2_content1_secondline_right">
