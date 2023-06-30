@@ -1,7 +1,17 @@
+@font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+body{
+    font-family:'SUIT-Regular' ;
+}
+
 .content {
     display: inline-flex;
     width: 100%;
-    height: 120vh;
+    height: 140vh;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -25,7 +35,7 @@
     border:1px transparent;
     border-radius: 8px;
     width:70%;
-    height:85vh;
+    height:120vh;
 
     background: var(--2, linear-gradient(134deg, rgba(53, 204, 170, 0.30) 0%, rgba(151, 121, 255, 0.30) 99.59%));
 }
@@ -50,6 +60,8 @@
     border:1px transparent;
     background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
     color:white;
+    font-size: 20px;
+    margin-top: -600px;
 }
 .profile_top{
     grid-column: 1/6;
@@ -81,30 +93,68 @@
     border-radius: 8px;
     grid-column: 1/2;
     grid-row:3/4;
+    height:40px;
+
+}
+.profile_hashtag_box{
+    grid-column: 2/5;
+    grid-row:3/4;
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    justify-content: center;
+}
+.profile_hashtag1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px transparent;
+    width:100px;
+    height: 30px;
+    background-color: #48CACE;
+    border-radius: 8px;
+    color:white;
+}
+.profile_hashtag2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px transparent;
+    width:100px;
+    height: 30px;
+    background-color: #48CACE;
+    border-radius: 8px;
+    color:white;
+
 }
 .profile_status{
     display:flex;
     justify-content: center;
     align-items: center;
-    grid-column: 3/5;
+    grid-column: 2/5;
     grid-row: 1/2;
-    font-size:15px;
+    font-size:20px;
     background-color: white;
     border:1px transparent;
     border-radius: 8px;
-
+    height: 80px;
+    
 
 }
 .profile_test{
     display:flex;
     justify-content: center;
     align-items: center;
-    grid-column: 3/5;
+    grid-column: 2/5;
     grid-row: 2/3;
-    font-size:15px;
+    font-size:20px;
     background-color: white;
     border:1px transparent;
-    border-radius: 8px;}
+    border-radius: 8px;
+    height: 80px;
+
+}
 .profile_middle{
     grid-column: 1/2;
     grid-row:3/4;
@@ -121,27 +171,34 @@
     color:white;
 }
 
-
-.halfbox{
-    display:grid;
-    grid-template-rows: repeat(5,1fr);
-    border:1px solid black;
-    background-color: white;
-    border-radius: 8px;
+.profile_like_dislike{
+    grid-row: 4/6;
     grid-column: 1/6;
-    grid-row:4/6;
-    border:1px transparent;
-    height: 300px;
-
-}
-.halfbox_top{
-    color:white;
     display:flex;
-    justify-content: left;
+    flex-direction: row;
+    
+}
+.profile_like_box{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    grid-row: 1/2;
-    border:1px transparent;
-
-    border-radius: 8px;
-    background: linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
+    font-size: 30px;
+}
+.profile_dislike_box{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+}
+.profile_like_dislike .fas{
+    background: -webkit-linear-gradient(109.12deg, #35CCAA -10.9%, #9779FF 98.02%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 115px;
 }

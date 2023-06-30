@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.core.mail import send_mail
-from .models import Profile
+from .models import *
 import logging
 import random
 import string
@@ -41,12 +41,26 @@ def signup(request):
             department = request.POST['department']
             name = request.POST['name']
             nickname = request.POST['nickname']
+            userImage = request.FILES.get('userImage')
+            mytags = request.POST['mytags']
+            
+            #태그형식
+            words = mytags.split(' ')
+            tag_list = []
+            for w in words:
+                if len(w)>0:
+                    if w[0] == '#':
+                        tag_list.append(w[1:])
             
             #한줄에 편하게 POST를 받는 방식
-            profile = Profile(user=user, grade=grade, department=department,name=name, nickname=nickname)
+            profile = Profile(user=user, grade=grade, department=department,name=name, nickname=nickname, userImage=userImage)
             profile.save()
+            for t in tag_list:
+                tag, boolean = MyTag.objects.get_or_create(mytagname=t) 
+                profile.taglist.add(tag)
+                
             auth.login(request, user)
-            return redirect('/')
+            return redirect('main:teamtest1')
     return render(request, 'accounts/signup.html')
 
 def emailconfirm(request, username):

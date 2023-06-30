@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+class Tag(models.Model):
+    name = models.CharField(max_length=30, null=False, blank=False)
+    
+    def __str__(self):
+        return self.name
+
 class Post(models.Model):
     title = models.CharField(max_length=200) #제목 필드
     writer = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
@@ -10,6 +16,7 @@ class Post(models.Model):
     body = models.TextField() #팀플 기본적 정보 필드
     describe = models.TextField(blank=True, null=True) #주제 설명 필드
     image = models.ImageField(upload_to="blog/", blank=True, null=True) #이미지 필드
+    tags = models.ManyToManyField(Tag, related_name='posts', blank=True)
     propensity = models.TextField(blank=True, null=True)
     url = models.TextField(blank=False)
     
@@ -42,6 +49,8 @@ class Choice(models.Model):
 class TestResult(models.Model):
     result_text = models.CharField(max_length=200)
     personality_type = models.CharField(max_length=10)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # 사용자 필드 추가
+    created_at = models.DateTimeField(auto_now_add=True)
 
 class Volunteer(models.Model):
     STATUS_CHOICES = [

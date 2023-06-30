@@ -8,21 +8,44 @@
 
 {% block content %}
 
-<h1>팀플 성향 테스트 2</h1>
-{% if result %}
-  <!-- 결과를 표시하는 부분 -->
-  <h2>성격 유형 검사 결과</h2>
-  {% if result.personality_type == "Type A" %}
-    <img src = "{% static 'images/열정적인리더.jpg' %}" style="width:500px;">
-  {% elif result.personality_type == "Type B"%}
-    <img src = "{% static 'images/논리적인발표자.jpg' %}" style="width:500px;">
-  {% elif result.personality_type == "Type C"%}
-    <img src = "{% static 'images/꼼꼼한탐정.jpg' %}" style="width:500px;">
-  {% endif %}
-  <h1>{{ result.result_text }}</h1>
-  <!-- 테스트 URL 숨기기 -->
-  {% url 'teamtest1' as test_url %}
-{% endif %}
-<h2><a href = "{% url 'main:mainpage' %}">메인페이지로 돌아가기</a></h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>result리더편</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/result.css' %}"
+    />
+  </head>
+  <body>
+    <div container>
+      </div>
+        {% if result %}
+          <!-- 결과를 표시하는 부분 -->
+          {% if result.personality_type == "Type A" %}
+            <div class="result-image">
+              <img src = "{% static 'images/열정적인리더.jpg' %}">
+            </div>
+          {% elif result.personality_type == "Type B"%}
+            <div class="result-image">
+              <img src = "{% static 'images/논리적인발표자.jpg' %}">
+            </div>
+          {% elif result.personality_type == "Type C"%}
+            <div class="result-image">
+              <img src = "{% static 'images/꼼꼼한탐정.jpg' %}">
+            </div>
+          {% endif %}
+          <div class="result">
+            <h1>당신은 {{ result.result_text }} 팀플을 시작해보세요</h1></div>
+          <div class="start"><a class="link1" href="{% url 'main:mainpage' %}">팀플 시작하기</a></div>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+</html>
 
 {% endblock %}

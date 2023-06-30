@@ -23,3 +23,10 @@ class ExcelDB:
     def write_data(self, data):
         df = pd.DataFrame(data, columns=self.columns)
         df.to_excel(self.file_path, index=False, sheet_name=self.sheet_name)
+        
+    def check_search(self, query):
+        data = self.read_data()
+        for item in data:
+            if query in item.values():
+                return True
+        return False
